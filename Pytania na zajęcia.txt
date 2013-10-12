@@ -1,2 +1,0 @@
-Pytania na zajęcia:
-- Czy zasoby które ma używac system to mają być stworzone zmienne w programie, czy ma sięgać do zasobów fizycznych
