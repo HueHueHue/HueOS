@@ -208,7 +208,7 @@ void pamiec::scal_wolna_pamiec()//przeprojektowac
 
 }
 
-void sortuj_wolna_pamiec()
+void sortuj_wolna_pamiec()//zrobi sie
 {
 
 
