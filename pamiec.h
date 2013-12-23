@@ -31,7 +31,7 @@ struct proces_i_pierwszy_bajt
 {
 	unsigned short pierwszy_bajt;
 	unsigned char id_procesu;
-};*////
+};*///////
 
 class pamiec
 {
