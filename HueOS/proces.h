@@ -5,8 +5,10 @@ class Proces {
 	Proces* grupaNext;
 	Proces* grupaLast;
 	Proces* wszystkieNext;
-	Proces* wszystkieLast
-	bool ready;			//do przetwarzania
+	Proces* wszystkieLast;
+	bool stopped;
+	bool blocked;
+
 	bool przewidziany; 	//wykonane obliczenia?
 	int t_przewidywany; 	//ile wyliczono?
 	int t_przewidywany_next;	 //ile nastêpna faza
