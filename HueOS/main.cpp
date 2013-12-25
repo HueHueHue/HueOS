@@ -1,8 +1,6 @@
-#include <iostream>
+#include "global.h"
 
-using namespace std;
-
-int main(int argc, char *argv[]) {
+int main() {
 	cout << "Ahoj, przygodo!" << endl;
 	return 0;
 }
