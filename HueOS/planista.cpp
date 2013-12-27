@@ -4,6 +4,7 @@
 
 Planista::Planista(Proces* startWszystkie){
 	this->startWszystkie = startWszystkie;
+	najlepszyCzas = 0;
 }
 
 void Planista::startCykl(){
@@ -50,6 +51,7 @@ void Planista::koniecProcesu(){
 	najlepszyCzasProces->t_przewidywany = najlepszyCzasProces->t_przewidywany_next;
 	najlepszyCzasProces->t_przewidywany_next = NULL;
 	najlepszyCzasProces->t_wykonania = najlepszyCzasProces->t_obslugi;
+	najlepszyCzas == 0;
 }
 
 void Planista::nowyProces(Proces* nowyProces){
