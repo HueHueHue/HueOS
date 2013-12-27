@@ -20,5 +20,5 @@ Proces::Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proce
 	t_przewidywany = 1; 
 
 	t_wykonania = 0; 	
-	t_obs³ugi = 0; 
+	t_obslugi = 0; 
 }

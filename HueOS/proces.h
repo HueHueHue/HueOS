@@ -16,7 +16,7 @@ public:
 	int t_przewidywany; 	//ile wyliczono?
 	int t_przewidywany_next;	 //ile nastêpna faza
 	int t_wykonania; 		// ostatni czas wykonania
-	int t_obs³ugi; 	// czas przetworzonych danych
+	int t_obslugi; 	// czas przetworzonych danych
 
 	Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next);
 };
