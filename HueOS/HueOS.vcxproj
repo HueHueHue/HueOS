@@ -63,11 +63,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="planista.cpp" />
     <ClCompile Include="proces.cpp" />
     <ClCompile Include="semafor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h" />
+    <ClInclude Include="planista.h" />
     <ClInclude Include="proces.h" />
     <ClInclude Include="semafor.h" />
   </ItemGroup>

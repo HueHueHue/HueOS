@@ -24,6 +24,9 @@
     <ClCompile Include="proces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="planista.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="proces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="planista.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

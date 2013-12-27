@@ -16,7 +16,7 @@ void Semafor::pWait(Proces x){
 		//WYŒLIJ SYGNA£ CZEKAJ
 	}
 	wart--;
-}
+} 
 
 void Semafor::vSignal(Proces x){
 	wart++;
