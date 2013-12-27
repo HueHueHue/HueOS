@@ -62,16 +62,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Hue\planista.cpp" />
+    <ClCompile Include="Hue\proces.cpp" />
+    <ClCompile Include="Hue\semafor.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="planista.cpp" />
-    <ClCompile Include="proces.cpp" />
-    <ClCompile Include="semafor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h" />
-    <ClInclude Include="planista.h" />
-    <ClInclude Include="proces.h" />
-    <ClInclude Include="semafor.h" />
+    <ClInclude Include="Hue\planista.h" />
+    <ClInclude Include="Hue\proces.h" />
+    <ClInclude Include="Hue\semafor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

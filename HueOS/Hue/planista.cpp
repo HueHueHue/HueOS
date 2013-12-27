@@ -1,4 +1,4 @@
-#include "global.h"
+#include "../global.h"
 #include "proces.h"
 #include "planista.h"
 

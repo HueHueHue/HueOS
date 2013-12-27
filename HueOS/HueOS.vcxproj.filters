@@ -18,13 +18,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="semafor.cpp">
+    <ClCompile Include="Hue\planista.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="proces.cpp">
+    <ClCompile Include="Hue\proces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="planista.cpp">
+    <ClCompile Include="Hue\semafor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,13 +32,13 @@
     <ClInclude Include="global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="semafor.h">
+    <ClInclude Include="Hue\planista.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="proces.h">
+    <ClInclude Include="Hue\proces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="planista.h">
+    <ClInclude Include="Hue\semafor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

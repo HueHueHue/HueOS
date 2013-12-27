@@ -1,4 +1,4 @@
-#include "global.h"
+#include "../global.h"
 #include "proces.h"
 #include "semafor.h"
 
@@ -25,7 +25,8 @@ void Semafor::vSignal(Proces x){
 
 void Semafor::odpalCzekajacy(){
 	if(listaCzekaj.empty() == false){
-		listaCzekaj.front;
+		// @FIXME wez to napraw co.
+		//listaCzekaj.front;
 		//WYŒLIJ SYGNA£ DO STARTU
 		listaCzekaj.pop_front();
 	}

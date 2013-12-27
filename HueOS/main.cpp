@@ -1,7 +1,6 @@
 #include "global.h"
-#include "proces.h"
-#include "semafor.h"
-#include "planista.h"
+#include "Hue/proces.h"
+#include "Hue/planista.h"
 
 int main() {
 	cout << "Ahoj, przygodo!" << endl;
