@@ -27,6 +27,12 @@
     <ClCompile Include="Hue\semafor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HueHue\pamiec.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HueHueHueHueHue\supervisor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -39,6 +45,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hue\semafor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHue\pamiec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

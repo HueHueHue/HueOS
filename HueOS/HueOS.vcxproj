@@ -62,6 +62,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HueHueHueHueHue\supervisor.cpp" />
+    <ClCompile Include="HueHue\pamiec.cpp" />
     <ClCompile Include="Hue\planista.cpp" />
     <ClCompile Include="Hue\proces.cpp" />
     <ClCompile Include="Hue\semafor.cpp" />
@@ -69,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h" />
+    <ClInclude Include="HueHue\pamiec.h" />
     <ClInclude Include="Hue\planista.h" />
     <ClInclude Include="Hue\proces.h" />
     <ClInclude Include="Hue\semafor.h" />
