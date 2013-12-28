@@ -8,6 +8,6 @@ public:
 	Semafor(int i);
 	void pWait(Proces x);
 	void vSignal(Proces x);
-	
+	bool gotowy(Proces x);
 
 };
