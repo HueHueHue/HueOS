@@ -3,4 +3,4 @@
 #include "proces.h"
 #include "semafor.h"
 
-void textLev1(int id);
+void textLev1(bool dziala, string wiadomosc);
