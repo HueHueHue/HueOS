@@ -4,18 +4,18 @@
 
 CPRINT::CPRINT()
 {
-	zaj_print = 0 ;   //konstruktor i przypisanie pocz¹tkowej wartoœci zmiennej odpowiadaj¹cej za sprawdzanie stanu.
-	cout << "==> konstruktor PRINT wywo³any!!! \n";
+	zaj_print = 0 ;   //konstruktor i przypisanie poczatkowej wartosci zmiennej odpowiadajacej za sprawdzanie stanu.
+	cout << "==> konstruktor PRINT wywolany!!! \n";
 }
 
 
 
 void CPRINT::PRINT( char zapisywane[] ){
-		// Tu nale¿y podmieniæ na w³aœciw¹ funkcjê semafora od Michala
+		// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
 		
-	//	user_semaphore( P ) ;       // Operacja któr¹ nale¿y wykonaæ przed przyst¹pieniem do operacji
+	//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
 	if( zaj_print == 1 ){
-		cout << "Urz¹dzenie PRINT jest w tej chwili zajête! \n";
+		cout << "Urzadzenie PRINT jest w tej chwili zajete! \n";
 	}
 	else 
 	{
@@ -26,11 +26,11 @@ void CPRINT::PRINT( char zapisywane[] ){
 
 		/*
 		   PRINT( "AFdsafsdf");
-		   Przyk³ad wywo³ania funkcji zapisu
+		   Przyklad wywolania funkcji zapisu
 		   */
 		wyniki.close();
-// Tu nale¿y podmieniæ na w³aœciw¹ funkcjê semafora od Michala
-	  	//	user_semaphore( V ) ;       // Operacja któr¹ nale¿y wykonaæ po operacji która przywruci semafor do stanu sprzed operacji
+// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+	  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
 		zaj_print=0;
 	}
 }

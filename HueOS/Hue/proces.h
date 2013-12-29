@@ -15,7 +15,7 @@ public:
 
 	bool przewidziany; 	//wykonane obliczenia?
 	int t_przewidywany; 	//ile wyliczono?
-	int t_przewidywany_next;	 //ile nastêpna faza
+	int t_przewidywany_next;	 //ile nastepna faza
 	int t_wykonania; 		// ostatni czas wykonania
 	int t_obslugi; 	// czas przetworzonych danych
 

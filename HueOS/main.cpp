@@ -3,18 +3,17 @@
 void tRzeczywisty(float t, DWORD tStart);
 
 int main() {
-	setlocale(LC_ALL,"polish");
 	
-	//Proces* startWszystkie = NULL; //proces od którego zaczynam iterowaæ po wszystkich. Na starcie ma byæ chyba utworzony jeden który bêdzie mia³ zawsze dzia³a³?
+	//Proces* startWszystkie = NULL; //proces od ktorego zaczynam iterowac po wszystkich. Na starcie ma byc chyba utworzony jeden ktory bedzie mial zawsze dzialal?
 	
 	Planista mPlanista;
 	
-	DWORD tStart; //Pêtla czasu rzeczywistego
+	DWORD tStart; //Petla czasu rzeczywistego
 
-	cout << "Hue0: Start pêtli" << endl;
+	cout << "Hue0: Start petli" << endl;
 	
 	while(1){
-		tStart = GetTickCount(); //czas na rozpoczêciu pêtli
+		tStart = GetTickCount(); //czas na rozpoczeciu petli
 		mPlanista.startCykl(); //Hue1
 
 

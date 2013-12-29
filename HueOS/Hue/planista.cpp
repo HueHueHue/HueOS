@@ -19,7 +19,7 @@ void Planista::startCykl(){
 			}
 			bufor = bufor->wszystkieNext;
 		} while(bufor->wszystkieNext != startWszystkie);
-		textLev1(true, "Zakoñczono obliczanie czasu przewidywanego dla wszystkich procesów aktywnych");
+		textLev1(true, "Zakonczono obliczanie czasu przewidywanego dla wszystkich procesow aktywnych");
 		//wyszukiwanie najszybszego
 		
 		do {
@@ -40,16 +40,16 @@ void Planista::startCykl(){
 		} while(bufor->wszystkieNext != startWszystkie);
 
 		if(najlepszyCzasProces != NULL){
-			textLev1(true, "Wybrano proces o najkrótszym czasie wykonywania" /*+ najlepszyCzasProces->id + "]"*/);	//INT + STRING
+			textLev1(true, "Wybrano proces o najkrotszym czasie wykonywania" /*+ najlepszyCzasProces->id + "]"*/);	//INT + STRING
 			najlepszyCzasProces->running = 1;
 			//WYKONAJ najlepszyCzasProces
 		} else {
-			textLev1(true, "Brak procesów gotowych do wykonania");
+			textLev1(true, "Brak procesow gotowych do wykonania");
 		}
 
 	} else {
 		if(bufor == NULL)
-			textLev1(true, "Brak procesów na liœcie");
+			textLev1(true, "Brak procesow na liscie");
 		if(najlepszyCzasProces != NULL)
 			textLev1(true, "Proces wybrany, w trakcie wykonywania");
 	}
@@ -58,7 +58,7 @@ void Planista::startCykl(){
 
 void Planista::koniecProcesu(){
 	if(najlepszyCzasProces != NULL){
-		textLev1(true, "Proces zakonczy³ dzia³anie");
+		textLev1(true, "Proces zakonczyl dzialanie");
 		najlepszyCzasProces->przewidziany = false;
 		najlepszyCzasProces->t_przewidywany = najlepszyCzasProces->t_przewidywany_next;
 		najlepszyCzasProces->t_przewidywany_next = NULL;
@@ -73,14 +73,14 @@ void Planista::koniecProcesu(){
 }
 
 void Planista::nowyProces(Proces* nowyProces){
-	textLev1(true, "Pojawi³ siê nowy aktywny proces! Testujê jego przewidywany czas wykonywania...");
+	textLev1(true, "Pojawil sie nowy aktywny proces! Testuje jego przewidywany czas wykonywania...");
 	if(nowyProces->stopped == 0 && nowyProces->blocked == 0){
 		if(nowyProces->przewidziany == false){
 			nowyProces->t_przewidywany_next = 0.5 * nowyProces->t_przewidywany + 0.5 * nowyProces-> t_wykonania;
 			nowyProces->przewidziany = 1;
 		}
 		if(nowyProces->t_przewidywany_next < najlepszyCzasProces->t_przewidywany_next - najlepszyCzasProces->t_obslugi){
-			textLev1(true, "Nowy proces ma mniejszy przewidywany czas. Wyw³aszczam stary i uruchamian nowy");
+			textLev1(true, "Nowy proces ma mniejszy przewidywany czas. Wywlaszczam stary i uruchamian nowy");
 			//ZATRZYMAJ najlepszyCzasProces
 			najlepszyCzasProces->running = 0;
 			//ZAPISZ STAN najlepszyCzasProces
@@ -89,7 +89,7 @@ void Planista::nowyProces(Proces* nowyProces){
 			//WYKONAJ najlepszyCzasProces
 			najlepszyCzasProces->running = 1;
 		} else {
-			textLev1(true, "Nowy proces ma wiêkszy przewydywany czas. Kontynuujê wykonywanie starego");
+			textLev1(true, "Nowy proces ma wiekszy przewydywany czas. Kontynuuje wykonywanie starego");
 		}
 	}
 }

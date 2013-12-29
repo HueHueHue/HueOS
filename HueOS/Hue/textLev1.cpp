@@ -5,7 +5,7 @@ void textLev1(bool dziala, string wiadomosc){
 	if(dziala){
 		o += "Info: ";
 	} else {
-		o += "B³¹d: ";
+		o += "Blad: ";
 	}
 	o += wiadomosc;
 

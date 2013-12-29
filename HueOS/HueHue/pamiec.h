@@ -46,7 +46,7 @@ public:
 	~pamiec();
 	unsigned short zajmnij_pamiec(unsigned short rozmiar);//do uzycia podczas powstawania procesu, gdy zwrocone jest 0xFFFF oznacza ze brak wolnej pamieci, zwracany pierwszy bajt- index tablicy pamieci
 	void zwolnij_pamiec(unsigned short pierwszy_bajt);// gdy proces umiera, moze zmienie na bool, dla wiekszekj kontroli
-	char pobierz_bajt(unsigned short pierwszy_bajt, unsigned short indeks);//czytanie pamieci dokladnie bajtu, chyba jako blad dostępu użyje wartość 0xFF
-	bool ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, char bajt);// zapisywanie do pamieci, jesli prawda zapis sie powiodł
+	char pobierz_bajt(unsigned short pierwszy_bajt, unsigned short indeks);//czytanie pamieci dokladnie bajtu, chyba jako blad dostepu uzyje wartosc 0xFF
+	bool ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, char bajt);// zapisywanie do pamieci, jesli prawda zapis sie powiodl
 
 };

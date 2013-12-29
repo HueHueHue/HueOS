@@ -3,19 +3,19 @@
  using namespace std;
 
 
-// Zmienna ta jest potrzebna do sprawdzenia czy u¿¹dzenie jest zajête czy nie, gdyz nie mam dostêpu do
-//sprawdzenia wartoœci semaforów, na których wykonuje operacjê.
+// Zmienna ta jest potrzebna do sprawdzenia czy uzadzenie jest zajete czy nie, gdyz nie mam dostepu do
+//sprawdzenia wartosci semaforow, na ktorych wykonuje operacje.
 
 int zaj_P2=0;
 
-		// Jeœ³i zaj = 1 to znaczy ¿e trwa operacja ,
-		//jeœli zaj = 0 to znaczy ¿e urz¹dzenie jest wolne i mo¿na wykonaæ na nim operacjê
+		// Jesli zaj = 1 to znaczy ze trwa operacja ,
+		//jesli zaj = 0 to znaczy ze urzadzenie jest wolne i mozna wykonac na nim operacje
 
 void PRINT2( char zapisywane[] ){
-// Tu nale¿y podmieniæ na w³aœciw¹ funkcjê semafora od Michala
-		//	user_semaphore( P ) ;       // Operacja któr¹ nale¿y wykonaæ przed przyst¹pieniem do operacji
+// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+		//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
 	if( zaj_P2 == 1 ){
-		cout << "Urz¹dzenie PRINT2 jest w tej chwili zajête!";
+		cout << "Urzadzenie PRINT2 jest w tej chwili zajete!";
 	}
 	else 
 	{
@@ -26,13 +26,13 @@ void PRINT2( char zapisywane[] ){
 
 		/*
 		   PRINT2(zaj_P2, "AFdsafsdf");
-		   Przyk³ad wywo³ania funkcji zapisu
+		   Przyklad wywolania funkcji zapisu
 		   */
 		
 
 	wyniki.close();
-// Tu nale¿y podmieniæ na w³aœciw¹ funkcjê semafora od Michala
-	  	//	user_semaphore( V ) ;       // Operacja któr¹ nale¿y wykonaæ po operacji która przywruci semafor do stanu sprzed operacji
+// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+	  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
 	zaj_P2=0;
 	}
 }

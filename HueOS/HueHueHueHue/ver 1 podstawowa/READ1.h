@@ -6,19 +6,19 @@ using namespace std;
 
 
 
-// Zmienna ta jest potrzebna do sprawdzenia czy u¿¹dzenie jest zajête czy nie, gdyz nie mam dostêpu do
-//sprawdzenia wartoœci semaforów, na których wykonuje operacjê.
+// Zmienna ta jest potrzebna do sprawdzenia czy uzadzenie jest zajete czy nie, gdyz nie mam dostepu do
+//sprawdzenia wartosci semaforow, na ktorych wykonuje operacje.
 
 int zaj_R1=0;
 
-		// Jeœ³i zaj = 1 to znaczy ¿e trwa operacja ,
-		//jeœli zaj = 0 to znaczy ¿e urz¹dzenie jest wolne i mo¿na wykonaæ na nim operacjê
+		// Jesli zaj = 1 to znaczy ze trwa operacja ,
+		//jesli zaj = 0 to znaczy ze urzadzenie jest wolne i mozna wykonac na nim operacje
 
 
 /*
 
   READ1(zaj_R1,2);
-  przyk³ad wywo³ania funkcji READ
+  przyklad wywolania funkcji READ
 
 */
 
@@ -26,11 +26,11 @@ double READ1( int numer_rozkazu )  // Funkcja READ1
 {
 	
 	double adres_rozkazu=0;			//zwracamy zero w razie nie powodzenia
-// Tu nale¿y podmieniæ na w³aœciw¹ funkcjê semafora od Michala
-		//	user_semaphore( P ) ;       // Operacja któr¹ nale¿y wykonaæ przed przyst¹pieniem do operacji
+// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+		//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
 
 			if( zaj_R1 == 1 ){
-				cout << "Urz¹dzenie READ1 jest w tej chwili zajête!";
+				cout << "Urzadzenie READ1 jest w tej chwili zajete!";
 			}
 	else 
 	{
@@ -38,8 +38,8 @@ double READ1( int numer_rozkazu )  // Funkcja READ1
 		double liczba ;
 
 	zaj_R1=1;
-	std::cout<<"Otwieram i przeszukujê bazê rozkazów \n";
-	fstream bazarozkazow("rozkazy.roz",ios::in);           // co do bazy rozkazów to jest ona do stworzenia ale potrzebne s¹ dane od Pani Agnieszki.(Cytat J.B.)
+	std::cout<<"Otwieram i przeszukuje baze rozkazow \n";
+	fstream bazarozkazow("rozkazy.roz",ios::in);           // co do bazy rozkazow to jest ona do stworzenia ale potrzebne sa dane od Pani Agnieszki.(Cytat J.B.)
 	if(bazarozkazow.is_open())
 	{
 		while(!bazarozkazow.eof()){
@@ -53,14 +53,14 @@ double READ1( int numer_rozkazu )  // Funkcja READ1
 	}
 	else 
 	{
-		cout<<"Nie mo¿na otworzyæ pliku lub nie znaleziono rozkazu."<<endl;
+		cout<<"Nie mozna otworzyc pliku lub nie znaleziono rozkazu."<<endl;
 	}
 	bazarozkazow.close();
 
 	
-	cout <<adres_rozkazu<<endl<<" powy¿sza wartoœæ to odnaleziony adres rozkazu który zwrócê \n \n";
-// Tu nale¿y podmieniæ na w³aœciw¹ funkcjê semafora od Michala
-  	//	user_semaphore( V ) ;       // Operacja któr¹ nale¿y wykonaæ po operacji która przywruci semafor do stanu sprzed operacji
+	cout <<adres_rozkazu<<endl<<" powyzsza wartosc to odnaleziony adres rozkazu ktory zwroce \n \n";
+// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
 	zaj_R1=0;
 	}
 

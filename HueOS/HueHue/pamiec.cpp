@@ -87,7 +87,7 @@ pamiec::~pamiec()
 	zajeta_pamiec.~list();
 }
 
-void pamiec::zwolnij_pamiec(unsigned short pierwszy_bajt)//dokoñczyc
+void pamiec::zwolnij_pamiec(unsigned short pierwszy_bajt)//dokonczyc
 {
 	//wolna_pamiec.dodaj(miejsce->pierwszy_bajt, miejsce->rozmiar);
 	while (zajeta_pamiec.head->pierwszy_bajt != pierwszy_bajt)
