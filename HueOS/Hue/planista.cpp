@@ -40,7 +40,10 @@ void Planista::startCykl(){
 		} while(bufor->wszystkieNext != startWszystkie);
 
 		if(najlepszyCzasProces != NULL){
-			textLev1(true, "Wybrano proces o najkrotszym czasie wykonywania" /*+ najlepszyCzasProces->id + "]"*/);	//INT + STRING
+			string text = "Wybrano proces o najkrotszym czasie wykonywania [";
+			text += (char)najlepszyCzasProces->id;
+			text += "]";
+			textLev1(true, text);
 			najlepszyCzasProces->running = 1;
 			//WYKONAJ najlepszyCzasProces
 		} else {
@@ -92,4 +95,20 @@ void Planista::nowyProces(Proces* nowyProces){
 			textLev1(true, "Nowy proces ma wiekszy przewydywany czas. Kontynuuje wykonywanie starego");
 		}
 	}
+}
+
+void Planista::test(){
+	//Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next);
+	Proces* proces1 = new Proces(1, "Test1", 0, 0, 0, 0, 15);
+	startWszystkie = proces1;
+	Proces* proces2 = new Proces(2, "Test1", 0, proces1, 0, proces1, 15);
+	Proces* proces3 = new Proces(3, "Test1", 0, proces2, 0, proces2, 15);
+	proces1->grupaLast = proces3;
+	proces1->grupaNext = proces2;
+	proces1->wszystkieLast = proces3;
+	proces1->wszystkieNext = proces2;
+	proces2->grupaNext = proces3;
+	proces2->wszystkieNext = proces3;
+	proces3->grupaNext = proces1;
+	proces3->wszystkieNext = proces1;
 }

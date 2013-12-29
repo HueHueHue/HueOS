@@ -7,10 +7,14 @@ Semafor::Semafor(int i){
 
 void Semafor::pWait(Proces* &x){
 	if(wart > 0){
-		textLev1(true, "Semafor: Operacja P: Zezwalam na uzycie zasobow, bo wart = " + wart);
+		string text = "Semafor: Operacja P: Zezwalam na uzycie zasobow, bo wart = ";
+		text += wart;
+		textLev1(true, text);
 		x->semaforReceiver = 1;
 	} else{
-		textLev1(true, "Semafor: Operacja P: Dodaje proces do listy oczekujacych, bo wart = " + wart);
+		string text = "Semafor: Operacja P: Dodaje proces do listy oczekujacych, bo wart = ";
+		text += wart;
+		textLev1(true, text);
 		listaCzekaj.push_back(x);
 		x->semaforReceiver = -1;
 	}
@@ -19,19 +23,26 @@ void Semafor::pWait(Proces* &x){
 
 void Semafor::vSignal(Proces* &x){
 	wart++;
-	textLev1(true, "Semafor: Operacja V: Wysylam sygnal do czekajacych procesow, wart = " + wart);
+	string text = "Semafor: Operacja V: Wysylam sygnal do czekajacych procesow, wart = ";
+	text += wart;
+	textLev1(true, text);
 	odpalCzekajacy();
 }
 
 void Semafor::odpalCzekajacy(){
 	if(listaCzekaj.empty() == false){
 		Proces* buf = listaCzekaj.front();
-		textLev1(true, "Semafor: Odpalam proces oczekujacy, id [" + buf->id /*+ "]"*/);	//INT + STRING
+		string text = "Semafor: Odpalam proces oczekujacy, id [";
+		text += buf->id;
+		text += "]";
+		textLev1(true, text);
 		buf->semaforReceiver = 1;
 		
 		listaCzekaj.pop_front();
 	} else {
-		textLev1(true, "Semafor: Brak czekajacych procesow pod semaforem, wart = " + wart);
+		string text = "Semafor: Brak czekajacych procesow pod semaforem, wart = ";
+		text += wart;
+		textLev1(true, text);
 	}
 }
 

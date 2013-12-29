@@ -12,4 +12,7 @@ public:
 	void startCykl();
 	void koniecProcesu();
 	void nowyProces(Proces* nowyProces);
+
+
+	void test();
 };

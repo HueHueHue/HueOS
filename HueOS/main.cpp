@@ -16,7 +16,7 @@ int main() {
 		tStart = GetTickCount(); //czas na rozpoczeciu petli
 		mPlanista.startCykl(); //Hue1
 
-
+		mPlanista.test();
 		//Koniec operacji w tym cyklu
 		tRzeczywisty(1, tStart); //Czekanie na koniec minimalnego czasu cyklu
 	}
