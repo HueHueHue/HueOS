@@ -1,3 +1,4 @@
+class Proces;
 class Semafor{
 private:
 	int wart;

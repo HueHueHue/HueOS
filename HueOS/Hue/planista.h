@@ -1,3 +1,5 @@
+
+class Proces;
 class Planista{
 private:
 	Proces* startWszystkie;

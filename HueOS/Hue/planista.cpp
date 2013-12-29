@@ -1,6 +1,4 @@
-#include "../global.h"
-#include "proces.h"
-#include "planista.h"
+#include "globLev1.h"
 
 Planista::Planista(Proces* startWszystkie){
 	this->startWszystkie = startWszystkie;
@@ -40,8 +38,11 @@ void Planista::startCykl(){
 			bufor = bufor->wszystkieNext;
 		} while(bufor->wszystkieNext != startWszystkie);
 
+		najlepszyCzasProces->running = 1;
 		//WYKONAJ najlepszyCzasProces
 
+	} else {
+		textLev1(51);
 	}
 }
 
@@ -51,7 +52,9 @@ void Planista::koniecProcesu(){
 	najlepszyCzasProces->t_przewidywany = najlepszyCzasProces->t_przewidywany_next;
 	najlepszyCzasProces->t_przewidywany_next = NULL;
 	najlepszyCzasProces->t_wykonania = najlepszyCzasProces->t_obslugi;
-	najlepszyCzas == 0;
+	najlepszyCzasProces->running = 0;
+
+	najlepszyCzas = 0;
 }
 
 void Planista::nowyProces(Proces* nowyProces){
@@ -62,10 +65,12 @@ void Planista::nowyProces(Proces* nowyProces){
 		}
 		if(nowyProces->t_przewidywany_next < najlepszyCzasProces->t_przewidywany_next - najlepszyCzasProces->t_obslugi){
 			//ZATRZYMAJ najlepszyCzasProces
+			najlepszyCzasProces->running = 0;
 			//ZAPISZ STAN najlepszyCzasProces
 
 			najlepszyCzasProces = nowyProces;
 			//WYKONAJ najlepszyCzasProces
+			najlepszyCzasProces->running = 1;
 		}
 	}
 }

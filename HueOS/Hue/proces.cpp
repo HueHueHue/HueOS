@@ -1,5 +1,4 @@
-#include "../global.h"
-#include "proces.h"
+#include "globLev1.h"
 
 Proces::Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next){
 	this->id = id;
@@ -13,6 +12,7 @@ Proces::Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proce
 
 	stopped = 0;
 	blocked = 0;
+	running = 0;
 	semaforCommon = 0;
 	semaforReceiver = 0;
 

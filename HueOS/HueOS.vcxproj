@@ -67,11 +67,13 @@
     <ClCompile Include="Hue\planista.cpp" />
     <ClCompile Include="Hue\proces.cpp" />
     <ClCompile Include="Hue\semafor.cpp" />
+    <ClCompile Include="Hue\textLev1.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h" />
     <ClInclude Include="HueHue\pamiec.h" />
+    <ClInclude Include="Hue\globLev1.h" />
     <ClInclude Include="Hue\planista.h" />
     <ClInclude Include="Hue\proces.h" />
     <ClInclude Include="Hue\semafor.h" />

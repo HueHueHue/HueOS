@@ -9,6 +9,7 @@ public:
 	Proces* wszystkieLast;
 	bool stopped;
 	bool blocked;
+	bool running;
 	int semaforCommon;
 	int semaforReceiver;
 

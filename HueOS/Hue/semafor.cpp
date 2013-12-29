@@ -1,7 +1,4 @@
-#include "../global.h"
-#include "proces.h"
-#include "semafor.h"
-
+#include "globLev1.h"
 
 Semafor::Semafor(int i){
 	wart = i;
@@ -25,8 +22,8 @@ void Semafor::vSignal(Proces x){
 
 void Semafor::odpalCzekajacy(){
 	if(listaCzekaj.empty() == false){
-		Proces buf = listaCzekaj.front;
-		buf.semaforReceiver = 1;
+		Proces* buf = listaCzekaj.front();
+		buf->semaforReceiver = 1;
 		
 		listaCzekaj.pop_front();
 	}
