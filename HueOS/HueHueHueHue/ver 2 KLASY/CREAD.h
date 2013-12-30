@@ -2,6 +2,9 @@
 #include<fstream>
 #include <string>
 
+#include <windows.h>
+#include <cstdlib>
+
 using namespace std;
 
 
@@ -13,7 +16,8 @@ private:
 //sprawdzenia wartosci semaforow, na ktorych wykonuje operacje.
 	
 	
-	int zaj_read;  
+	int zaj_read;
+	HANDLE hOut;
 
 		// Jesli zaj = 1 to znaczy ze trwa operacja ,
 		//jesli zaj = 0 to znaczy ze urzadzenie jest wolne i mozna wykonac na nim operacje

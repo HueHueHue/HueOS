@@ -5,6 +5,9 @@
 CPRINT::CPRINT()
 {
 	zaj_print = 0 ;   //konstruktor i przypisanie poczatkowej wartosci zmiennej odpowiadajacej za sprawdzanie stanu.
+		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+		
 	cout << "==> konstruktor PRINT wywolany!!! \n";
 }
 
@@ -14,7 +17,7 @@ void CPRINT::PRINT( char zapisywane[] ){
 		// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
 		
 	//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
-	if( zaj_print == 1 ){
+		if( zaj_print == 1 ){
 		cout << "Urzadzenie PRINT jest w tej chwili zajete! \n";
 	}
 	else 
