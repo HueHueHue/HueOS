@@ -403,7 +403,7 @@ unsigned short pamiec::zajmij_pamiec(unsigned short rozmiar)// moze uproszcze
 	}
 
 }
-bool pamiec::ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, char bajt)
+bool pamiec::ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, unsigned char bajt)
 {
 	lista *it = zajeta_pamiec.head;
 	bool	przerwij=false;
