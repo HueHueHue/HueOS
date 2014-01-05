@@ -39,6 +39,6 @@ public:
 	unsigned short zajmij_pamiec(unsigned short rozmiar);//do uzycia podczas powstawania procesu, gdy zwrocone jest 0xFFFF oznacza ze brak wolnej pamieci, zwracany pierwszy bajt- index tablicy pamieci
 	bool zwolnij_pamiec(unsigned short pierwszy_bajt);// gdy proces umiera, jesli zwrocone true - powiodlo sie, jezeli nie semafor blokuje dostep do wolnej pamieci - malo prawdopodobne
 	char pobierz_bajt(unsigned short pierwszy_bajt, unsigned short indeks);//czytanie pamieci dokladnie bajtu, jako bład wartosc 0xFF
-	bool ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, char bajt);// zapisywanie do pamieci, jesli prawda zapis sie powiodl
+	bool ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, unsigned char bajt);// zapisywanie do pamieci, jesli prawda zapis sie powiodl
 
 }; 
