@@ -1,5 +1,6 @@
-﻿#include <iostream>
-
+#include <iostream>
+#include <string>
+using namespace std;
 
 struct lista
 {
@@ -21,32 +22,23 @@ public:
 	unsigned char	 ile();
 };
 
-/*struct lista_czekajacych_procesow
-{
-unsigned char id_procesu;
-unsigned short rozmiar;
-};
 
-struct proces_i_pierwszy_bajt
-{
-	unsigned short pierwszy_bajt;
-	unsigned char id_procesu;
-};*/
 
 class pamiec
 {
 private:
 	list wolna_pamiec, zajeta_pamiec;
-	char tablica_pamieci[512];
+	unsigned char tablica_pamieci[512];
 	bool semafor_wolnej_pamieci, semafor_pamieci;
-	void sortuj_wolna_pamiec();
-	void scal_wolna_pamiec();
+	void sortuj_wolna_pamiec(lista* dodany);
+	void scal_wolna_pamiec(lista* dodany);
+	void wypisz(string a);
 public:
 	pamiec();
 	~pamiec();
-	unsigned short zajmnij_pamiec(unsigned short rozmiar);//do uzycia podczas powstawania procesu, gdy zwrocone jest 0xFFFF oznacza ze brak wolnej pamieci, zwracany pierwszy bajt- index tablicy pamieci
-	void zwolnij_pamiec(unsigned short pierwszy_bajt);// gdy proces umiera, moze zmienie na bool, dla wiekszekj kontroli
-	char pobierz_bajt(unsigned short pierwszy_bajt, unsigned short indeks);//czytanie pamieci dokladnie bajtu, chyba jako blad dostepu uzyje wartosc 0xFF
+	unsigned short zajmij_pamiec(unsigned short rozmiar);//do uzycia podczas powstawania procesu, gdy zwrocone jest 0xFFFF oznacza ze brak wolnej pamieci, zwracany pierwszy bajt- index tablicy pamieci
+	bool zwolnij_pamiec(unsigned short pierwszy_bajt);// gdy proces umiera, jesli zwrocone true - powiodlo sie, jezeli nie semafor blokuje dostep do wolnej pamieci - malo prawdopodobne
+	char pobierz_bajt(unsigned short pierwszy_bajt, unsigned short indeks);//czytanie pamieci dokladnie bajtu, jako bład wartosc 0xFF
 	bool ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, char bajt);// zapisywanie do pamieci, jesli prawda zapis sie powiodl
 
-};
+}; 
