@@ -9,6 +9,7 @@ CREAD::CREAD()    //konstruktor i przypisanie poczatkowej wartosci zmiennej odpo
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 	cout << "==> konstruktor READ wywolany!!! \n";
+	SetConsoleTextAttribute( hOut, 0x07);
 }
 
 
@@ -21,7 +22,9 @@ double CREAD::READ( int numer_rozkazu )  // Funkcja READ1
 		//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
 
 			if( zaj_read == 1 ){
+				SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 				cout << "Urzadzenie READ jest w tej chwili zajete!";
+				
 			}
 	else 
 	{
@@ -50,7 +53,8 @@ double CREAD::READ( int numer_rozkazu )  // Funkcja READ1
 
 	
 	cout <<adres_rozkazu<<endl<<" powyzsza wartosc to odnaleziony adres rozkazu ktory zwroce \n \n";
-
+	SetConsoleTextAttribute( hOut, 0x07);
+	
 	// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
   	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
 	
