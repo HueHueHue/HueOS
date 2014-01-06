@@ -41,7 +41,10 @@ void Planista::startCykl(){
 
 		if(najlepszyCzasProces != NULL){
 			string text = "Wybrano proces o najkrotszym czasie wykonywania [";
-			text += (char)najlepszyCzasProces->id;
+			
+			char str[10];
+			itoa(najlepszyCzasProces->id,str,10);
+			text += str;
 			text += "]";
 			textLev1(true, text);
 			najlepszyCzasProces->running = 1;
