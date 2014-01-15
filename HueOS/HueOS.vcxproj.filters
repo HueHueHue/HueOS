@@ -36,6 +36,9 @@
     <ClCompile Include="Hue\textLev1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HueHueHue\lev3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hue\globLev1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHue\lev3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

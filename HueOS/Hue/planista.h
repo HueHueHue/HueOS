@@ -6,9 +6,9 @@ private:
 	Proces* najlepszyCzasProces;
 	int najlepszyCzas;
 public:
-	Proces* startWszystkie;
+	Proces* procesList;
 
-	Planista();
+	Planista(Proces* procesList);
 	void startCykl();
 	void koniecProcesu();
 	void nowyProces(Proces* nowyProces);

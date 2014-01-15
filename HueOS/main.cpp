@@ -1,13 +1,14 @@
 #include "global.h"
 #include "Hue/globLev1.h"
+#include "HueHueHue/lev3.h"
 void tRzeczywisty(float t, DWORD tStart);
 
 int main() {
 	
-	//Proces* startWszystkie = NULL; //proces od ktorego zaczynam iterowac po wszystkich. Na starcie ma byc chyba utworzony jeden ktory bedzie mial zawsze dzialal?
+	Proces* procesList = NULL; //proces od ktorego zaczynam iterowac po wszystkich. Na starcie ma byc chyba utworzony jeden ktory bedzie mial zawsze dzialal?
 	
-	Planista mPlanista;
-	
+	Planista mPlanista(procesList);
+	Lev3 mPoz3(procesList);
 	DWORD tStart; //Petla czasu rzeczywistego
 
 	cout << "Hue0: Start petli" << endl;
@@ -23,6 +24,8 @@ int main() {
 
 	return 0;
 }
+
+
 
 
 ////////////

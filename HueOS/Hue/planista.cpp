@@ -1,13 +1,13 @@
 #include "globLev1.h"
 
-Planista::Planista(){
-	startWszystkie = NULL;
+Planista::Planista(Proces* procesList){
+	this-> procesList = procesList;
 	najlepszyCzas = 0;
 	najlepszyCzasProces = NULL;
 }
 
 void Planista::startCykl(){
-	Proces* bufor = startWszystkie;
+	Proces* bufor = procesList;
 	if(bufor != NULL && najlepszyCzasProces == NULL){
 		//wyliczanie czasu
 		do {
@@ -18,7 +18,7 @@ void Planista::startCykl(){
 				}
 			}
 			bufor = bufor->wszystkieNext;
-		} while(bufor->wszystkieNext != startWszystkie);
+		} while(bufor->wszystkieNext != procesList);
 		textLev1(true, "Zakonczono obliczanie czasu przewidywanego dla wszystkich procesow aktywnych");
 		//wyszukiwanie najszybszego
 		
@@ -37,7 +37,7 @@ void Planista::startCykl(){
 				}
 			}
 			bufor = bufor->wszystkieNext;
-		} while(bufor->wszystkieNext != startWszystkie);
+		} while(bufor->wszystkieNext != procesList);
 
 		if(najlepszyCzasProces != NULL){
 			string text = "Wybrano proces o najkrotszym czasie wykonywania [";
@@ -103,7 +103,7 @@ void Planista::nowyProces(Proces* nowyProces){
 void Planista::test(){
 	//Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next);
 	Proces* proces1 = new Proces(1, "Test1", 0, 0, 0, 0, 15);
-	startWszystkie = proces1;
+	procesList = proces1;
 	Proces* proces2 = new Proces(2, "Test1", 0, proces1, 0, proces1, 15);
 	Proces* proces3 = new Proces(3, "Test1", 0, proces2, 0, proces2, 15);
 	proces1->grupaLast = proces3;
