@@ -20,4 +20,7 @@ public:
 	int t_obslugi; 	// czas przetworzonych danych
 
 	Proces(int id, string nazwa, /*Proces* grupaNext, Proces* grupaLast,*/ Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_nextint id, string nazwa, /*Proces* grupaNext, Proces* grupaLast,*/ Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next);
+
+	list<string> komunikaty;
+
 };
