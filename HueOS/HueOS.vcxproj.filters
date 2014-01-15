@@ -39,6 +39,9 @@
     <ClCompile Include="HueHueHue\lev3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hue\rejestr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -60,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HueHueHue\lev3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hue\rejestr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

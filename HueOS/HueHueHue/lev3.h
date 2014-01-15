@@ -21,10 +21,4 @@ public:
 
 
 
-
-
-
-	void blad(int i 
-
-
 };
