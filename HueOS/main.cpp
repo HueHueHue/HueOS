@@ -5,7 +5,7 @@ void tRzeczywisty(float t, DWORD tStart);
 
 int main() {
 	
-	Proces* procesList = NULL; //proces od ktorego zaczynam iterowac po wszystkich. Na starcie ma byc chyba utworzony jeden ktory bedzie mial zawsze dzialal?
+	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0, 0, 0); //proces od ktorego zaczynam iterowac po wszystkich.
 	
 	Planista mPlanista(procesList);
 	Lev3 mPoz3(procesList);

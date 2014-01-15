@@ -4,5 +4,104 @@
 
 Lev3::Lev3(Proces* procesList){
 	this->procesList = procesList;
+	IDCounter = 0;
+}
+
+void Lev3::dodajProces(string Nazwa, int t_przewidywany_next){
+	IDCounter ++;
+
+	Proces* bufor = procesList;
+	bool nazwauzyta = false;
+	do {
+		if(bufor->nazwa == Nazwa){
+			nazwauzyta = true;
+			break;
+		}
+		bufor = bufor->wszystkieNext;
+	} while(bufor->wszystkieNext != procesList);
+
+	if(nazwauzyta == true){
+		cout << "Nazwa procesu jest uzyta!" << endl;
+	} else {
+		cout << "Nazwa procesu jest wolna!" << endl;
+		Proces* nowyProces = new Proces(IDCounter, Nazwa, 0, 0, t_przewidywany_next);
+
+		//ODPALENIE PROGRAMU PRZYDZIELAJACEGO PAMIEC
+
+		dodajPCB(nowyProces);
+
+	}
+
+
+}
+
+void Lev3::usunProces(string nazwa){
+	
+	Proces* doKasacji = znajdzProces(nazwa); //todo XN
+
+	
+
+	if(doKasacji == 0){
+		cout << "Brak procesu o takiej nazwie" << endl;
+	} else {
+		//PROGRAM XZ - zatrzymanie procesu
+		
+		usunPCB(doKasacji);
+
+		//Zwalnianie pamieci
+		//Kasowanie komunikatow
+
+		delete doKasacji;
+	}
+}
+
+void Lev3::dodajPCB(Proces* &nowy){
+	if(procesList->wszystkieLast == 0 && procesList->wszystkieNext == 0){
+		//Pierwszy proces
+		procesList->wszystkieLast = nowy;
+		procesList->wszystkieNext = nowy;
+		nowy->wszystkieLast = procesList;
+		nowy->wszystkieNext = procesList;
+	} else{
+		nowy->wszystkieNext = procesList;
+		nowy->wszystkieLast = procesList->wszystkieLast;
+		procesList->wszystkieLast->wszystkieNext = nowy;
+		procesList->wszystkieLast = nowy;
+	}
+
+}
+void Lev3::usunPCB(Proces* &doKasacji){
+	if(procesList->wszystkieLast == doKasacji && procesList->wszystkieNext == doKasacji){
+		//Pierwszy proces
+		procesList->wszystkieLast = 0;
+		procesList->wszystkieNext = 0;
+
+	} else{
+		doKasacji->wszystkieNext->wszystkieLast = doKasacji->wszystkieLast;
+		doKasacji->wszystkieLast->wszystkieNext = doKasacji->wszystkieNext;
+
+		doKasacji->wszystkieNext = 0;
+		doKasacji->wszystkieLast = 0;
+
+	}
+
+}
+
+Proces* Lev3::znajdzProces(string nazwa){
+	Proces* bufor = procesList;
+	bool znalazlem = false;
+	do {
+		if(bufor->nazwa == nazwa){
+			znalazlem = true;
+			break;
+		}
+		bufor = bufor->wszystkieNext;
+	} while(bufor->wszystkieNext != procesList);
+
+	if(znalazlem){
+		return bufor;
+	} else {
+		return 0;
+	}
 
 }

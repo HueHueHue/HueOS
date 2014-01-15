@@ -55,7 +55,7 @@ void Planista::startCykl(){
 
 	} else {
 		if(bufor == NULL)
-			textLev1(true, "Brak procesow na liscie");
+			textLev1(true, "Brak procesow na liscie!!!");
 		if(najlepszyCzasProces != NULL)
 			textLev1(true, "Proces wybrany, w trakcie wykonywania");
 	}
@@ -102,16 +102,16 @@ void Planista::nowyProces(Proces* nowyProces){
 
 void Planista::test(){
 	//Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next);
-	Proces* proces1 = new Proces(1, "Test1", 0, 0, 0, 0, 15);
+	Proces* proces1 = new Proces(1, "Test1", /*0, 0,*/ 0, 0, 15);
 	procesList = proces1;
-	Proces* proces2 = new Proces(2, "Test1", 0, proces1, 0, proces1, 15);
-	Proces* proces3 = new Proces(3, "Test1", 0, proces2, 0, proces2, 15);
-	proces1->grupaLast = proces3;
-	proces1->grupaNext = proces2;
+	Proces* proces2 = new Proces(2, "Test1", /*0, proces1,*/ 0, proces1, 15);
+	Proces* proces3 = new Proces(3, "Test1", /*0, proces2,*/ 0, proces2, 15);
+	//proces1->grupaLast = proces3;
+	//proces1->grupaNext = proces2;
 	proces1->wszystkieLast = proces3;
 	proces1->wszystkieNext = proces2;
-	proces2->grupaNext = proces3;
+	//proces2->grupaNext = proces3;
 	proces2->wszystkieNext = proces3;
-	proces3->grupaNext = proces1;
+	//proces3->grupaNext = proces1;
 	proces3->wszystkieNext = proces1;
 }
