@@ -9,7 +9,7 @@ public:
 
 	void dodajProces(string nazwa, int t_przewidywany_next);	//XC
 	void usunProces(string nazwa);	//XD
-	//XI?
+	//XH?
 	void dodajPCB(Proces* &nowy);	//XI
 	void usunPCB(Proces* &doKasacji);	//XJ
 	Proces* znajdzProces(string nazwa);	//XN
