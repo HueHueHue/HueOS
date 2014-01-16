@@ -16,8 +16,9 @@ public:
 	int in_smc;
 	int stop_waiting;
 
-	int auto_storage_size;
-	//ADRES DO PAMIÊCI
+	unsigned short auto_storage_size;
+	unsigned short pierwszy_bajt_pamieci;
+
 	list<string> komunikaty;
 
 	//////Obszary ochronne
