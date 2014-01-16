@@ -31,7 +31,7 @@ public:
 	int t_wykonania; 		// ostatni czas wykonania
 	int t_obslugi; 	// czas przetworzonych danych
 
-	Proces(int id, string nazwa, /*Proces* grupaNext, Proces* grupaLast,*/ Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next);
+	Proces(int id, string nazwa, int t_przewidywany_next);
 	void zapiszStan(Rejestr* &mRejestr);
 	void wczytajStan(Rejestr* &mRejestr);
 

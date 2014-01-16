@@ -25,7 +25,7 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next){
 		cout << "Nazwa procesu jest uzyta!" << endl;
 	} else {
 		cout << "Nazwa procesu jest wolna!" << endl;
-		Proces* nowyProces = new Proces(IDCounter, Nazwa, 0, 0, t_przewidywany_next);
+		Proces* nowyProces = new Proces(IDCounter, Nazwa, t_przewidywany_next);
 
 		//ODPALENIE PROGRAMU PRZYDZIELAJACEGO PAMIEC
 

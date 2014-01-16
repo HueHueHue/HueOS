@@ -12,7 +12,7 @@ public:
 
 	Planista(Proces* procesList);
 	void startCykl();
-	void koniecProcesu();
+	void koniecProcesu(Rejestr* & mRejestr);
 	void nowyProces(Proces* nowyProces);
 
 	void xexc(Proces* proc);

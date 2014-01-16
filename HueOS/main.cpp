@@ -5,7 +5,7 @@ void tRzeczywisty(float t, DWORD tStart);
 
 int main() {
 	//1
-	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0, 0, 0); //proces od ktorego zaczynam iterowac po wszystkich.
+	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0); //proces od ktorego zaczynam iterowac po wszystkich.
 	Planista mPlanista(procesList);
 	Rejestr* mRejestr = new Rejestr();
 	//1

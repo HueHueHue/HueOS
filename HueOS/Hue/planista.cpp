@@ -8,7 +8,7 @@ Planista::Planista(Proces* procesList){
 }
 void Planista::stopowanie(){
 	Proces* bufor = procesList;
-	if(bufor->wszystkieNext != 0){
+	if(bufor != NULL && bufor->wszystkieNext != 0){
 		do {
 			if(bufor->stop_waiting == 1){
 				if(bufor->in_smc == 0){
@@ -26,7 +26,7 @@ void Planista::startCykl(){
 
 	Proces* bufor = procesList;
 	if(Running == 0){
-		if(bufor != NULL && najlepszyCzasProces == NULL && bufor->wszystkieNext != 0){
+		if(bufor != NULL && bufor->wszystkieNext != 0){
 			//wyliczanie czasu
 			do {
 				if(bufor->blocked == 0 && bufor->stopped == 0){
@@ -68,6 +68,7 @@ void Planista::startCykl(){
 				textLev1(true, text);
 				najlepszyCzasProces->running = 1;
 				Running = najlepszyCzasProces;
+				najlepszyCzasProces = 0;
 				//WYKONAJ najlepszyCzasProces
 			} else {
 				textLev1(true, "Brak procesow gotowych do wykonania");
@@ -93,17 +94,20 @@ void Planista::startCykl(){
 }
 
 
-void Planista::koniecProcesu(){
-	if(najlepszyCzasProces != NULL){
+void Planista::koniecProcesu(Rejestr* &mRejestr){
+	if(Running != NULL){
 		textLev1(true, "Proces zakonczyl dzialanie");
-		najlepszyCzasProces->przewidziany = false;
-		najlepszyCzasProces->t_przewidywany = najlepszyCzasProces->t_przewidywany_next;
-		najlepszyCzasProces->t_przewidywany_next = NULL;
-		najlepszyCzasProces->t_wykonania = najlepszyCzasProces->t_obslugi;
-		najlepszyCzasProces->running = 0;
+		Running->przewidziany = false;
+		Running->t_przewidywany = Running->t_przewidywany_next;
+		Running->t_przewidywany_next = NULL;
+		Running->t_wykonania = Running->t_obslugi;
+		Running->running = 0;
 
-		najlepszyCzasProces = NULL;
+		Running->zapiszStan(mRejestr);
+
+		Running = NULL;
 		najlepszyCzas = 0;
+
 	} else {
 		textLev1(false, "Nie mozna zakonczyc procesu - brak odpalonego procesu");
 	}
@@ -116,15 +120,16 @@ void Planista::nowyProces(Proces* nowyProces){
 			nowyProces->t_przewidywany_next = 0.5 * nowyProces->t_przewidywany + 0.5 * nowyProces-> t_wykonania;
 			nowyProces->przewidziany = 1;
 		}
-		if(nowyProces->t_przewidywany_next < najlepszyCzasProces->t_przewidywany_next - najlepszyCzasProces->t_obslugi){
+		if(nowyProces->t_przewidywany_next < Running->t_przewidywany_next - Running->t_obslugi){
 			textLev1(true, "Nowy proces ma mniejszy przewidywany czas. Wywlaszczam stary i uruchamian nowy");
 			//ZATRZYMAJ najlepszyCzasProces
-			najlepszyCzasProces->running = 0;
+			Running->running = 0;
+			//koniecProcesu(Running);
 			//ZAPISZ STAN najlepszyCzasProces
 
-			najlepszyCzasProces = nowyProces;
+			Running = nowyProces;
 			//WYKONAJ najlepszyCzasProces
-			najlepszyCzasProces->running = 1;
+			Running->running = 1;
 		} else {
 			textLev1(true, "Nowy proces ma wiekszy przewydywany czas. Kontynuuje wykonywanie starego");
 		}
