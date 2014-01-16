@@ -6,8 +6,8 @@ void tRzeczywisty(float t, DWORD tStart);
 int main() {
 	//1
 	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0); //proces od ktorego zaczynam iterowac po wszystkich.
-	Planista mPlanista(procesList);
 	Rejestr* mRejestr = new Rejestr();
+	Planista mPlanista(procesList, mRejestr);
 	//1
 
 	//3

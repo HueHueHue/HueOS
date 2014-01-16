@@ -33,8 +33,8 @@ public:
 	int t_obslugi; 	// czas przetworzonych danych
 
 	Proces(int id, string nazwa, int t_przewidywany_next);
-	void zapiszStan(Rejestr* &mRejestr);
-	void wczytajStan(Rejestr* &mRejestr);
+	void zapiszStan(Rejestr* mRejestr);
+	void wczytajStan(Rejestr* mRejestr);
 
 
 

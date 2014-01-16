@@ -5,7 +5,7 @@ Semafor::Semafor(int i){
 }
 
 
-void Semafor::pWait(Proces* &x){
+void Semafor::pWait(Proces* x){
 	//Operacja czekania - prosba o dostep
 	if(wart > 0){
 		string text = "Semafor: Operacja P: Zezwalam na uzycie zasobow, bo wart = ";
@@ -26,7 +26,7 @@ void Semafor::pWait(Proces* &x){
 	wart--;
 } 
 
-void Semafor::vSignal(Proces* &x){
+void Semafor::vSignal(Proces* x){
 	//Operacja sygnalu - po uzyciu zasobow
 	wart++;
 	string text = "Semafor: Operacja V: Wysylam sygnal do czekajacych procesow, wart = ";
@@ -59,7 +59,7 @@ void Semafor::odpalCzekajacy(){
 	}
 }
 
-bool Semafor::gotowy(Proces* &x){
+bool Semafor::gotowy(Proces* x){
 	//Funkcja pomocnicza - szybkie sprawdzenie czy proces dostal zezwolenie od semafora na dostep do danych
 
 	if(x->semaforReceiver == 1){

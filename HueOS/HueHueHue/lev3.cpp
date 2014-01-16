@@ -56,7 +56,7 @@ void Lev3::usunProces(string nazwa){
 	}
 }
 
-void Lev3::dodajPCB(Proces* &nowy){
+void Lev3::dodajPCB(Proces* nowy){
 	if(procesList->wszystkieLast == 0 && procesList->wszystkieNext == 0){
 		//Pierwszy proces
 		procesList->wszystkieLast = nowy;
@@ -71,7 +71,7 @@ void Lev3::dodajPCB(Proces* &nowy){
 	}
 
 }
-void Lev3::usunPCB(Proces* &doKasacji){
+void Lev3::usunPCB(Proces* doKasacji){
 	if(procesList->wszystkieLast == doKasacji && procesList->wszystkieNext == doKasacji){
 		//Pierwszy proces
 		procesList->wszystkieLast = 0;

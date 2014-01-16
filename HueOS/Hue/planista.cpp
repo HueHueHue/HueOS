@@ -1,7 +1,8 @@
 #include "globLev1.h"
 
-Planista::Planista(Proces* procesList){
+Planista::Planista(Proces* procesList, Rejestr* mRejestr){
 	this-> procesList = procesList;
+	this->mRejestr = mRejestr;
 	najlepszyCzas = 0;
 	najlepszyCzasProces = NULL;
 	Running = NULL;
@@ -94,7 +95,7 @@ void Planista::startCykl(){
 }
 
 
-void Planista::koniecProcesu(Rejestr* &mRejestr){
+void Planista::koniecProcesu(Rejestr* mRejestr){
 	if(Running != NULL){
 		textLev1(true, "Proces zakonczyl dzialanie");
 		Running->przewidziany = false;
@@ -124,7 +125,7 @@ void Planista::nowyProces(Proces* nowyProces){
 			textLev1(true, "Nowy proces ma mniejszy przewidywany czas. Wywlaszczam stary i uruchamian nowy");
 			//ZATRZYMAJ najlepszyCzasProces
 			Running->running = 0;
-			//koniecProcesu(Running);
+			koniecProcesu(mRejestr);
 			//ZAPISZ STAN najlepszyCzasProces
 
 			Running = nowyProces;

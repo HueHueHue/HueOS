@@ -26,12 +26,12 @@ Proces::Proces(int id, string nazwa, int t_przewidywany_next){
 	in_smc = 0;
 }
 
-void Proces::zapiszStan(Rejestr* &mRejestr){
+void Proces::zapiszStan(Rejestr* mRejestr){
 	for(int i=0;i<4;i++){
 		old_registers[i] = mRejestr->getRejestr(i);
 	}
 }
-void Proces::wczytajStan(Rejestr* &mRejestr){
+void Proces::wczytajStan(Rejestr* mRejestr){
 	for(int i=0;i<4;i++){
 		 mRejestr->setRejestr(i, old_registers[i]);
 	}
