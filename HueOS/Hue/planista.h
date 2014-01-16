@@ -5,6 +5,8 @@ private:
 	
 	Proces* najlepszyCzasProces;
 	int najlepszyCzas;
+
+	void stopowanie();
 public:
 	Proces* procesList;
 
@@ -17,6 +19,4 @@ public:
 	void xcom(Proces* proc);
 
 	Proces* Running;
-
-	void test();
 };

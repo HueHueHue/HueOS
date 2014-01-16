@@ -6,61 +6,89 @@ Planista::Planista(Proces* procesList){
 	najlepszyCzasProces = NULL;
 	Running = NULL;
 }
-
-void Planista::startCykl(){
+void Planista::stopowanie(){
 	Proces* bufor = procesList;
-	if(bufor != NULL && najlepszyCzasProces == NULL && bufor->wszystkieNext != 0){
-		//wyliczanie czasu
+	if(bufor->wszystkieNext != 0){
 		do {
-			if(bufor->blocked == 0 && bufor->stopped == 0){
-				if(bufor->przewidziany == 0){
-					bufor->t_przewidywany_next = 0.5 * bufor->t_przewidywany + 0.5 * bufor-> t_wykonania;
-					bufor->przewidziany = 1;
+			if(bufor->stop_waiting == 1){
+				if(bufor->in_smc == 0){
+					bufor->stopped = 1;
+					bufor->stop_waiting = 0;
 				}
 			}
 			bufor = bufor->wszystkieNext;
 		} while(bufor->wszystkieNext != procesList);
-		textLev1(true, "Zakonczono obliczanie czasu przewidywanego dla wszystkich procesow aktywnych");
-		//wyszukiwanie najszybszego
-		
-		do {
-			if(bufor->blocked == 0 && bufor->stopped == 0){
-				if(bufor->przewidziany == 1){
-					if(najlepszyCzas == 0){
-						najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
-						najlepszyCzasProces = bufor;
-					} else {
-						if(najlepszyCzas < bufor->t_przewidywany_next - bufor->t_obslugi){
+	}
+}
+void Planista::startCykl(){
+	stopowanie();
+
+
+	Proces* bufor = procesList;
+	if(Running == 0){
+		if(bufor != NULL && najlepszyCzasProces == NULL && bufor->wszystkieNext != 0){
+			//wyliczanie czasu
+			do {
+				if(bufor->blocked == 0 && bufor->stopped == 0){
+					if(bufor->przewidziany == 0){
+						bufor->t_przewidywany_next = 0.5 * bufor->t_przewidywany + 0.5 * bufor-> t_wykonania;
+						bufor->przewidziany = 1;
+					}
+				}
+				bufor = bufor->wszystkieNext;
+			} while(bufor->wszystkieNext != procesList);
+			textLev1(true, "Zakonczono obliczanie czasu przewidywanego dla wszystkich procesow aktywnych");
+
+			//wyszukiwanie najszybszego
+			do {
+				if(bufor->blocked == 0 && bufor->stopped == 0){
+					if(bufor->przewidziany == 1){
+						if(najlepszyCzas == 0){
 							najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
 							najlepszyCzasProces = bufor;
+						} else {
+							if(najlepszyCzas < bufor->t_przewidywany_next - bufor->t_obslugi){
+								najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
+								najlepszyCzasProces = bufor;
+							}
 						}
 					}
 				}
-			}
-			bufor = bufor->wszystkieNext;
-		} while(bufor->wszystkieNext != procesList);
+				bufor = bufor->wszystkieNext;
+			} while(bufor->wszystkieNext != procesList);
 
 
-		if(najlepszyCzasProces != NULL){
-			string text = "Wybrano proces o najkrotszym czasie wykonywania [";
+			if(najlepszyCzasProces != NULL){
+				string text = "Wybrano proces o najkrotszym czasie wykonywania [";
 			
-			char str[10];
-			itoa(najlepszyCzasProces->id,str,10);
-			text += str;
-			text += "]";
-			textLev1(true, text);
-			najlepszyCzasProces->running = 1;
-			Running = najlepszyCzasProces;
-			//WYKONAJ najlepszyCzasProces
-		} else {
-			textLev1(true, "Brak procesow gotowych do wykonania");
-		}
+				char str[10];
+				itoa(najlepszyCzasProces->id,str,10);
+				text += str;
+				text += "]";
+				textLev1(true, text);
+				najlepszyCzasProces->running = 1;
+				Running = najlepszyCzasProces;
+				//WYKONAJ najlepszyCzasProces
+			} else {
+				textLev1(true, "Brak procesow gotowych do wykonania");
+			}
 
+		} else {
+			if(bufor == NULL || bufor->wszystkieNext == 0)
+				textLev1(true, "Brak procesow na liscie!!!");
+			if(Running != NULL)
+				textLev1(true, "Proces wybrany, w trakcie wykonywania");
+		}
 	} else {
-		if(bufor == NULL || bufor->wszystkieNext == 0)
-			textLev1(true, "Brak procesow na liscie!!!");
-		if(Running != NULL)
-			textLev1(true, "Proces wybrany, w trakcie wykonywania");
+		string text = "Proces jest wykonywany: ID [";
+		char str[10];
+		itoa(Running->id,str,10);
+		text += str;
+		text += "], wykonywany od: ";
+		itoa(Running->t_obslugi,str,10);
+		text += str;
+		text += " jednostek czasu";
+		textLev1(true, text);
 	}
 }
 
@@ -103,24 +131,6 @@ void Planista::nowyProces(Proces* nowyProces){
 	}
 }
 
-void Planista::test(){
-	//Proces(int id, string nazwa, Proces* grupaNext, Proces* grupaLast, Proces* wszystkieNext, Proces* wszystkieLast, int t_przewidywany_next);
-	Proces* proces1 = new Proces(1, "Test1", /*0, 0,*/ 0, 0, 15);
-	procesList = proces1;
-	Proces* proces2 = new Proces(2, "Test2", /*0, proces1,*/ 0, proces1, 15);
-	Proces* proces3 = new Proces(3, "Test3", /*0, proces2,*/ 0, proces2, 15);
-	//proces1->grupaLast = proces3;
-	//proces1->grupaNext = proces2;
-	proces1->wszystkieLast = proces3;
-	proces1->wszystkieNext = proces2;
-	//proces2->grupaNext = proces3;
-	proces2->wszystkieNext = proces3;
-	//proces3->grupaNext = proces1;
-	proces3->wszystkieNext = proces1;
-	proces1->stopped = 0;
-	proces2->stopped = 0;
-	proces3->stopped = 0;
-}
 
 void Planista::xexc(Proces* proc){
 	proc->in_smc += 1;

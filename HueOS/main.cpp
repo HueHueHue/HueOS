@@ -7,11 +7,11 @@ int main() {
 	//1
 	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0, 0, 0); //proces od ktorego zaczynam iterowac po wszystkich.
 	Planista mPlanista(procesList);
-	Rejestr mRejestr();
+	Rejestr* mRejestr = new Rejestr();
 	//1
 
 	//3
-	Lev3 mPoz3(procesList);
+	Lev3 mPoz3(procesList,mRejestr);
 	//3
 
 
@@ -25,7 +25,6 @@ int main() {
 
 		//mPlanista.Running		//wskaznik na proces do wykonania
 
-		mPlanista.test();
 		//Koniec operacji w tym cyklu
 		tRzeczywisty(3, tStart); //Czekanie na koniec minimalnego czasu cyklu
 	}
