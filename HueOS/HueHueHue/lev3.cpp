@@ -2,8 +2,9 @@
 #include "lev3.h"
 #include"../Hue/globLev1.h"
 
-Lev3::Lev3(Proces* procesList){
+Lev3::Lev3(Proces* procesList, Rejestr* mRejestr){
 	this->procesList = procesList;
+	this->mRejestr = mRejestr;
 	IDCounter = 0;
 }
 
@@ -104,4 +105,26 @@ Proces* Lev3::znajdzProces(string nazwa){
 		return 0;
 	}
 
+}
+
+void Lev3::uruchomProces(string nazwa){
+	Proces* proc = znajdzProces(nazwa);
+	if(proc !=0){
+		proc->zapiszStan(mRejestr); //NIE JESTEM PEWNY - ma zostac zapisany okreslony stan rejestrow do bloku
+		proc->stopped = 0;
+	} else {
+		cout << "Nie znaleziono procesu o nazwie" << nazwa;
+	}
+}
+void Lev3::zatrzymajProces(string nazwa){
+	Proces* proc = znajdzProces(nazwa);
+	if(proc !=0){
+		if(proc->in_smc == 0){
+			proc->stopped = 1;
+		} else {
+			proc->stop_waiting = 1;
+		}
+	} else {
+		cout << "Nie znaleziono procesu o nazwie" << nazwa;
+	}
 }
