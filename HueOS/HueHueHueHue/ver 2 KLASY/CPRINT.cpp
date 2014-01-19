@@ -1,4 +1,5 @@
-#include "CPRINT.h"
+#include
+"CPRINT.h"
 
 
 
@@ -14,9 +15,10 @@ CPRINT::CPRINT()
 
 
 void CPRINT::PRINT( char zapisywane[] ){
-		// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
 		
-	//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
+	// Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
+		//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
+
 		if( zaj_print == 1 ){
 		cout << "Urzadzenie PRINT jest w tej chwili zajete! \n";
 	}
@@ -32,7 +34,7 @@ void CPRINT::PRINT( char zapisywane[] ){
 		   Przyklad wywolania funkcji zapisu
 		   */
 		wyniki.close();
-// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+// Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
 	  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
 		zaj_print=0;
 	}

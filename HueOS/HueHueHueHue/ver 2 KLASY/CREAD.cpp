@@ -18,7 +18,7 @@ double CREAD::READ( int numer_rozkazu )  // Funkcja READ1
 	
 	double adres_rozkazu=0;			//zwracamy zero w razie nie powodzenia
 
-// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+// Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
 		//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
 
 			if( zaj_read == 1 ){
@@ -55,7 +55,7 @@ double CREAD::READ( int numer_rozkazu )  // Funkcja READ1
 	cout <<adres_rozkazu<<endl<<" powyzsza wartosc to odnaleziony adres rozkazu ktory zwroce \n \n";
 	SetConsoleTextAttribute( hOut, 0x07);
 	
-	// Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
+	// Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
   	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
 	
 	zaj_read=0;
