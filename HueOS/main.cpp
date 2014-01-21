@@ -8,10 +8,12 @@ int main() {
 	//1
 	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0); //proces od ktorego zaczynam iterowac po wszystkich.
 	Rejestr* mRejestr = new Rejestr();
-	pamiec opamiec = new pamiec();
+	
 	Planista mPlanista(procesList, mRejestr);
 	//1
-
+	//2
+	pamiec *opamiec = new pamiec();
+	//2
 	//3
 	Lev3 mPoz3(procesList,mRejestr);
 	//3
