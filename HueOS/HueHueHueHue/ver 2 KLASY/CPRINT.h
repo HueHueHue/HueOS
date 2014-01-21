@@ -1,7 +1,11 @@
+// @ autor witkowski01
+
+
+
 #include <iostream>
 #include <fstream>
 
-#include <windows.h>
+#include <windows.h>  // Biblioteki potrzebne do kolorow
 #include <cstdlib>
  
 using namespace std;

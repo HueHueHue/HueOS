@@ -1,40 +1,54 @@
 // @autor witkowski01
 
 
+#include<iostream>
+#include<fstream>
+#include <string>
+
+#include <windows.h> // Biblioteki potrzebne do kolorow
+#include <cstdlib>
+
+
+using namespace std;
+
 //  Karta $JOB jest reprezentowana przez plik tekstowy i ma okreœlon¹ strukturê:	
 // - WorkspaceSize: Wielkoœæ pamiêci roboczej.
+// - Urz¹dzenie wejœcia (pierwsze czy drugie)
 // - Data: Dane do przekazania.
-// - EntryPoint: Nazwa wejœciowa (tytu³). 
-// - Urz¹dzenie wejœcia/wyjœcia
+// - Employer:  Kto wydaje rozkazy
 
-class SJob {
+class JOB {
 	
-	private String	WorkspaceSize;
-	private String 	EntryPoint;
-	private String 	IODevice;
-	private String  Data;
+private:
+		string WorkspaceSize;
+		string IODevice; 
+		string Data;
+		string Employer;
+		int rozmiar;
+		string *tabl;
+
+		HANDLE hOut;  // Zmienna odpowiedzialna za przetrzymanie koloru.
 	
-	public SJob (String EntryPoint, String WorkspaceSize, String IODevice, String Data){
-		this.EntryPoint=EntryPoint;
-		this.WorkspaceSize=WorkspaceSize;
-		this.IODevice=IODevice;
-		this.Data=Data;
+public:
+		JOB();
+
+		//Mozliwosc wywo³ania akcji karty JOB bez pliku karta a za pomoca ponizszej funkcji z parametrami.
+		void Job (string WorkspaceSize, string IODevice, string Data, string Employer){
+
+			this ->WorkspaceSize=WorkspaceSize;
+			this ->IODevice=IODevice;
+			this ->Data=Data;
+			this ->Employer=Employer;
 	}
 	
-	public String getWorkspaceSize() {
-		return WorkspaceSize;
-	}
+	    string getWorkspaceSize();
 
+	    string getIODevice();
 
-	public String getIODevice() {
-		return IODevice;
-	}
+	    string getData();
 
+		string getEmployer();
 
-	public String getData() {
-		return Data;
-	}
+		int getSize();
 
-	
-	
-}
+};

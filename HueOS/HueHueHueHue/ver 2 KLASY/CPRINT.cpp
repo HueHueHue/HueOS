@@ -1,5 +1,9 @@
-#include
-"CPRINT.h"
+// @ autor witkowski01
+
+
+
+#include "CPRINT.h"
+
 
 
 
@@ -10,6 +14,7 @@ CPRINT::CPRINT()
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 		
 	cout << "==> konstruktor PRINT wywolany!!! \n";
+	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 }
 
 
@@ -19,23 +24,39 @@ void CPRINT::PRINT( char zapisywane[] ){
 	// Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
 		//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
 
-		if( zaj_print == 1 ){
+	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+
+
+	if( zaj_print == 1 ){
 		cout << "Urzadzenie PRINT jest w tej chwili zajete! \n";
 	}
 	else 
 	{
 		zaj_print=1;
 		fstream wyniki;
-		wyniki.open("wyniki.txt",std::ios::app | std::ios::ate);
-		wyniki<<zapisywane<<endl;
 
-		/*
+		wyniki.open("wyniki.txt",std::ios::app | std::ios::ate); // otwarcie pliku
+		if(wyniki.is_open())	
+		{
+			cout<<"Otwieram plik zapisu wyniki.txt ."<<endl;
+			wyniki<<zapisywane<<endl;
+
+		   /*
 		   PRINT( "AFdsafsdf");
 		   Przyklad wywolania funkcji zapisu
 		   */
-		wyniki.close();
+
+			wyniki.close();
+			cout<<"Zamykam plik zapisu wyniki.txt ."<<endl;
+		}
+		else
+	{
+		cout<<"ERROR 01\nNie otwarto pliku PRINT."<<endl;	
+	}
 // Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
 	  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
 		zaj_print=0;
 	}
+SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 }

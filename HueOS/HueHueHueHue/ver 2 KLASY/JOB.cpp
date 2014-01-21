@@ -1,14 +1,6 @@
 // @autor witkowski01
 
 
-#include<iostream>
-#include<fstream>
-#include <string>
-
-#include <windows.h> // Biblioteki potrzebne do kolorow
-#include <cstdlib>
-
-
 #include "JOB.h"
 
 
@@ -16,7 +8,7 @@
 JOB::JOB()
 {
 	    rozmiar = 5;
-
+		
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
@@ -30,26 +22,28 @@ JOB::JOB()
 
 	if(bazadanych.is_open())
 	{
-		*tabl = new string[rozmiar];
+		tabl = new string[rozmiar];
 		int numer_lini=0;
-
+		string line; //zmienna przechowujaca tekst z lini karty $JOB
 
 		cout <<"Rozpoczecie wczytywania pliku do bufora.\n";
-		while((plik.eof() != 1))
+		while((bazadanych.eof() != 1))
 			{
-				getline(plik, line);
+				getline(bazadanych, line);
 				tabl[numer_lini]=line;
 				numer_lini++;
 			}
 		cout <<"Wczytywanie pliku do bufora zakonczone.\n";
 	}
-	plik.close();
+
 
 	else
 	{
 		cout<<"ERROR 01\nNie otwarto pliku."<<endl;	
 	}
+	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego
 
+	bazadanych.close();
 }
 
 string	JOB::getWorkspaceSize() {
@@ -86,7 +80,10 @@ int JOB::getSize() {
 
 	int size = 0;
 
-	stream bazadanych("Job.job",ios::in);    // Otwarcie pliku
+	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+
+	fstream bazadanych("Job.job",ios::in);    // Otwarcie pliku
 
 	if(bazadanych.is_open())
 	{
@@ -97,9 +94,9 @@ int JOB::getSize() {
 	}
 	else
 	{
-		cout<<"ERROR 01\nNie otwarto pliku."<<endl;	
+		cout<<"ERROR 01\nNie otwarto pliku JOB."<<endl;	
 	}
-
+		SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 
 		 return size;
 }
