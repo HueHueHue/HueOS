@@ -11,12 +11,12 @@ public:
 
 	void dodajProces(string nazwa, int t_przewidywany_next);	//XC
 	void usunProces(string nazwa);	//XD
-	//XH
+	void stop(string nazwa);//XH
 	void dodajPCB(Proces* nowy);	//XI
 	void usunPCB(Proces* doKasacji);	//XJ
 	Proces* znajdzProces(string nazwa);	//XN
-	//XR
-	// XS
+	string czytajKomunikat(string nazwa);	//XR
+	void wyslijKomunikat(string nazwa, string text);// XS
 	void uruchomProces(string nazwa);	// XY
 	void zatrzymajProces(string nazwa);	// XZ
 	//XQUE - bez
