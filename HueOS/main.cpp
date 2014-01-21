@@ -1,6 +1,7 @@
 #include "global.h"
 #include "Hue/globLev1.h"
 #include "HueHueHue/lev3.h"
+#include "HueHue/pamiec.h"
 void tRzeczywisty(float t, DWORD tStart);
 
 int main() {
