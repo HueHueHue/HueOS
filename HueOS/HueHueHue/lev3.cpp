@@ -62,7 +62,7 @@ void Lev3::stop(string nazwa){
 		}
 	}
 
-	wyslijKomunikat("*IBSUP", "Koniec zlecenia procesu " + nazwa);
+	wyslijKomunikat("*IBSUP", "KONIEC " + nazwa);
 
 }
 void Lev3::dodajPCB(Proces* nowy){
