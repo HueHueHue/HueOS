@@ -51,6 +51,18 @@
     <ClCompile Include="HueHueHueHueHue\sysproces.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HueHueHueHue\CPRINT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HueHueHueHue\CREAD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HueHueHueHue\CREAD_File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HueHueHueHue\JOB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -87,6 +99,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HueHueHueHueHue\sysproces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHue\CPRINT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHue\CREAD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHue\CREAD_File.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHue\JOB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
