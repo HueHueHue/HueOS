@@ -48,8 +48,8 @@ void Lev3::usunProces(string nazwa){
 		//PROGRAM XZ - zatrzymanie procesu
 		
 		usunPCB(doKasacji);
+		mPamiec->zwolnij_pamiec(doKasacji->pierwszy_bajt_pamieci);
 
-		//Zwalnianie pamieci
 		//Kasowanie komunikatow
 
 		delete doKasacji;
