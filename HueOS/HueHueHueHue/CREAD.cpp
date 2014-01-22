@@ -131,7 +131,7 @@ string CREAD::READ_all(  )  // Funkcja READ_all czyta wszystko z karty $JOB plik
 string CREAD::READ_all(string nazwapliku){
 
 	string nazwapliku1 = nazwapliku;
-	string rozkaz;			//zwracamy zero w razie nie powodzenia
+	string rozkaz = "0";			//zwracamy zero w razie nie powodzenia
 
 	JOB *a= new JOB();
 	a->JOB_nazwapliku(nazwapliku1);
@@ -176,6 +176,62 @@ string CREAD::READ_all(string nazwapliku){
 	}
 
 	return rozkaz;
+
+}
+
+void CREAD::READ_all(string WorkspaceSize, string IODevice, string Data, string Employer){
+
+	string rozkaz = "0";
+
+	string rozmiarpracy1 = WorkspaceSize;
+	string IDUrzadzenia1 = IODevice;
+	string dane1 = Data;
+	string zleceniodawca1 = Employer;
+		
+
+	JOB *a= new JOB();
+	a->Job (rozmiarpracy1 , IDUrzadzenia1 , dane1 , zleceniodawca1);
+
+		// Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
+		//	user_semaphore( P ) ;       // Operacja ktora nalezy wykonac przed przystapieniem do operacji
+
+			if( zaj_read == 1 )
+			{
+				SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+				cout << "Urzadzenie READ jest w tej chwili zajete!";
+				
+			}
+	else 
+	{
+	
+
+		zaj_read=1;
+
+		SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+
+	std::cout<<"Otwieram i wykonuje READ_all bez pliku \n";
+	
+
+	 rozkaz = a->getData() ;   // Zwracam tylko ta dana ale do bufora zapisuje wszystkie
+		
+	 Rozmiar_job = a->getWorkspaceSize() ;
+	 IOurzadzenie = a->getIODevice() ; 
+	 Dane = a->getData() ;
+	 zleceniodawca = a->getEmployer() ;
+	
+
+
+	cout <<rozkaz<<endl<<" powyzsza wartosc to dane ktory zwroce \n \n";
+
+	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
+	
+	// Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
+  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
+	
+	zaj_read=0;
+	}
+
+	
 
 }
 

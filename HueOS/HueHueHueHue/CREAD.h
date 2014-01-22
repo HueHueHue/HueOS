@@ -47,6 +47,7 @@ public:
 	string READ(  ); // czytanie rozkazu z $JOB z pliku !!!
 	string READ_all(); // czytanie wszystkiego z pliku karty $JOB  i zwracanie pola Dane !!!
 	string READ_all(string nazwapliku);
+	void READ_all(string WorkspaceSize, string IODevice, string Data, string Employer);
 
 
 	// Jesli chcemy uzyskac inne dane uzyc ponizszysz operacji ale tylko pod warunkiem wykonania READ_all !!!!
