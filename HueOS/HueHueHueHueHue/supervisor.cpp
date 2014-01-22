@@ -71,7 +71,7 @@ void Supervisor::checkMessages() {
 				// wyslac komunikat do nadawcy (czyli kogo :v)
 				break;
 			case 2:
-				drukarka1.PRINT((char *)komunikat.c_str());
+				drukarka1->PRINT((char *)komunikat.c_str());
 				cout << "Przekazano komunikat do druku: " << komunikat << endl;
 				break;
 			}
