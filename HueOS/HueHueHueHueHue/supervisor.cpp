@@ -18,7 +18,19 @@ void Supervisor::init() {
 		job.JOB_nazwapliku(job_cards[i]);
 		Interpreter interpreter;
 		interpreter.interpret_code(job.getData());
-		(interpreter.buffer);
+		mPoz3->dodajProces(job_cards[i], interpreter.op_count, interpreter.total_length);
+		Proces* userprog = mPoz3->znajdzProces(job_cards[i]);
+		if (!userprog) {
+			cout << "Proces " << job_cards[i] << " nie zostal utworzony";
+		}
+
+		for (int i = 0; i < interpreter.total_length; i++) {
+			if(!mPoz3->mPamiec->ustaw_bajt(userprog->auto_storage_size, i, interpreter.buffer[i])) {
+				cout << "Pisanie do bajtu " << i << " nie powiodlo sie";
+			}
+		}
+
+		mPoz3->uruchomProces(job_cards[i]);
 	}
 
 }

@@ -44,7 +44,8 @@ void Interpreter::interpret_code(string blob) {
 	and should print 2 to the output
 	*/
 	vector<unsigned int> param_lengths; // this is needed for forward jumps
-	vector<string> lines = split(blob, '|');	
+	vector<string> lines = split(blob, '|');
+	op_count = lines.size();
 	unsigned int total_length = 2 * lines.size();
 	unsigned int length;
 	// initially we just find the lengths of params
@@ -55,6 +56,7 @@ void Interpreter::interpret_code(string blob) {
 			// no param
 		} else if (parts[0] == "IN") {
 			// this needs to compensate for IN2 opcode (and its param size char)
+			op_count += 1;
 			total_length += 2;
 		} else if (parts[0] == "OUT") {
 			// so basically, if this is OUT (and has params), it can be any length
