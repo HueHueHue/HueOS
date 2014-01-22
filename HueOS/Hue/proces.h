@@ -18,7 +18,7 @@ public:
 
 	unsigned short auto_storage_size;
 	unsigned short pierwszy_bajt_pamieci;
-	short mem_pointer;
+	unsigned short mem_pointer;
 	list<string> komunikaty;
 
 	//////Obszary ochronne
