@@ -29,10 +29,13 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 		Proces* nowyProces = new Proces(IDCounter, Nazwa, t_przewidywany_next);
 
 		//ODPALENIE PROGRAMU PRZYDZIELAJACEGO PAMIEC
-		mPamiec->zajmij_pamiec(rozmiar);
+		if(mPamiec->zajmij_pamiec(rozmiar) == 0xFFFF){
+			cout << "Blad - pamiec nie przydzielona, anuluje!" << endl;
+			delete nowyProces;
+		} else {
 
 		dodajPCB(nowyProces);
-
+		}
 	}
 
 
