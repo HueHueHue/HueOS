@@ -8,13 +8,13 @@ struct lista
 	unsigned short pierwszy_bajt, rozmiar;
 };
 
-class list
+class listka
 {
 public:
 	lista * head;  // punkt wejœcia do listy
 
-	list();        // konstruktor
-	~list();       // destruktor
+	listka();        // konstruktor
+	~listka();       // destruktor
 
 	void	 wyswietl();
 	void     dodaj(unsigned short pierwszy_bajt, unsigned short rozmiar);
