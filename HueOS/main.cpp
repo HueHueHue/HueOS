@@ -2,6 +2,7 @@
 #include "Hue/globLev1.h"
 #include "HueHueHue/lev3.h"
 #include "HueHue/pamiec.h"
+#include "HueHueHueHueHue/supervisor.h"
 void tRzeczywisty(float t, DWORD tStart);
 
 int main() {
@@ -9,15 +10,17 @@ int main() {
 	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0); //proces od ktorego zaczynam iterowac po wszystkich.
 	Rejestr* mRejestr = new Rejestr();
 	
-	Planista mPlanista(procesList, mRejestr);
+	Planista* mPlanista = new Planista(procesList, mRejestr);
 	//1
 	//2
 	pamiec *opamiec = new pamiec();
 	//2
 	//3
-	Lev3 mPoz3(procesList,mRejestr, opamiec);
+	Lev3* mPoz3 = new Lev3(procesList,mRejestr,opamiec);
 	//3
 
+	Supervisor* supervisor = new Supervisor(mPlanista, mPoz3);
+	supervisor->init();
 
 	DWORD tStart; //Petla czasu rzeczywistego
 
@@ -25,9 +28,11 @@ int main() {
 	
 	while(1){
 		tStart = GetTickCount(); //czas na rozpoczeciu petli
-		mPlanista.startCykl(); //Hue1
+		mPlanista->startCykl(); //Hue1
 
 		//mPlanista.Running		//wskaznik na proces do wykonania
+
+		supervisor->checkMessages();
 
 		//Koniec operacji w tym cyklu
 		tRzeczywisty(3, tStart); //Czekanie na koniec minimalnego czasu cyklu
