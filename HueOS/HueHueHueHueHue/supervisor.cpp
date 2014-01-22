@@ -1,5 +1,6 @@
 #include "supervisor.h"
 
+const char* const Supervisor::names[] = {"*IBSUP", "*IN", "*OUT"};
 
 Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3) : mPlanista(mPlanista), mPoz3(mPoz3) {}
 
@@ -24,9 +25,9 @@ void Supervisor::init() {
 			cout << "Proces " << job_cards[i] << " nie zostal utworzony";
 		}
 
-		for (int i = 0; i < interpreter.total_length; i++) {
-			if(!mPoz3->mPamiec->ustaw_bajt(userprog->auto_storage_size, i, interpreter.buffer[i])) {
-				cout << "Pisanie do bajtu " << i << " nie powiodlo sie";
+		for (unsigned int j = 0; j < interpreter.total_length; j++) {
+			if(!mPoz3->mPamiec->ustaw_bajt(userprog->auto_storage_size, j, interpreter.buffer[j])) {
+				cout << "Pisanie do bajtu " << j << " nie powiodlo sie";
 			}
 		}
 

@@ -15,7 +15,7 @@ public:
 	CREAD_File czytnik1;
 	Planista* mPlanista;
 	Lev3* mPoz3;
-	string names[] = { "*IBSUP", "*IN", "*OUT" };
+	static const char * const names[3];
 
 	Supervisor(Planista* mPlanista, Lev3* mPoz3);
 	void init();
