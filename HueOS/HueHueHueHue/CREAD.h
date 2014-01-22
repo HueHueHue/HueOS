@@ -46,6 +46,7 @@ public:
 	CREAD();
 	string READ(  ); // czytanie rozkazu z $JOB z pliku !!!
 	string READ_all(); // czytanie wszystkiego z pliku karty $JOB  i zwracanie pola Dane !!!
+	string READ_all(string nazwapliku);
 
 
 	// Jesli chcemy uzyskac inne dane uzyc ponizszysz operacji ale tylko pod warunkiem wykonania READ_all !!!!

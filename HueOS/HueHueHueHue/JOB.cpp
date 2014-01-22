@@ -8,17 +8,69 @@
 JOB::JOB()
 {
 	    rozmiar = 5;
+
+		 WorkspaceSize = "null";
+		 IODevice = "null"; 
+		 Data = "null";
+		 Employer = "null";
 		
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
+
 		
-		
-	cout << "==> konstruktor JOB wywolany!!! \n";
+		cout << "==> konstruktor JOB wywolany!!! \n";
 	
 	std::cout<<"Otwieram i analizuje karte $JOB \n";
 
-	fstream bazadanych("Job.job",ios::in);     
+	ifstream bazadanych("Job.job",ios::in);     
+
+	if(bazadanych.is_open())
+	{
+		tabl = new string[rozmiar];
+		int numer_lini=0;
+		string line; //zmienna przechowujaca tekst z lini karty $JOB
+
+		cout <<"Rozpoczecie wczytywania pliku do bufora.\n";
+		while((bazadanych.eof() != 1))
+			{
+				getline(bazadanych, line);
+				tabl[numer_lini]=line;
+				numer_lini++;
+			}
+		cout <<"Wczytywanie pliku do bufora zakonczone.\n";
+
+		bazadanych.close();
+	}
+	
+
+	else
+	{
+		cout<<"ERROR 01\nNie otwarto pliku."<<endl;	
+
+		bazadanych.close();
+	}
+
+	bazadanych.close();
+
+	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego
+
+	
+}
+string JOB::JOB_nazwapliku(string nazwapliku)
+{
+	    rozmiar = 5;
+		
+		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+
+
+		
+		cout << "==> konstruktor JOB wywolany!!! \n";
+	
+	std::cout<<"Otwieram i analizuje karte $JOB \n";
+
+	fstream bazadanych(nazwapliku,ios::in);     
 
 	if(bazadanych.is_open())
 	{
@@ -44,6 +96,7 @@ JOB::JOB()
 	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego
 
 	bazadanych.close();
+	return "2";
 }
 
 string	JOB::getWorkspaceSize() {
