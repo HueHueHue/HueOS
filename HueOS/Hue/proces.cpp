@@ -22,6 +22,7 @@ Proces::Proces(int id, string nazwa, int t_przewidywany_next){
 
 	t_wykonania = 0; 	
 	t_obslugi = 0; 
+	mem_pointer = 0;
 
 	in_smc = 0;
 }
