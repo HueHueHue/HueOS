@@ -9,19 +9,19 @@ using namespace std;
 
 /////////////////////////////////////////////////////////// obsluga listy cyklicznej
 
-list::list()
+listka::listka()
 {
 	head = NULL;
 
 }
 
 
-list::~list()
+listka::~listka()
 {
 	while (head) usun();
 }
 
-void list::dodaj(unsigned short pierwszy_bajt, unsigned short rozmiar)
+void listka::dodaj(unsigned short pierwszy_bajt, unsigned short rozmiar)
 {
 	lista * p = new lista;
 
@@ -37,7 +37,7 @@ void list::dodaj(unsigned short pierwszy_bajt, unsigned short rozmiar)
 }
 
 
-void list::usun()
+void listka::usun()
 {
 	if (head)
 	{
@@ -50,7 +50,7 @@ void list::usun()
 	}
 }
 
-void list::wyswietl()
+void listka::wyswietl()
 {
 	lista *p = head;
 	do
@@ -62,7 +62,7 @@ void list::wyswietl()
 
 }
 
-unsigned char list::ile()
+unsigned char listka::ile()
 {
 	lista *p = head;
 	unsigned char licznik = 0;
