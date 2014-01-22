@@ -27,7 +27,7 @@ public:
 class pamiec
 {
 private:
-	list wolna_pamiec, zajeta_pamiec;
+	listka wolna_pamiec, zajeta_pamiec;
 	unsigned char tablica_pamieci[512];
 	bool semafor_wolnej_pamieci, semafor_pamieci;
 	void sortuj_wolna_pamiec(lista* dodany);
