@@ -74,7 +74,7 @@ void Interpreter::interpret_code(string blob) {
 
 	buffer = new char[total_length];
 	unsigned int c = 0;
-	enum OpCode opcode;
+	OpCode opcode;
 
 	for(vector<string>::size_type i = 0; i != lines.size(); i++) {
 		vector<string> parts = split(lines[i], ':');
