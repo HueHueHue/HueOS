@@ -2,13 +2,14 @@
 #include "lev3.h"
 #include"../Hue/globLev1.h"
 #include "../HueHue/pamiec.h"
-Lev3::Lev3(Proces* procesList, Rejestr* mRejestr){
+Lev3::Lev3(Proces* procesList, Rejestr* mRejestr, pamiec* mPamiec){
 	this->procesList = procesList;
 	this->mRejestr = mRejestr;
+	this->mPamiec = mPamiec;
 	IDCounter = 0;
 }
 
-void Lev3::dodajProces(string Nazwa, int t_przewidywany_next){
+void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short rozmiar){
 	IDCounter ++;
 
 	Proces* bufor = procesList;
@@ -28,7 +29,7 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next){
 		Proces* nowyProces = new Proces(IDCounter, Nazwa, t_przewidywany_next);
 
 		//ODPALENIE PROGRAMU PRZYDZIELAJACEGO PAMIEC
-		
+		mPamiec->zajmij_pamiec(rozmiar);
 
 		dodajPCB(nowyProces);
 
@@ -80,6 +81,12 @@ void Lev3::dodajPCB(Proces* nowy){
 	}
 
 }
+void Lev3::dodajPCB(Proces* nowy, bool zewnetrzny){
+	if (zewnetrzny) {
+		IDCounter++;
+	}
+}
+
 void Lev3::usunPCB(Proces* doKasacji){
 	if(procesList->wszystkieLast == doKasacji && procesList->wszystkieNext == doKasacji){
 		//Pierwszy proces

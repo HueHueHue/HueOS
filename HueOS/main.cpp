@@ -15,7 +15,7 @@ int main() {
 	pamiec *opamiec = new pamiec();
 	//2
 	//3
-	Lev3 mPoz3(procesList,mRejestr);
+	Lev3 mPoz3(procesList,mRejestr, opamiec);
 	//3
 
 
