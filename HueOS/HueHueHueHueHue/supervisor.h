@@ -1,6 +1,5 @@
 
 
-
 class Supervisor {
 public:
 	CPRINT drukarka1;

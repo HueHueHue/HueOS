@@ -20,7 +20,7 @@ void Supervisor::init() {
 
 	// uruchom procesy systemowe
 	for (int i = 0; i < 3; i++) {
-		mPoz3->dodajPCB(new SysProces(i+1, names[i]), true);
+		mPoz3->dodajPCB(new SysProces(i + 1, Supervisor::names[i]), true);
 	}
 
 	JOB job; // hey, let's ignore job.job :v
@@ -51,9 +51,9 @@ void Supervisor::checkMessages() {
 	string komunikat;
 	vector<string> x;
 	for (int i = 0; i < 3; i++) {
-		komunikat = mPoz3->czytajKomunikat(names[i]);
+		komunikat = mPoz3->czytajKomunikat(Supervisor::names[i]);
 		if (!komunikat.empty()) {
-			cout << names[i] << " otrzymal komunikat: " << komunikat << endl;
+			cout << Supervisor::names[i] << " otrzymal komunikat: " << komunikat << endl;
 			switch (i) {
 			case 0: // ibsup
 				x = split(komunikat, ' ');
