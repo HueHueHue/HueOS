@@ -29,9 +29,10 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 		Proces* nowyProces = new Proces(IDCounter, Nazwa, t_przewidywany_next);
 
 		//ODPALENIE PROGRAMU PRZYDZIELAJACEGO PAMIEC
-		 unsigned short pierwszy_bajt = mPamiec->zajmij_pamiec(rozmiar);
+		unsigned short pierwszy_bajt = mPamiec->zajmij_pamiec(rozmiar);
 		if(pierwszy_bajt == 0xFFFF){
 			cout << "Blad - pamiec nie przydzielona, anuluje!" << endl;
+			wyslijKomunikat("*IBSUP", "BRAKPAMIECI " + Nazwa);
 			delete nowyProces;
 		} else {
 			nowyProces->auto_storage_size = rozmiar;
