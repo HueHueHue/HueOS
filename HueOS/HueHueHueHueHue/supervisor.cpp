@@ -4,14 +4,23 @@
 Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3) : mPlanista(mPlanista), mPoz3(mPoz3) {}
 
 void Supervisor::init() {
+	string job_cards[] = {"1.job", "2.job"};
+
 	// uruchom procesy systemowe
 	for (int i = 0; i < 3; i++) {
 		mPoz3->dodajPCB(new SysProces(i+1, names[i]), true);
 	}
 
+	JOB job; // hey, let's ignore job.job :v
+
 	// parsuj $JOB
-	Interpreter interpreter;
-	interpreter.interpret_code(karta1.getData());
+	for (int i = 0; i < sizeof(job_cards)/sizeof(job_cards[0]); i++) {
+		job.JOB_nazwapliku(job_cards[i]);
+		Interpreter interpreter;
+		interpreter.interpret_code(job.getData());
+		(interpreter.buffer);
+	}
+
 }
 
 void Supervisor::checkMessages() {
@@ -31,7 +40,7 @@ void Supervisor::checkMessages() {
 				// wyslac komunikat do nadawcy (czyli kogo :v)
 				break;
 			case 2:
-				drukarka1.PRINT(komunikat.c_str());
+				drukarka1.PRINT((char *)komunikat.c_str());
 				cout << "Przekazano komunikat do druku: " << komunikat << endl;
 				break;
 			}
