@@ -62,7 +62,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HueHueHueHueHue\interpreter.cpp" />
+    <ClCompile Include="HueHueHueHueHue\split.cpp" />
     <ClCompile Include="HueHueHueHueHue\supervisor.cpp" />
+    <ClCompile Include="HueHueHueHueHue\sysproces.cpp" />
     <ClCompile Include="HueHueHue\lev3.cpp" />
     <ClCompile Include="HueHue\pamiec.cpp" />
     <ClCompile Include="Hue\planista.cpp" />
@@ -74,6 +77,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h" />
+    <ClInclude Include="HueHueHueHueHue\interpreter.h" />
+    <ClInclude Include="HueHueHueHueHue\split.h" />
+    <ClInclude Include="HueHueHueHueHue\supervisor.h" />
+    <ClInclude Include="HueHueHueHueHue\sysproces.h" />
     <ClInclude Include="HueHueHue\lev3.h" />
     <ClInclude Include="HueHue\pamiec.h" />
     <ClInclude Include="Hue\globLev1.h" />

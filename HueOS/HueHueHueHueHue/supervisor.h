@@ -1,10 +1,10 @@
 #include "../global.h"
+#include "../Hue/globLev1.h"
+#include "../HueHueHue/lev3.h"
 #include "sysproces.h"
 #include <vector>
 #include "interpreter.h"
 #include "split.h"
-#include "../Hue/globLev1.h"
-#include "../HueHueHue/lev3.h"
 #include "../HueHueHueHue/CPRINT.h"
 #include "../HueHueHueHue/CREAD_File.h"
 #include "../HueHueHueHue/JOB.h"

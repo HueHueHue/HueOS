@@ -1,3 +1,5 @@
+#ifndef l3_h
+#define l3_h
 class Proces;
 class Rejestr;
 class pamiec;
@@ -27,3 +29,4 @@ public:
 
 
 };
+#endif

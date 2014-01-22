@@ -42,6 +42,15 @@
     <ClCompile Include="Hue\rejestr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HueHueHueHueHue\interpreter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HueHueHueHueHue\split.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HueHueHueHueHue\sysproces.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">
@@ -66,6 +75,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hue\rejestr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHueHue\supervisor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHueHue\interpreter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHueHue\split.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HueHueHueHueHue\sysproces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

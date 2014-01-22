@@ -1,7 +1,8 @@
 #include "../global.h"
-#include "lev3.h"
 #include"../Hue/globLev1.h"
 #include "../HueHue/pamiec.h"
+#include "lev3.h"
+
 Lev3::Lev3(Proces* procesList, Rejestr* mRejestr, pamiec* mPamiec){
 	this->procesList = procesList;
 	this->mRejestr = mRejestr;
