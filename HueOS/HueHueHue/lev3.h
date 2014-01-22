@@ -5,12 +5,12 @@ class Rejestr;
 class pamiec;
 
 class Lev3{
-private:
+public:
 	Proces* procesList;
 	Rejestr* mRejestr;
 	pamiec* mPamiec;
 	int IDCounter; //do nadawania unikalnych numerow
-public:
+
 	Lev3(Proces* procesList, Rejestr* mRejestr, pamiec* mPamiec);
 
 	void dodajProces(string nazwa, int t_przewidywany_next, unsigned short rozmiar);	//XC
