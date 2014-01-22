@@ -13,7 +13,13 @@
 
 const char* const Supervisor::names[] = {"*IBSUP", "*IN", "*OUT"};
 
-Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3) : mPlanista(mPlanista), mPoz3(mPoz3) {}
+Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec) /*: mPlanista(mPlanista), mPoz3(mPoz3)*/ {
+	this->mPoz3 = mPoz3;
+	this->mPlanista = mPlanista;
+	this->mPamiec = mPamiec;
+	drukarka1 = new CPRINT();
+	czytnik1 = new CREAD_File();
+}
 
 void Supervisor::init() {
 	string job_cards[] = {"1.job", "2.job"};
@@ -35,9 +41,10 @@ void Supervisor::init() {
 		if (!userprog) {
 			cout << "Proces " << job_cards[i] << " nie zostal utworzony";
 		}
-
+		
 		for (unsigned int j = 0; j < interpreter.total_length; j++) {
-			if(!mPoz3->mPamiec->ustaw_bajt(userprog->auto_storage_size, j, interpreter.buffer[j])) {
+			
+			if(!mPamiec->ustaw_bajt(userprog->auto_storage_size, j, interpreter.buffer[j])) {
 				cout << "Pisanie do bajtu " << j << " nie powiodlo sie";
 			}
 		}
