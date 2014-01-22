@@ -90,8 +90,8 @@ pamiec::pamiec()
 
 pamiec::~pamiec()
 {
-	wolna_pamiec.~list();
-	zajeta_pamiec.~list();
+	wolna_pamiec.~listka();
+	zajeta_pamiec.~listka();
 	wypisz("Modul pamieci zegna");
 }
 
