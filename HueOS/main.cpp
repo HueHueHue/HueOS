@@ -4,7 +4,7 @@
 #include "HueHue/pamiec.h"
 #include "HueHueHueHueHue/supervisor.h"
 void tRzeczywisty(float t, DWORD tStart);
-void decyzja(Planista* mPlanista, pamiec* opamiec);
+void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor* mSupervisor);
 
 
 int main() {
@@ -49,7 +49,7 @@ int main() {
 		//Koniec operacji w tym cyklu
 		//tRzeczywisty(5, tStart); //Czekanie na koniec minimalnego czasu cyklu, tryb AUTO
 
-		decyzja(mPlanista, opamiec); //Tryb manualny
+		decyzja(mPlanista, mRejestr, opamiec, supervisor); //Tryb manualny
 	}
 
 	return 0;
@@ -76,7 +76,7 @@ void tRzeczywisty(float t, DWORD tStart){
 ////////////
 
 void wyswietlKomendy();
-void decyzja(Planista* mPlanista, pamiec* opamiec){
+void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor* mSupervisor){
 	cout << "Hue0: Koniec jednostki czasu" << endl;
 	string x;
 	bool end = false;
@@ -100,11 +100,11 @@ void decyzja(Planista* mPlanista, pamiec* opamiec){
 			opamiec->wyswietl_tablice_pamieci_szesnastkowo();
 		} else if(x == "pcb"){
 			mPlanista->wyswietl();
-		}
-		else if (x == "drukarka"){
-
-		}
-		else if (x == ""){
+		}else if (x == "rejestr"){
+			mRejestr->wyswietl();
+		}else if (x == "drukarka"){
+			mSupervisor->wyswietlDrukarka1();
+		}else if (x == ""){
 			end = true;
 		} else {
 			cout << "Zla komenda" << endl;

@@ -16,4 +16,6 @@ public:
 	void init();
 	void execute(Proces* proces);
 	void checkMessages();
+
+	void wyswietlDrukarka1();
 };

@@ -93,6 +93,10 @@ void CPRINT::wyswietl(){
 			numer_lini++;
 		}
 		//wypisz("Wczytywanie pliku do bufora wyswietlania druku zakonczone.");
+			for (int i = 0; i <= rozmiar; i++)
+			{
+				cout << i << tabl[i] << endl;
+			}
 	}
 	
 	else
@@ -102,10 +106,7 @@ void CPRINT::wyswietl(){
 	
 	bazadanych.close();
 
-	for (int i = 0; i <= rozmiar; i++)
-	{
-		cout << i << tabl[i] << endl;
-	}
+
 
 	SetConsoleTextAttribute(hOut, 0x07);
 }

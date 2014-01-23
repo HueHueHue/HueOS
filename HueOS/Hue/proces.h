@@ -36,7 +36,7 @@ public:
 	void zapiszStan(Rejestr* mRejestr);
 	void wczytajStan(Rejestr* mRejestr);
 
-
+	
 
 
 };

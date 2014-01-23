@@ -7,4 +7,6 @@ public:
 	Rejestr();
 	int getRejestr(int id);
 	void setRejestr(int id, int wartosc);
+
+	void wyswietl();
 };

@@ -179,3 +179,7 @@ void Supervisor::checkMessages() {
 		}
 	}
 }
+
+void Supervisor::wyswietlDrukarka1(){
+	drukarka1->wyswietl();
+}
