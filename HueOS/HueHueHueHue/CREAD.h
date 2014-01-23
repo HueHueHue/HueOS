@@ -1,3 +1,6 @@
+#ifndef CREAD_h
+#define CREAD_h
+
 // @ autor witkowski01
 
 
@@ -66,3 +69,6 @@ public:
   przyklad wywolania funkcji READ
 
 */
+
+
+#endif

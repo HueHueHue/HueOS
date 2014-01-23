@@ -1,3 +1,6 @@
+#ifndef CPRINT_h
+#define CPRINT_h
+
 // @ autor witkowski01
 
 
@@ -33,5 +36,4 @@ public:
 
 };
 
-
-
+#endif

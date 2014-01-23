@@ -1,3 +1,6 @@
+#ifndef JOB_h
+#define JOB_h
+
 // @autor witkowski01
 
 
@@ -54,3 +57,5 @@ public:
 		int getSize();
 
 };
+
+#endif
