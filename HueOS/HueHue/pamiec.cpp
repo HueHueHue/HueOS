@@ -472,3 +472,23 @@ char pamiec::pobierz_bajt(unsigned short pierwszy_bajt, unsigned short indeks)
 	}
 
 }
+
+void pamiec::wyswietl_tablice_pamieci()
+{
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+	for (int i = 0; i < 512; i++)
+	{
+		if (i%8==0)
+		cout <<endl << i << "\t";
+		if (tablica_pamieci[i] < 16)
+			cout << '0';
+		cout.setf(ios::hex, ios::basefield);
+		cout << static_cast<unsigned>(tablica_pamieci[i])<<"  ";
+		cout.setf(ios::dec, ios::basefield);
+		
+		if (i % 8 == 7)
+			cout << "\t" << i << endl;
+	}
+	SetConsoleTextAttribute(hOut, 0x07);
+}
