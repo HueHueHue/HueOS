@@ -60,3 +60,11 @@ void CPRINT::PRINT( char zapisywane[] ){
 	}
 SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 }
+
+void CPRINT::wypisz(string a)
+{
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	cout << "Hue4: " << a << endl;
+	SetConsoleTextAttribute(hOut, 0x07);
+}

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 
 #include <windows.h>  // Biblioteki potrzebne do kolorow
 #include <cstdlib>
@@ -33,6 +34,7 @@ public:
 
 	CPRINT();
 	void PRINT( char zapisywane[] );
+	void wypisz(string a);
 
 };
 
