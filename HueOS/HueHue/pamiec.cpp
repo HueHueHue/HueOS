@@ -421,7 +421,7 @@ bool pamiec::ustaw_bajt(unsigned short pierwszy_bajt, unsigned short indeks, uns
 	{
 		if (indeks < it->rozmiar)
 		{
-			wypisz("Wpisano bajt do tablicy pamieci");
+			//wypisz("Wpisano bajt do tablicy pamieci");
 			tablica_pamieci[pierwszy_bajt + indeks] = bajt;
 			return true;
 		}

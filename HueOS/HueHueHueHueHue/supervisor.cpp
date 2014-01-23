@@ -24,7 +24,8 @@ Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec) /*: mP
 
 void Supervisor::init() {
 	string job_cards[] = {"1.job", "2.job"};
-
+	HANDLE hOut;
+	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	// uruchom procesy systemowe
 	for (int i = 0; i < 3; i++) {
 		mPoz3->dodajPCB(new SysProces(i + 1, Supervisor::names[i]), true);
@@ -34,26 +35,34 @@ void Supervisor::init() {
 
 	// parsuj $JOB
 	for (int i = 0; i < 2; i++) {
-		cout << "Czytanie $JOB " << job_cards[i] << endl;
+		SetConsoleTextAttribute( hOut, 0x0D);
+		cout << "Hue5: Czytanie $JOB " << job_cards[i] << endl;
+		SetConsoleTextAttribute( hOut, 0x07);
+
 		job.JOB_nazwapliku(job_cards[i]);
 		Interpreter interpreter;
 		interpreter.interpret_code(job.getData());
 		mPoz3->dodajProces(job_cards[i], interpreter.op_count, interpreter.total_length);
 		Proces* userprog = mPoz3->znajdzProces(job_cards[i]);
 		if (!userprog) {
-			cout << "Proces " << job_cards[i] << " nie zostal utworzony";
+			SetConsoleTextAttribute( hOut, 0x0D);
+			cout << "Hue5: Proces " << job_cards[i] << " nie zostal utworzony" << endl;
+			SetConsoleTextAttribute( hOut, 0x07);
 		}
 		
 		for (unsigned int j = 0; j < interpreter.total_length; j++) {
 			if (!mPamiec->ustaw_bajt(userprog->pierwszy_bajt_pamieci, j, interpreter.buffer[j])) {
-				cout << "Pisanie do bajtu " << j << " nie powiodlo sie" << endl;
+				SetConsoleTextAttribute( hOut, 0x0D);
+				cout << "Hue5: Pisanie do bajtu " << j << " nie powiodlo sie" << endl;
+				SetConsoleTextAttribute( hOut, 0x07);
 			}
 			else {
-				cout << "Pisanie do bajtu " << j << " powiodlo sie" << endl;
+				//cout << "Pisanie do bajtu " << j << " powiodlo sie" << endl;
 			}
 		}
-
-		cout << "Uruchomienie procesu " << job_cards[i];
+		SetConsoleTextAttribute( hOut, 0x0D);
+		cout << "Hue5: Uruchomienie procesu " << job_cards[i] << endl;
+		SetConsoleTextAttribute( hOut, 0x07);
 		mPoz3->uruchomProces(job_cards[i]);
 
 	}
@@ -64,8 +73,12 @@ void Supervisor::execute(Proces* proces) {
 	if (!proces) {
 		return; // brak procesu do wykonania
 	}
-	cout << "Wykonuje rozkaz procesu " << proces->nazwa << endl;
-	
+	HANDLE hOut;
+	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	SetConsoleTextAttribute( hOut, 0x0D);
+	cout << "Hue5: Wykonuje rozkaz procesu " << proces->nazwa << endl;
+	SetConsoleTextAttribute( hOut, 0x07);
+
 	// fixme dodaj obsluge bledow pobierz_bajt
 	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 	unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
@@ -78,7 +91,9 @@ void Supervisor::execute(Proces* proces) {
 		}
 	}
 
-	cout << "OP" << (char)op << " len: " << param_length << " " << raw_param << endl;
+	SetConsoleTextAttribute( hOut, 0x0D);
+	cout << "Hue5: OP" << (char)op << " len: " << param_length << " " << raw_param << endl;
+	SetConsoleTextAttribute( hOut, 0x07);
 
 	// parameter preprocessing
 	switch (op) {
@@ -107,10 +122,14 @@ void Supervisor::execute(Proces* proces) {
 	case Interpreter::OpCode::IN2:
 	case Interpreter::OpCode::OUT1:
 	case Interpreter::OpCode::BYE:
-		cout << "Cos uzytecznego! Olewam!";
+		SetConsoleTextAttribute( hOut, 0x0D);
+		cout << "Hue5: Cos uzytecznego! Olewam!" << endl;
+		SetConsoleTextAttribute( hOut, 0x07);
 		break;
 	default:
-		cout << "Nieprawidlowy rozkaz. Proces zostanie usuniety";
+		SetConsoleTextAttribute( hOut, 0x0D);
+		cout << "Hue5: Nieprawidlowy rozkaz. Proces zostanie usuniety" << endl;
+		SetConsoleTextAttribute( hOut, 0x07);
 		// fixme usun proces
 	}
 
@@ -121,16 +140,23 @@ void Supervisor::execute(Proces* proces) {
 }
 
 void Supervisor::checkMessages() {
+	HANDLE hOut;
+	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	
 	string komunikat;
 	vector<string> x;
 	for (int i = 0; i < 3; i++) {
 		komunikat = mPoz3->czytajKomunikat(Supervisor::names[i]);
 		if (!komunikat.empty()) {
-			cout << Supervisor::names[i] << " otrzymal komunikat: " << komunikat << endl;
+			SetConsoleTextAttribute( hOut, 0x0D);
+			cout << "Hue5: " << Supervisor::names[i] << " otrzymal komunikat: " << komunikat << endl;
+			SetConsoleTextAttribute( hOut, 0x07);
 			switch (i) {
 			case 0: // ibsup
 				x = split(komunikat, ' ');
-				cout << "Zakonczono proces uzytkownika: " << x[1] << endl;
+				SetConsoleTextAttribute( hOut, 0x0D);
+				cout << "Hue5: Zakonczono proces uzytkownika: " << x[1] << endl;
+				SetConsoleTextAttribute( hOut, 0x07);
 				break;
 			case 1: // in
 				// pobrac tekst (z pliku podanego w komunikacie?),
@@ -138,7 +164,9 @@ void Supervisor::checkMessages() {
 				break;
 			case 2:
 				drukarka1->PRINT((char *)komunikat.c_str());
-				cout << "Przekazano komunikat do druku: " << komunikat << endl;
+				SetConsoleTextAttribute( hOut, 0x0D);
+				cout << "Hue5: Przekazano komunikat do druku: " << komunikat << endl;
+				SetConsoleTextAttribute( hOut, 0x07);
 				break;
 			}
 		}

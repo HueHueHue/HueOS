@@ -35,7 +35,7 @@ int main() {
 		supervisor->checkMessages();
 
 		//Koniec operacji w tym cyklu
-		tRzeczywisty(3, tStart); //Czekanie na koniec minimalnego czasu cyklu
+		tRzeczywisty(5, tStart); //Czekanie na koniec minimalnego czasu cyklu
 	}
 
 	return 0;
