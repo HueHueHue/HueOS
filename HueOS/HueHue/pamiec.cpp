@@ -473,21 +473,43 @@ char pamiec::pobierz_bajt(unsigned short pierwszy_bajt, unsigned short indeks)
 
 }
 
-void pamiec::wyswietl_tablice_pamieci()
+void pamiec::wyswietl_tablice_pamieci_szesnastkowo()
 {
 	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
 	for (int i = 0; i < 512; i++)
 	{
-		if (i%8==0)
+		if (i%16==0)
 		cout <<endl << i << "\t";
 		if (tablica_pamieci[i] < 16)
 			cout << '0';
 		cout.setf(ios::hex, ios::basefield);
-		cout << static_cast<unsigned>(tablica_pamieci[i])<<"  ";
+		cout << static_cast<unsigned>(tablica_pamieci[i])<<" ";
 		cout.setf(ios::dec, ios::basefield);
 		
-		if (i % 8 == 7)
+		if (i % 16 == 15)
+			cout << "\t" << i << endl;
+	}
+	SetConsoleTextAttribute(hOut, 0x07);
+}
+void pamiec::wyswietl_tablice_pamieci_dziesietnie()
+{
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+	for (int i = 0; i < 512; i++)
+	{
+		if (i % 16 == 0)
+			cout << endl << i << "\t";
+		if (tablica_pamieci[i] < 10)
+			cout << ' '<<' ';
+		else
+		if (tablica_pamieci[i]<100)
+			cout << ' ';
+		
+		cout << static_cast<unsigned>(tablica_pamieci[i]) << " ";
+		
+
+		if (i % 16 == 15)
 			cout << "\t" << i << endl;
 	}
 	SetConsoleTextAttribute(hOut, 0x07);
