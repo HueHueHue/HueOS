@@ -47,6 +47,9 @@ protected:
 
 public:
 	CREAD();
+
+	void wypisz(string a);
+
 	string READ(  ); // czytanie rozkazu z $JOB z pliku !!!
 	string READ_all(); // czytanie wszystkiego z pliku karty $JOB  i zwracanie pola Dane !!!
 	string READ_all(string nazwapliku);

@@ -13,7 +13,7 @@ CREAD::CREAD()    //konstruktor i przypisanie poczatkowej wartosci zmiennej odpo
 	zaj_read = 0;
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-	cout << "Hue4: ==> konstruktor READ wywolany!!! \n";
+	wypisz(" ==> konstruktor READ wywolany!!! ");
 	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 }
 
@@ -29,7 +29,7 @@ string CREAD::READ(  )  // Funkcja READ1
 			if( zaj_read == 1 )
 			{
 				SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-				cout << "Hue4: Urzadzenie READ jest w tej chwili zajete!";
+				wypisz("Urzadzenie READ jest w tej chwili zajete!");
 				
 			}
 	else 
@@ -40,7 +40,7 @@ string CREAD::READ(  )  // Funkcja READ1
 
 		SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
-	std::cout<<"Hue4: Otwieram i wykonuje READ \n";
+	wypisz(" Otwieram i wykonuje READ ");
 
 	//Stara nie uzyta funkcja zostawiam nie usuwac
 /*	fstream bazarozkazow("rozkazy.roz",ios::in);       
@@ -66,7 +66,7 @@ string CREAD::READ(  )  // Funkcja READ1
 	 rozkaz = job.getData() ;
 
 
-	cout << "Hue4: " <<rozkaz<<endl<<" powyzsza wartosc to rozkaz ktore zwroce \n \n";
+	 cout << "Hue4: " << rozkaz << endl; wypisz(" powyzsza wartosc to rozkaz ktore zwroce \n");
 
 	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 	
@@ -91,7 +91,7 @@ string CREAD::READ_all(  )  // Funkcja READ_all czyta wszystko z karty $JOB plik
 			if( zaj_read == 1 )
 			{
 				SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-				cout << "Hue4: Urzadzenie READ jest w tej chwili zajete!";
+				wypisz(" Urzadzenie READ jest w tej chwili zajete!");
 				
 			}
 	else 
@@ -102,7 +102,7 @@ string CREAD::READ_all(  )  // Funkcja READ_all czyta wszystko z karty $JOB plik
 
 		SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
-	 cout<<"Hue4: Otwieram i wykonuje READ_all \n";
+	 wypisz(" Otwieram i wykonuje READ_all ");
 	
 
 	 rozkaz = job.getData() ;   // Zwracam tylko ta dana ale do bufora zapisuje wszystkie
@@ -114,7 +114,7 @@ string CREAD::READ_all(  )  // Funkcja READ_all czyta wszystko z karty $JOB plik
 	
 
 
-	cout <<"Hue4: "<<rozkaz<<endl<<" powyzsza wartosc to dane ktory zwroce \n \n";
+	 cout << "Hue4: " << rozkaz << endl;  wypisz(" powyzsza wartosc to dane ktory zwroce \n");
 
 	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 	
@@ -142,7 +142,7 @@ string CREAD::READ_all(string nazwapliku){
 			if( zaj_read == 1 )
 			{
 				SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-				cout << "Hue4: Urzadzenie READ jest w tej chwili zajete!";
+				wypisz("Urzadzenie READ jest w tej chwili zajete!");
 				
 			}
 	else 
@@ -153,7 +153,7 @@ string CREAD::READ_all(string nazwapliku){
 
 		SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
-	cout<<"Hue4: Otwieram i wykonuje READ_all \n";
+	wypisz(" Otwieram i wykonuje READ_all ");
 	
 
 	 rozkaz = a->getData() ;   // Zwracam tylko ta dana ale do bufora zapisuje wszystkie
@@ -165,7 +165,7 @@ string CREAD::READ_all(string nazwapliku){
 	
 
 
-	cout <<"Hue4: " <<rozkaz<<endl<<" powyzsza wartosc to dane ktory zwroce \n \n";
+	 cout << "Hue4: " << rozkaz << endl; wypisz(" powyzsza wartosc to dane ktory zwroce \n");
 
 	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 	
@@ -198,7 +198,7 @@ void CREAD::READ_all(string WorkspaceSize, string IODevice, string Data, string 
 			if( zaj_read == 1 )
 			{
 				SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-				cout << "Hue4: Urzadzenie READ jest w tej chwili zajete!";
+				wypisz(" Urzadzenie READ jest w tej chwili zajete!");
 				
 			}
 	else 
@@ -209,7 +209,7 @@ void CREAD::READ_all(string WorkspaceSize, string IODevice, string Data, string 
 
 		SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
-	cout<<"Hue4: Otwieram i wykonuje READ_all bez pliku \n";
+	wypisz(" Otwieram i wykonuje READ_all bez pliku ");
 	
 
 	 rozkaz = a->getData() ;   // Zwracam tylko ta dana ale do bufora zapisuje wszystkie
@@ -270,4 +270,13 @@ string CREAD::READ_all_returnEmployer(){
 	Employer = job.getEmployer();
 
 return Employer;
+}
+
+
+void CREAD::wypisz(string a)
+{
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	cout << "Hue4: " << a << endl;
+	SetConsoleTextAttribute(hOut, 0x07);
 }
