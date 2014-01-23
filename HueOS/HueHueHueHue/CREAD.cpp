@@ -221,7 +221,7 @@ void CREAD::READ_all(string WorkspaceSize, string IODevice, string Data, string 
 	
 
 
-	cout <<"Hue4: "<<rozkaz<<endl<<" powyzsza wartosc to dane ktory zwroce \n \n";
+	 cout << "Hue4: " << rozkaz << endl; wypisz(" powyzsza wartosc to dane ktory zwroce \n");
 
 	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 	
