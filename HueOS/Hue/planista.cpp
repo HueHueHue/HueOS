@@ -55,10 +55,32 @@ void Planista::startCykl(){
 						if(najlepszyCzas == 0){
 							najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
 							najlepszyCzasProces = bufor;
+							string text = "Pierwsza wartosc [";
+							char str[10];
+							itoa(bufor->t_przewidywany_next,str,10);
+							text += str;
+							text += "] dla procesu: ";
+							text += bufor->nazwa;
+							textLev1(true, text);
 						} else {
 							if(najlepszyCzas < bufor->t_przewidywany_next - bufor->t_obslugi){
 								najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
 								najlepszyCzasProces = bufor;
+								string text = "Lepsza wartosc [";
+								char str[10];
+								itoa(bufor->t_przewidywany_next,str,10);
+								text += str;
+								text += "] dla procesu: ";
+								text += bufor->nazwa;
+								textLev1(true, text);
+							} else {
+								string text = "Gorsza wartosc [";
+								char str[10];
+								itoa(bufor->t_przewidywany_next,str,10);
+								text += str;
+								text += "] dla procesu: ";
+								text += bufor->nazwa;
+								textLev1(true, text);
 							}
 						}
 					}

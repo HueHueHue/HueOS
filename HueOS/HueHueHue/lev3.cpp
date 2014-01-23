@@ -42,7 +42,7 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 		} else {
 			nowyProces->auto_storage_size = rozmiar;
 			nowyProces->pierwszy_bajt_pamieci = pierwszy_bajt;
-		dodajPCB(nowyProces);
+			dodajPCB(nowyProces);
 		}
 	}
 
