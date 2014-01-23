@@ -33,6 +33,7 @@ protected:
 
 public:
         CREAD_File();
+		void wypisz(string a);
         int READ_Int_File(string nazwapliku);
 		string READ_String_File(string nazwapliku);
 
