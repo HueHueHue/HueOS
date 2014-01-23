@@ -63,7 +63,7 @@ void Planista::startCykl(){
 							text += bufor->nazwa;
 							textLev1(true, text);
 						} else {
-							if(najlepszyCzas < bufor->t_przewidywany_next - bufor->t_obslugi){
+							if(najlepszyCzas > bufor->t_przewidywany_next - bufor->t_obslugi){
 								najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
 								najlepszyCzasProces = bufor;
 								string text = "Lepsza wartosc [";
