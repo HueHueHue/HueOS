@@ -4,7 +4,7 @@ Rejestr::Rejestr(){
 	for(int i=0;i<4;i++){
 		rejestr[i] = 0;
 	}
-
+	textLev1(1, "Rejestr zostal utworzony");
 }
 
 int Rejestr::getRejestr(int id){

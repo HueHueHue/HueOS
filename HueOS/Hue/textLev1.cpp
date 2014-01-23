@@ -3,7 +3,7 @@
 void textLev1(bool dziala, string wiadomosc){
 	string o = "Hue1: ";
 	if(dziala){
-		o += "Info: ";
+		//o += "Info: ";
 	} else {
 		o += "Blad: ";
 	}

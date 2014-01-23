@@ -25,6 +25,12 @@ Proces::Proces(int id, string nazwa, int t_przewidywany_next){
 	mem_pointer = 0;
 
 	in_smc = 0;
+
+	if(nazwa == "Proces bezczynnosciowy"){
+		textLev1(1, "Proces wskaznikowy utworzony (PCB)");
+	} else {
+		textLev1(1, "Proces" + nazwa + " utworzony (PCB)");
+	}
 }
 
 void Proces::zapiszStan(Rejestr* mRejestr){

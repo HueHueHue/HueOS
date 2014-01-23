@@ -6,6 +6,7 @@ Planista::Planista(Proces* procesList, Rejestr* mRejestr){
 	najlepszyCzas = 0;
 	najlepszyCzasProces = NULL;
 	Running = NULL;
+	textLev1(1, "Planista utworzony. Modul nizszy wita");
 }
 void Planista::stopowanie(){
 	Proces* bufor = procesList;

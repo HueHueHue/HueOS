@@ -9,6 +9,11 @@ Lev3::Lev3(Proces* procesList, Rejestr* mRejestr, pamiec* mPamiec){
 	this->mRejestr = mRejestr;
 	this->mPamiec = mPamiec;
 	IDCounter = 0;
+	HANDLE hOut;
+	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	SetConsoleTextAttribute( hOut, 0x0B);
+	cout << "Hue3: Lev3 utworzony. Modul wyzszy wita" << endl;
+	SetConsoleTextAttribute( hOut, 0x07);
 }
 
 void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short rozmiar){
