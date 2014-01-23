@@ -13,5 +13,6 @@ public:
 
 	Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec);
 	void init();
+	void execute(Proces* proces);
 	void checkMessages();
 };

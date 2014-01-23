@@ -30,7 +30,7 @@ int main() {
 		tStart = GetTickCount(); //czas na rozpoczeciu petli
 		mPlanista->startCykl(); //Hue1
 
-		//mPlanista.Running		//wskaznik na proces do wykonania
+		supervisor->execute(mPlanista->Running);
 
 		supervisor->checkMessages();
 

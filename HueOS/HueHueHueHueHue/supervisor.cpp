@@ -34,6 +34,7 @@ void Supervisor::init() {
 
 	// parsuj $JOB
 	for (int i = 0; i < sizeof(job_cards)/sizeof(job_cards[0]); i++) {
+		cout << "Czytanie $JOB " << job_cards[i] << endl;
 		job.JOB_nazwapliku(job_cards[i]);
 		Interpreter interpreter;
 		interpreter.interpret_code(job.getData());
@@ -53,6 +54,64 @@ void Supervisor::init() {
 		mPoz3->uruchomProces(job_cards[i]);
 	}
 
+}
+
+void Supervisor::execute(Proces* proces) {
+	if (!proces) {
+		return; // brak procesu do wykonania
+	}
+	cout << "Wykonuje rozkaz procesu " << proces->nazwa << endl;
+	
+	// fixme dodaj obsluge bledow pobierz_bajt
+	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->auto_storage_size, proces->mem_pointer++);
+	unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->auto_storage_size, proces->mem_pointer++);
+	char* raw_param;
+	unsigned int int_param;
+	if (param_length != 0) {
+		raw_param = new char[param_length];
+		for (int i = 0; i < param_length; i++) {
+			raw_param[i] = mPamiec->pobierz_bajt(proces->auto_storage_size, proces->mem_pointer++);
+		}
+	}
+
+	// parameter preprocessing
+	switch (op) {
+	case Interpreter::OpCode::SET:
+	case Interpreter::OpCode::ADD:
+	case Interpreter::OpCode::SUB:
+	case Interpreter::OpCode::MUL:
+	case Interpreter::OpCode::DIV:
+	case Interpreter::OpCode::JUMP:
+	case Interpreter::OpCode::JMPZ:
+	case Interpreter::OpCode::JPNZ:
+		memcpy(&int_param, raw_param, sizeof(unsigned int));
+		cout << int_param << endl;
+	}
+
+	switch (op) {
+	case Interpreter::OpCode::SET:
+	case Interpreter::OpCode::ADD:
+	case Interpreter::OpCode::SUB:
+	case Interpreter::OpCode::MUL:
+	case Interpreter::OpCode::DIV:
+	case Interpreter::OpCode::JUMP:
+	case Interpreter::OpCode::JMPZ:
+	case Interpreter::OpCode::JPNZ:
+	case Interpreter::OpCode::IN1:
+	case Interpreter::OpCode::IN2:
+	case Interpreter::OpCode::OUT1:
+	case Interpreter::OpCode::BYE:
+		cout << "Cos uzytecznego! Olewam!";
+		break;
+	default:
+		cout << "Nieprawidlowy rozkaz. Proces zostanie usuniety";
+		// fixme usun proces
+	}
+
+	if (param_length != 0) {
+		delete[] raw_param;
+	}
+	proces->t_obslugi++;
 }
 
 void Supervisor::checkMessages() {

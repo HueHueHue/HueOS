@@ -116,6 +116,7 @@ void Interpreter::interpret_code(string blob) {
 				// 	buffer[c++] = parts[1][i];
 				// }
 				memcpy(buffer + c, parts[1].c_str(), parts[1].length()+1);
+				c += parts[1].length() + 1;
 			} else {
 				unsigned int i = atoi(parts[1].c_str());
 				memcpy(buffer + c, &i, sizeof(unsigned int));
