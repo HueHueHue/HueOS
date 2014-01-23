@@ -175,3 +175,21 @@ void Planista::xexc(Proces* proc){
 void Planista::xcom(Proces* proc){
 	proc->in_smc -= 1;
 }
+
+void Planista::wyswietl(){
+	HANDLE hOut;
+	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
+	SetConsoleTextAttribute( hOut, 0x0C);
+	cout << "Wszystkie dostepne procesy" << endl;
+	Proces* bufor = procesList;
+	cout << "ID	Nazwa			stop	blocked	" << endl;
+	
+		do {
+			//cout << bufor->id << "	" << bufor ->nazwa << "			" << bufor->stopped << "		" << bufor->blocked << endl;
+			printf("%8i%24s%8i%8i\n", bufor->id, bufor ->nazwa, bufor->stopped, bufor->blocked);
+			bufor = bufor->wszystkieNext;
+		} while(bufor != procesList);
+
+
+	SetConsoleTextAttribute( hOut, 0x07);
+}

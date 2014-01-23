@@ -21,4 +21,6 @@ public:
 	void xcom(Proces* proc);
 
 	Proces* Running;
+
+	void wyswietl();
 };

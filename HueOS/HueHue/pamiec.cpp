@@ -480,7 +480,8 @@ void pamiec::wyswietl_tablice_pamieci_szesnastkowo()
 	for (int i = 0; i < 512; i++)
 	{
 		if (i%16==0)
-		cout <<endl << i << "\t";
+		//cout <<endl << i << " | ";
+		printf("\n	%3i | ", i);
 		if (tablica_pamieci[i] < 16)
 			cout << '0';
 		cout.setf(ios::hex, ios::basefield);
@@ -488,7 +489,11 @@ void pamiec::wyswietl_tablice_pamieci_szesnastkowo()
 		cout.setf(ios::dec, ios::basefield);
 		
 		if (i % 16 == 15)
-			cout << "\t" << i << endl;
+			printf(" | %3i\n", i);
+		if (i % 16 == 7)
+			cout << "  ";
+		//cout << " | " << i << endl;
+		
 	}
 	SetConsoleTextAttribute(hOut, 0x07);
 }

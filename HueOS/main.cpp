@@ -4,7 +4,7 @@
 #include "HueHue/pamiec.h"
 #include "HueHueHueHueHue/supervisor.h"
 void tRzeczywisty(float t, DWORD tStart);
-void decyzja(pamiec* opamiec);
+void decyzja(Planista* mPlanista, pamiec* opamiec);
 
 
 int main() {
@@ -14,6 +14,7 @@ int main() {
 	cout << endl << "Hue0: Lev1" << endl;
 	//1
 	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0); //proces od ktorego zaczynam iterowac po wszystkich.
+	procesList->blocked = 1;
 	Rejestr* mRejestr = new Rejestr();
 	Planista* mPlanista = new Planista(procesList, mRejestr);
 	//1
@@ -48,7 +49,7 @@ int main() {
 		//Koniec operacji w tym cyklu
 		//tRzeczywisty(5, tStart); //Czekanie na koniec minimalnego czasu cyklu, tryb AUTO
 
-		decyzja(opamiec); //Tryb manualny
+		decyzja(mPlanista, opamiec); //Tryb manualny
 	}
 
 	return 0;
@@ -75,7 +76,7 @@ void tRzeczywisty(float t, DWORD tStart){
 ////////////
 
 void wyswietlKomendy();
-void decyzja(pamiec* opamiec){
+void decyzja(Planista* mPlanista, pamiec* opamiec){
 	cout << "Hue0: Koniec jednostki czasu" << endl;
 	string x;
 	bool end = false;
@@ -94,9 +95,11 @@ void decyzja(pamiec* opamiec){
 		} else if(x == "start"){
 			//dodaj nowy proces z p³ytki job
 		} else if(x == "pamiec"){
-			opamiec->wyswietl_tablice_pamieci();
+			opamiec->wyswietl_tablice_pamieci_dziesietnie();
+		} else if(x == "pamiec16"){
+			opamiec->wyswietl_tablice_pamieci_szesnastkowo();
 		} else if(x == "pcb"){
-			//wyswietla tabelke z listy procesow
+			mPlanista->wyswietl();
 		} else if(x == ""){
 			end = true;
 		} else {
@@ -117,6 +120,7 @@ void wyswietlKomendy(){
 	cout << "> <ENTER>	- zaczyna kolejna jendnostke czasu systemu" << endl;
 	cout << "> pcb		- wyswietla procesy na liscie glownej" << endl;
 	cout << "> pamiec		- wyswietla zawartosc pamieci" << endl;
+	cout << "> pamiec16		- wyswietla zawartosc pamieci w postaci szesnastkowej" << endl;
 	cout << "> start		- zacznij wczytywac nowy proces" << endl;
 
 }
