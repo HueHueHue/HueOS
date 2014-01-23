@@ -513,7 +513,7 @@ void pamiec::wyswietl_tablice_pamieci_dziesietnie()
 		if (tablica_pamieci[i]<100)
 			cout << ' ';
 		
-		cout << static_cast<unsigned>(tablica_pamieci[i]) << " ";
+		cout << (char)static_cast<unsigned>(tablica_pamieci[i]) << " ";
 		
 
 		if (i % 16 == 15)
