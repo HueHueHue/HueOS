@@ -34,9 +34,9 @@ private:
 	
 public:
 		JOB();
-
 		string JOB_nazwapliku(string nazwapliku);
 
+		void wypisz(string a);
 		//Mozliwosc wywo³ania akcji karty JOB bez pliku karta a za pomoca ponizszej funkcji z parametrami.
 		void Job (string WorkspaceSize, string IODevice, string Data, string Employer){
 

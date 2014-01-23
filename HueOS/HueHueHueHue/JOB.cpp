@@ -19,9 +19,9 @@ JOB::JOB()
 
 
 		
-		cout << "==> konstruktor JOB wywolany!!! \n";
+		wypisz("==> konstruktor JOB wywolany!!! ");
 	
-	std::cout<<"Otwieram i analizuje karte $JOB \n";
+	wypisz("Otwieram i analizuje karte $JOB ");
 
 	ifstream bazadanych("Job.job",ios::in);     
 
@@ -31,14 +31,14 @@ JOB::JOB()
 		int numer_lini=0;
 		string line; //zmienna przechowujaca tekst z lini karty $JOB
 
-		cout <<"Rozpoczecie wczytywania pliku do bufora.\n";
+		wypisz("Rozpoczecie wczytywania pliku do bufora.");
 		while((bazadanych.eof() != 1))
 			{
 				getline(bazadanych, line);
 				tabl[numer_lini]=line;
 				numer_lini++;
 			}
-		cout <<"Wczytywanie pliku do bufora zakonczone.\n";
+		wypisz("Wczytywanie pliku do bufora zakonczone.");
 
 		bazadanych.close();
 	}
@@ -66,9 +66,9 @@ string JOB::JOB_nazwapliku(string nazwapliku)
 
 
 		
-		cout << "Hue4: ==> konstruktor JOB wywolany!!! \n";
+	wypisz("==> konstruktor JOB wywolany!!! ");
 	
-	cout<<"Hue4: Otwieram i analizuje karte $JOB \n";
+	wypisz("Otwieram i analizuje karte $JOB ");
 
 	fstream bazadanych(nazwapliku,ios::in);     
 
@@ -78,20 +78,20 @@ string JOB::JOB_nazwapliku(string nazwapliku)
 		int numer_lini=0;
 		string line; //zmienna przechowujaca tekst z lini karty $JOB
 
-		cout <<"Hue4: Rozpoczecie wczytywania pliku do bufora.\n";
+		wypisz("Rozpoczecie wczytywania pliku do bufora.");
 		while((bazadanych.eof() != 1))
 			{
 				getline(bazadanych, line);
 				tabl[numer_lini]=line;
 				numer_lini++;
 			}
-		cout <<"Hue4: Wczytywanie pliku do bufora zakonczone.\n";
+		wypisz("Wczytywanie pliku do bufora zakonczone.");
 	}
 
 
 	else
 	{
-		cout<<"Hue4: ERROR 01\nNie otwarto pliku."<<endl;	
+		wypisz("ERROR 01\nNie otwarto pliku.");	
 	}
 	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego
 
@@ -143,13 +143,22 @@ int JOB::getSize() {
 		 bazadanych.seekg(0, ios::end); // Przejœcie na koniec pliku
 		 size = bazadanych.tellg();  // Sprawdzamy pozycjê, która odpowiada d³ugoœci pliku!
  
-		 cout << "Hue4: D³ugoœæ pliku w bajtach wynosi: " << size << "." << endl;
+		 wypisz("D³ugoœæ pliku w bajtach wynosi: "); cout<< size << "." << endl;
 	}
 	else
 	{
-		cout<<"Hue4: ERROR 01\nNie otwarto pliku JOB."<<endl;	
+		wypisz("ERROR 01\nNie otwarto pliku JOB.");
 	}
 		SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 
 		 return size;
+}
+
+
+void JOB::wypisz(string a)
+{
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	cout << "Hue4: " << a << endl;
+	SetConsoleTextAttribute(hOut, 0x07);
 }
