@@ -18,7 +18,7 @@ void Planista::stopowanie(){
 				}
 			}
 			bufor = bufor->wszystkieNext;
-		} while(bufor->wszystkieNext != procesList);
+		} while(bufor != procesList);
 	}
 }
 void Planista::startCykl(){
@@ -37,7 +37,7 @@ void Planista::startCykl(){
 					}
 				}
 				bufor = bufor->wszystkieNext;
-			} while(bufor->wszystkieNext != procesList);
+			} while(bufor != procesList);
 			textLev1(true, "Zakonczono obliczanie czasu przewidywanego dla wszystkich procesow aktywnych");
 
 			//wyszukiwanie najszybszego
@@ -56,7 +56,7 @@ void Planista::startCykl(){
 					}
 				}
 				bufor = bufor->wszystkieNext;
-			} while(bufor->wszystkieNext != procesList);
+			} while(bufor != procesList);
 
 
 			if(najlepszyCzasProces != NULL){

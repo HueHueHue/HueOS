@@ -125,7 +125,7 @@ Proces* Lev3::znajdzProces(string nazwa){
 				break;
 			}
 			bufor = bufor->wszystkieNext;
-		} while(bufor->wszystkieNext != procesList);
+		} while(bufor != procesList);
 	} else {
 		znalazlem = false;
 	}
