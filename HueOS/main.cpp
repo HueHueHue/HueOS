@@ -4,8 +4,8 @@
 #include "HueHue/pamiec.h"
 #include "HueHueHueHueHue/supervisor.h"
 void tRzeczywisty(float t, DWORD tStart);
-void decyzja();
-void wyswietlKomendy();
+void decyzja(pamiec* opamiec);
+
 
 int main() {
 	cout << "Hue0:				Start systemu" << endl;
@@ -48,7 +48,7 @@ int main() {
 		//Koniec operacji w tym cyklu
 		//tRzeczywisty(5, tStart); //Czekanie na koniec minimalnego czasu cyklu, tryb AUTO
 
-		decyzja(); //Tryb manualny
+		decyzja(opamiec); //Tryb manualny
 	}
 
 	return 0;
@@ -74,7 +74,8 @@ void tRzeczywisty(float t, DWORD tStart){
 //
 ////////////
 
-void decyzja(){
+void wyswietlKomendy();
+void decyzja(pamiec* opamiec){
 	cout << "Hue0: Koniec jednostki czasu" << endl;
 	string x;
 	bool end = false;
@@ -93,14 +94,14 @@ void decyzja(){
 		} else if(x == "start"){
 			//dodaj nowy proces z p³ytki job
 		} else if(x == "pamiec"){
-			//wyswietla tabelke z pamiecia
+			opamiec->wyswietl_tablice_pamieci();
 		} else if(x == "pcb"){
 			//wyswietla tabelke z listy procesow
 		} else if(x == ""){
 			end = true;
 		} else {
 			cout << "Zla komenda" << endl;
-			end == false;
+			end = false;
 		}
 
 
