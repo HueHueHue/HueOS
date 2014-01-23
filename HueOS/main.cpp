@@ -100,7 +100,11 @@ void decyzja(Planista* mPlanista, pamiec* opamiec){
 			opamiec->wyswietl_tablice_pamieci_szesnastkowo();
 		} else if(x == "pcb"){
 			mPlanista->wyswietl();
-		} else if(x == ""){
+		}
+		else if (x == "drukarka"){
+
+		}
+		else if (x == ""){
 			end = true;
 		} else {
 			cout << "Zla komenda" << endl;

@@ -68,3 +68,44 @@ void CPRINT::wypisz(string a)
 	cout << "Hue4: " << a << endl;
 	SetConsoleTextAttribute(hOut, 0x07);
 }
+
+
+void CPRINT::wyswietl(){
+	
+	int rozmiar = 5;
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	cout << "Ostatnie 5 wydrukowanych danych" << endl;
+	
+	fstream bazadanych("wyniki.txt", ios::in);
+
+	if (bazadanych.is_open())
+	{
+		tabl = new string[rozmiar];
+		int numer_lini = 0;
+		string line; //zmienna przechowujaca tekst z lini karty $JOB
+
+		//wypisz("Rozpoczecie wczytywania pliku do bufora przed wyswietleniem druku.");
+		while ((bazadanych.eof() != 1))
+		{
+			getline(bazadanych, line);
+			tabl[numer_lini] = line;
+			numer_lini++;
+		}
+		//wypisz("Wczytywanie pliku do bufora wyswietlania druku zakonczone.");
+	}
+	
+	else
+	{
+		wypisz("ERROR 01\nNie otwarto pliku wynikowego.");
+	}
+	
+	bazadanych.close();
+
+	for (int i = 0; i <= rozmiar; i++)
+	{
+		cout << i << tabl[i] << endl;
+	}
+
+	SetConsoleTextAttribute(hOut, 0x07);
+}

@@ -22,7 +22,8 @@ private:
 // Zmienna ta jest potrzebna do sprawdzenia czy uzadzenie jest zajete czy nie, gdyz nie mam dostepu do
 //sprawdzenia wartosci semaforow, na ktorych wykonuje operacje.
 
-	int zaj_print; 
+	int zaj_print;
+	string *tabl;
 	HANDLE hOut;
 
 		// Jesli zaj = 1 to znaczy ze trwa operacja ,
@@ -35,6 +36,7 @@ public:
 	CPRINT();
 	void PRINT( char zapisywane[] );
 	void wypisz(string a);
+	void wyswietl();
 
 };
 
