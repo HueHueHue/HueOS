@@ -34,6 +34,14 @@ void Planista::startCykl(){
 					if(bufor->przewidziany == 0){
 						bufor->t_przewidywany_next = 0.5 * bufor->t_przewidywany + 0.5 * bufor-> t_wykonania;
 						bufor->przewidziany = 1;
+
+							string text = "Obliczylem wartosc [";
+							char str[10];
+							itoa(bufor->t_przewidywany_next,str,10);
+							text += str;
+							text += "] dla procesu: ";
+							text += bufor->nazwa;
+							textLev1(true, text);
 					}
 				}
 				bufor = bufor->wszystkieNext;
