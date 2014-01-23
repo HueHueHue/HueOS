@@ -16,14 +16,17 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 
 	Proces* bufor = procesList;
 	bool nazwauzyta = false;
-	do {
-		if(bufor->nazwa == Nazwa){
-			nazwauzyta = true;
-			break;
-		}
-		bufor = bufor->wszystkieNext;
-	} while(bufor->wszystkieNext != procesList);
-
+	if(bufor->wszystkieNext != 0){
+		do {
+			if(bufor->nazwa == Nazwa){
+				nazwauzyta = true;
+				break;
+			}
+			bufor = bufor->wszystkieNext;
+		} while(bufor->wszystkieNext != procesList);
+	} else {
+		nazwauzyta = false;
+	}
 	if(nazwauzyta == true){
 		cout << "Nazwa procesu jest uzyta!" << endl;
 	} else {
