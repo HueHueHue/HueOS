@@ -66,9 +66,9 @@ string JOB::JOB_nazwapliku(string nazwapliku)
 
 
 		
-		cout << "==> konstruktor JOB wywolany!!! \n";
+		cout << "Hue4: ==> konstruktor JOB wywolany!!! \n";
 	
-	std::cout<<"Otwieram i analizuje karte $JOB \n";
+	cout<<"Hue4: Otwieram i analizuje karte $JOB \n";
 
 	fstream bazadanych(nazwapliku,ios::in);     
 
@@ -78,20 +78,20 @@ string JOB::JOB_nazwapliku(string nazwapliku)
 		int numer_lini=0;
 		string line; //zmienna przechowujaca tekst z lini karty $JOB
 
-		cout <<"Rozpoczecie wczytywania pliku do bufora.\n";
+		cout <<"Hue4: Rozpoczecie wczytywania pliku do bufora.\n";
 		while((bazadanych.eof() != 1))
 			{
 				getline(bazadanych, line);
 				tabl[numer_lini]=line;
 				numer_lini++;
 			}
-		cout <<"Wczytywanie pliku do bufora zakonczone.\n";
+		cout <<"Hue4: Wczytywanie pliku do bufora zakonczone.\n";
 	}
 
 
 	else
 	{
-		cout<<"ERROR 01\nNie otwarto pliku."<<endl;	
+		cout<<"Hue4: ERROR 01\nNie otwarto pliku."<<endl;	
 	}
 	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego
 
@@ -143,11 +143,11 @@ int JOB::getSize() {
 		 bazadanych.seekg(0, ios::end); // Przejœcie na koniec pliku
 		 size = bazadanych.tellg();  // Sprawdzamy pozycjê, która odpowiada d³ugoœci pliku!
  
-		 cout << "D³ugoœæ pliku w bajtach wynosi: " << size << "." << endl;
+		 cout << "Hue4: D³ugoœæ pliku w bajtach wynosi: " << size << "." << endl;
 	}
 	else
 	{
-		cout<<"ERROR 01\nNie otwarto pliku JOB."<<endl;	
+		cout<<"Hue4: ERROR 01\nNie otwarto pliku JOB."<<endl;	
 	}
 		SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 

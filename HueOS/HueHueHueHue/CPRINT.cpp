@@ -13,7 +13,7 @@ CPRINT::CPRINT()
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 		
-	cout << "==> konstruktor PRINT wywolany!!! \n";
+	cout << "Hue4: ==> konstruktor PRINT wywolany!!! \n";
 	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 }
 
@@ -29,7 +29,7 @@ void CPRINT::PRINT( char zapisywane[] ){
 
 
 	if( zaj_print == 1 ){
-		cout << "Urzadzenie PRINT jest w tej chwili zajete! \n";
+		cout << "Hue4: Urzadzenie PRINT jest w tej chwili zajete! \n";
 	}
 	else 
 	{
@@ -39,7 +39,7 @@ void CPRINT::PRINT( char zapisywane[] ){
 		wyniki.open("wyniki.txt",std::ios::app | std::ios::ate); // otwarcie pliku
 		if(wyniki.is_open())	
 		{
-			cout<<"Otwieram plik zapisu wyniki.txt ."<<endl;
+			cout<<"Hue4: Otwieram plik zapisu wyniki.txt ."<<endl;
 			wyniki<<zapisywane<<endl;
 
 		   /*
@@ -48,11 +48,11 @@ void CPRINT::PRINT( char zapisywane[] ){
 		   */
 
 			wyniki.close();
-			cout<<"Zamykam plik zapisu wyniki.txt ."<<endl;
+			cout<<"Hue4: Zamykam plik zapisu wyniki.txt ."<<endl;
 		}
 		else
 	{
-		cout<<"ERROR 01\nNie otwarto pliku PRINT."<<endl;	
+		cout<<"Hue4: ERROR 01\nNie otwarto pliku PRINT."<<endl;	
 	}
 // Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
 	  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji

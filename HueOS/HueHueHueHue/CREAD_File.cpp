@@ -11,7 +11,7 @@ CREAD_File::CREAD_File()    //konstruktor i przypisanie poczatkowej wartosci zmi
         zaj_read = 0;
                 hOut = GetStdHandle( STD_OUTPUT_HANDLE );
             SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-        cout << "==> konstruktor READ wywolany!!! \n";
+        cout << "Hue4: ==> konstruktor READ wywolany!!! \n";
         SetConsoleTextAttribute( hOut, 0x07);
 }
 
@@ -26,7 +26,7 @@ string CREAD_File::READ_String_File(string nazwapliku)  // Funkcja READ1
 
                         if( zaj_read == 1 ){
                                 SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-                                cout << "Urzadzenie READ_File jest w tej chwili zajete!";
+                                cout << "Hue4: Urzadzenie READ_File jest w tej chwili zajete!";
                                 
                         }
         else 
@@ -35,7 +35,7 @@ string CREAD_File::READ_String_File(string nazwapliku)  // Funkcja READ1
        
 
         zaj_read=1;
-        cout<<"Otwieram i przeszukuje plik "<<nazwapliku<<endl;
+        cout<<"Hue4: Otwieram i przeszukuje plik "<<nazwapliku<<endl;
         fstream plik(nazwapliku,ios::in);            // co do bazy rozkazow to jest ona do stworzenia ale potrzebne sa dane od Pani Agnieszki.(Cytat J.B.)
 				
 				if(plik.is_open())
@@ -44,12 +44,12 @@ string CREAD_File::READ_String_File(string nazwapliku)  // Funkcja READ1
 				}
 				else 
 				{
-						cout<<"Nie mozna otworzyc pliku lub danych."<<endl;
+						cout<<"Hue4: Nie mozna otworzyc pliku lub danych."<<endl;
 				}
 				plik.close();
 
         
-        cout <<dane<<endl<<" powyzsza wartosc dane ktore zwroce \n \n";
+        cout <<"Hue4: "<<dane<<endl<<" powyzsza wartosc dane ktore zwroce \n \n";
         SetConsoleTextAttribute( hOut, 0x07);
         
         // Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
@@ -71,7 +71,7 @@ int CREAD_File::READ_Int_File(string nazwapliku)  // Funkcja READ1
 
                         if( zaj_read == 1 ){
                                 SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
-                                cout << "Urzadzenie READ_File jest w tej chwili zajete!";
+                                cout << "Hue4: Urzadzenie READ_File jest w tej chwili zajete!";
                                 
                         }
         else 
@@ -81,7 +81,7 @@ int CREAD_File::READ_Int_File(string nazwapliku)  // Funkcja READ1
     
 
         zaj_read=1;
-        cout<<"Otwieram i przeszukuje plik "<<nazwapliku<<endl;
+        cout<<"Hue4: Otwieram i przeszukuje plik "<<nazwapliku<<endl;
         fstream plik(nazwapliku,ios::in);            // co do bazy rozkazow to jest ona do stworzenia ale potrzebne sa dane od Pani Agnieszki.(Cytat J.B.)
 				
 				if(plik.is_open())
@@ -90,12 +90,12 @@ int CREAD_File::READ_Int_File(string nazwapliku)  // Funkcja READ1
 				}
 				else 
 				{
-						cout<<"Nie mozna otworzyc pliku lub nie znaleziono danych."<<endl;
+						cout<<"Hue4: Nie mozna otworzyc pliku lub nie znaleziono danych."<<endl;
 				}
 				plik.close();
 
         
-        cout <<dane<<endl<<" powyzsza wartosc dane ktore zwroce \n \n";
+        cout <<"Hue4: "<<dane<<endl<<" powyzsza wartosc dane ktore zwroce \n \n";
         SetConsoleTextAttribute( hOut, 0x07);
         
         // Tu nalezy podmienic na wlasciwa funkcje semafora od Michala

@@ -84,7 +84,7 @@ void Supervisor::execute(Proces* proces) {
 	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 	unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 	if (param_length == 0xFFFF) {
-		cout << "Blad odczytu. Przerywam wykonanie.";
+		cout << "Hue5: Blad odczytu. Przerywam wykonanie." << endl;
 		//zatrzymajproces
 		return;
 	}

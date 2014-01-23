@@ -282,7 +282,7 @@ void pamiec::wypisz(string a)
 {
 	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
-	cout << "Modul pamieci : " << a << endl;
+	cout << "Hue2: " << a << endl;
 	SetConsoleTextAttribute( hOut, 0x07);
 }
 

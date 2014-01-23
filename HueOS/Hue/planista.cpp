@@ -46,7 +46,7 @@ void Planista::startCykl(){
 				}
 				bufor = bufor->wszystkieNext;
 			} while(bufor != procesList);
-			textLev1(true, "Zakonczono obliczanie czasu przewidywanego dla wszystkich procesow aktywnych");
+			textLev1(true, "Zakonczono obliczanie czasu przewidywanego dla procesow aktywnych");
 
 			//wyszukiwanie najszybszego
 			do {
