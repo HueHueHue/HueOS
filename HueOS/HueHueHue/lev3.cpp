@@ -118,14 +118,17 @@ void Lev3::usunPCB(Proces* doKasacji){
 Proces* Lev3::znajdzProces(string nazwa){
 	Proces* bufor = procesList;
 	bool znalazlem = false;
-	do {
-		if(bufor->nazwa == nazwa){
-			znalazlem = true;
-			break;
-		}
-		bufor = bufor->wszystkieNext;
-	} while(bufor->wszystkieNext != procesList);
-
+	if(bufor->wszystkieNext !=0){
+		do {
+			if(bufor->nazwa == nazwa){
+				znalazlem = true;
+				break;
+			}
+			bufor = bufor->wszystkieNext;
+		} while(bufor->wszystkieNext != procesList);
+	} else {
+		znalazlem = false;
+	}
 	if(znalazlem){
 		return bufor;
 	} else {
