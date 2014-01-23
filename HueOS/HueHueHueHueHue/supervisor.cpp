@@ -14,10 +14,11 @@
 
 const char* const Supervisor::names[] = {"*IBSUP", "*IN", "*OUT"};
 
-Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec) /*: mPlanista(mPlanista), mPoz3(mPoz3)*/ {
+Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec, Rejestr* mRejestr) /*: mPlanista(mPlanista), mPoz3(mPoz3)*/ {
 	this->mPoz3 = mPoz3;
 	this->mPlanista = mPlanista;
 	this->mPamiec = mPamiec;
+	this->mRejestr = mRejestr;
 	drukarka1 = new CPRINT();
 	czytnik1 = new CREAD_File();
 }
@@ -82,18 +83,24 @@ void Supervisor::execute(Proces* proces) {
 	// fixme dodaj obsluge bledow pobierz_bajt
 	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 	unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+	if (param_length == 0xFFFF) {
+		cout << "Blad odczytu. Przerywam wykonanie.";
+		//zatrzymajproces
+		return;
+	}
 	char* raw_param;
 	unsigned int int_param;
+	SetConsoleTextAttribute(hOut, 0x0D);
+	cout << "Hue5: Proces " << proces->nazwa << " wykonuje rozkaz : ID = " << (char)op;
 	if (param_length != 0) {
-		raw_param = new char[param_length];
+		raw_param = new char[param_length]();
 		for (int i = 0; i < param_length; i++) {
 			raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 		}
+		cout << " PARAM=" << raw_param;
 	}
-
-	SetConsoleTextAttribute( hOut, 0x0D);
-	cout << "Hue5: OP" << (char)op << " len: " << param_length << " " << raw_param << endl;
-	SetConsoleTextAttribute( hOut, 0x07);
+	cout << endl;
+	SetConsoleTextAttribute(hOut, 0x07);
 
 	// parameter preprocessing
 	switch (op) {

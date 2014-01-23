@@ -19,7 +19,7 @@ int main() {
 	Lev3* mPoz3 = new Lev3(procesList,mRejestr,opamiec);
 	//3
 
-	Supervisor* supervisor = new Supervisor(mPlanista, mPoz3, opamiec);
+	Supervisor* supervisor = new Supervisor(mPlanista, mPoz3, opamiec, mRejestr);
 	supervisor->init();
 
 	DWORD tStart; //Petla czasu rzeczywistego

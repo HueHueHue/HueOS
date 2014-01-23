@@ -56,7 +56,7 @@ void Interpreter::interpret_code(string blob) {
 			total_length += 2;
 		} else if (parts[0] == "OUT") {
 			// so basically, if this is OUT (and has params), it can be any length
-			length = parts[1].length();
+			length = parts[1].length()+1;
 		} else {
 			// otherwise 4 bytes for int
 			length = sizeof(unsigned int);

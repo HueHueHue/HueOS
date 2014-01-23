@@ -5,7 +5,7 @@
 
 class Interpreter {
 public:
-	enum class OpCode : char {
+	enum class OpCode : unsigned char {
 		SET = '1',
 		ADD = '2',
 		SUB = '3',

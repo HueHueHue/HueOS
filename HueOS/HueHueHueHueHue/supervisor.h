@@ -9,9 +9,10 @@ public:
 	Planista* mPlanista;
 	pamiec* mPamiec;
 	Lev3* mPoz3;
+	Rejestr* mRejestr;
 	static const char * const names[3];
 
-	Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec);
+	Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec, Rejestr* mRejestr);
 	void init();
 	void execute(Proces* proces);
 	void checkMessages();
