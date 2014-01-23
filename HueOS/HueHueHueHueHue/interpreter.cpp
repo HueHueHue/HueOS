@@ -1,9 +1,5 @@
 #include "interpreter.h"
 
-Interpreter::~Interpreter() {
-	delete[] buffer;
-}
-
 void Interpreter::interpret_code(string blob) {
 	/*
 	asm:
@@ -46,7 +42,7 @@ void Interpreter::interpret_code(string blob) {
 	vector<unsigned int> param_lengths; // this is needed for forward jumps
 	vector<string> lines = split(blob, '|');
 	op_count = lines.size();
-	unsigned int total_length = 2 * lines.size();
+	total_length = 2 * lines.size();
 	unsigned int length;
 	// initially we just find the lengths of params
 	for(vector<string>::iterator it = lines.begin(); it != lines.end(); ++it) {

@@ -1,1 +1,4 @@
-1.job
+osiem
+jeden
+SET:10|OUT:Witaj, tu sie liczy w kolko!|ADD:1|ADD:2|ADD:3|SUB:1|SUB:2|SUB:3|OUT:Bylo milo zrobic to kolko!|JUMP:1
+kierownik

@@ -13,7 +13,7 @@ JOB::JOB()
 		 IODevice = "null"; 
 		 Data = "null";
 		 Employer = "null";
-		
+		 /*
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
@@ -53,7 +53,7 @@ JOB::JOB()
 
 	bazadanych.close();
 
-	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego
+	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego*/
 
 	
 }

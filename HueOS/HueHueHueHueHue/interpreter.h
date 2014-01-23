@@ -22,6 +22,5 @@ public:
 	unsigned int op_count;
 	unsigned int total_length;
 	char* buffer;
-	~Interpreter();
 	void interpret_code(string blob);
 };

@@ -33,7 +33,7 @@ void Supervisor::init() {
 	JOB job; // hey, let's ignore job.job :v
 
 	// parsuj $JOB
-	for (int i = 0; i < sizeof(job_cards)/sizeof(job_cards[0]); i++) {
+	for (int i = 0; i < 2; i++) {
 		cout << "Czytanie $JOB " << job_cards[i] << endl;
 		job.JOB_nazwapliku(job_cards[i]);
 		Interpreter interpreter;
@@ -45,13 +45,17 @@ void Supervisor::init() {
 		}
 		
 		for (unsigned int j = 0; j < interpreter.total_length; j++) {
-			
-			if(!mPamiec->ustaw_bajt(userprog->auto_storage_size, j, interpreter.buffer[j])) {
-				cout << "Pisanie do bajtu " << j << " nie powiodlo sie";
+			if (!mPamiec->ustaw_bajt(userprog->pierwszy_bajt_pamieci, j, interpreter.buffer[j])) {
+				cout << "Pisanie do bajtu " << j << " nie powiodlo sie" << endl;
+			}
+			else {
+				cout << "Pisanie do bajtu " << j << " powiodlo sie" << endl;
 			}
 		}
 
+		cout << "Uruchomienie procesu " << job_cards[i];
 		mPoz3->uruchomProces(job_cards[i]);
+
 	}
 
 }
@@ -63,16 +67,18 @@ void Supervisor::execute(Proces* proces) {
 	cout << "Wykonuje rozkaz procesu " << proces->nazwa << endl;
 	
 	// fixme dodaj obsluge bledow pobierz_bajt
-	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->auto_storage_size, proces->mem_pointer++);
-	unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->auto_storage_size, proces->mem_pointer++);
+	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+	unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 	char* raw_param;
 	unsigned int int_param;
 	if (param_length != 0) {
 		raw_param = new char[param_length];
 		for (int i = 0; i < param_length; i++) {
-			raw_param[i] = mPamiec->pobierz_bajt(proces->auto_storage_size, proces->mem_pointer++);
+			raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 		}
 	}
+
+	cout << "OP" << (char)op << " len: " << param_length << " " << raw_param << endl;
 
 	// parameter preprocessing
 	switch (op) {
