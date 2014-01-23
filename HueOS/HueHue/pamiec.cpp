@@ -481,7 +481,7 @@ void pamiec::wyswietl_tablice_pamieci_szesnastkowo()
 	{
 		if (i%16==0)
 		//cout <<endl << i << " | ";
-		printf("\n	%3i | ", i);
+		printf("\n   %3i |   ", i);
 		if (tablica_pamieci[i] < 16)
 			cout << '0';
 		cout.setf(ios::hex, ios::basefield);
@@ -489,9 +489,11 @@ void pamiec::wyswietl_tablice_pamieci_szesnastkowo()
 		cout.setf(ios::dec, ios::basefield);
 		
 		if (i % 16 == 15)
-			printf(" | %3i\n", i);
+			printf("   | %3i\n", i);
 		if (i % 16 == 7)
 			cout << "  ";
+		if (i % 16 == 3 || i % 16 == 11)
+			cout << " ";
 		//cout << " | " << i << endl;
 		
 	}
