@@ -182,11 +182,11 @@ void Planista::wyswietl(){
 	SetConsoleTextAttribute( hOut, 0x0C);
 	cout << "Wszystkie dostepne procesy" << endl;
 	Proces* bufor = procesList;
-	cout << "ID	Nazwa			stop	blocked	" << endl;
+	cout << "ID	| run	| stop	| block	| t_prz	| Nazwa" << endl;
 	
 		do {
-			//cout << bufor->id << "	" << bufor ->nazwa << "			" << bufor->stopped << "		" << bufor->blocked << endl;
-			printf("%8i%24s%8i%8i\n", bufor->id, bufor ->nazwa, bufor->stopped, bufor->blocked);
+			cout << bufor->id << "	| " << bufor->running << "	| " << bufor->stopped << "	| " << bufor->blocked << "	| " << bufor ->t_przewidywany_next << "	| " << bufor ->nazwa << endl;
+			//printf("%i %24s %8d %8d \n", bufor->id, bufor ->nazwa, bufor->stopped, bufor->blocked);
 			bufor = bufor->wszystkieNext;
 		} while(bufor != procesList);
 

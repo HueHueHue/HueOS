@@ -16,7 +16,6 @@ public:
 	void dodajProces(string nazwa, int t_przewidywany_next, unsigned short rozmiar);	//XC
 	void usunProces(string nazwa);	//XD
 	void stop(string nazwa);//XH
-	void dodajPCB(Proces* nowy);	//XI
 	void dodajPCB(Proces* nowy, bool zewnetrzny);//XI
 	void usunPCB(Proces* doKasacji);	//XJ
 	Proces* znajdzProces(string nazwa);	//XN

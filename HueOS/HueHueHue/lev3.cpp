@@ -67,7 +67,7 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 			SetConsoleTextAttribute( hOut, 0x07);
 			nowyProces->auto_storage_size = rozmiar;
 			nowyProces->pierwszy_bajt_pamieci = pierwszy_bajt;
-			dodajPCB(nowyProces);
+			dodajPCB(nowyProces,0);
 		}
 	}
 
@@ -115,7 +115,8 @@ void Lev3::stop(string nazwa){
 	wyslijKomunikat("*IBSUP", "KONIEC " + nazwa);
 
 }
-void Lev3::dodajPCB(Proces* nowy){
+void Lev3::dodajPCB(Proces* nowy, bool zewnetrzny){
+
 	if(procesList->wszystkieLast == 0 && procesList->wszystkieNext == 0){
 		//Pierwszy proces
 		procesList->wszystkieLast = nowy;
@@ -131,9 +132,15 @@ void Lev3::dodajPCB(Proces* nowy){
 		HANDLE hOut;
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 		SetConsoleTextAttribute( hOut, 0x0B);
-		cout << "Hue3: PCB dodany" << endl;
+		if (zewnetrzny) {
+			IDCounter++;
+			cout << "Hue3: PCB systemowy dodany" << endl;
+		} else {
+			cout << "Hue3: PCB dodany" << endl;
+		}
 		SetConsoleTextAttribute( hOut, 0x07);
 }
+/*
 void Lev3::dodajPCB(Proces* nowy, bool zewnetrzny){
 	if (zewnetrzny) {
 		IDCounter++;
@@ -144,7 +151,7 @@ void Lev3::dodajPCB(Proces* nowy, bool zewnetrzny){
 		cout << "Hue3: PCB systemowy dodany" << endl;
 		SetConsoleTextAttribute( hOut, 0x07);
 }
-
+*/
 void Lev3::usunPCB(Proces* doKasacji){
 	if(procesList->wszystkieLast == doKasacji && procesList->wszystkieNext == doKasacji){
 		//Pierwszy proces
