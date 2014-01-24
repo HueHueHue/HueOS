@@ -128,7 +128,7 @@ void wyswietlKomendy(){
 	cout << "1> rejestr		- wyswietla stan rejestru" << endl;
 	cout << "2> pamiec		- wyswietla zawartosc pamieci" << endl;
 	cout << "2> pamiec16		- wyswietla zawartosc pamieci w postaci szesnastkowej" << endl;
-	cout << "4> drukarka		- wyswietla ostatnie wydrukowane dane" << endl;
+	cout << "4> drukarka		- wyswietla ostatnie 10 wydrukowanych danych" << endl;
 	cout << "5> start		- zacznij wczytywac nowy proces" << endl;
 
 }
