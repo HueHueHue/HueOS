@@ -19,14 +19,13 @@ Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec, Rejest
 	this->mPlanista = mPlanista;
 	this->mPamiec = mPamiec;
 	this->mRejestr = mRejestr;
+	job = new JOB();
 	drukarka1 = new CPRINT();
 	czytnik1 = new CREAD_File();
 }
 
 void Supervisor::init() {
 	string job_cards[] = {"1.job", "2.job"};
-	HANDLE hOut;
-	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	// uruchom procesy systemowe
 	for (int i = 0; i < 3; i++) {
 		mPoz3->dodajPCB(new SysProces(i + 1, Supervisor::names[i]), true);
@@ -36,38 +35,56 @@ void Supervisor::init() {
 
 	// parsuj $JOB
 	for (int i = 0; i < 2; i++) {
-		SetConsoleTextAttribute( hOut, 0x0D);
-		cout << "Hue5: Czytanie $JOB " << job_cards[i] << endl;
-		SetConsoleTextAttribute( hOut, 0x07);
-
-		job.JOB_nazwapliku(job_cards[i]);
-		Interpreter interpreter;
-		interpreter.interpret_code(job.getData());
-		mPoz3->dodajProces(job_cards[i], interpreter.op_count, interpreter.total_length);
-		Proces* userprog = mPoz3->znajdzProces(job_cards[i]);
-		if (!userprog) {
-			SetConsoleTextAttribute( hOut, 0x0D);
-			cout << "Hue5: Proces " << job_cards[i] << " nie zostal utworzony" << endl;
-			SetConsoleTextAttribute( hOut, 0x07);
-		}
-		
-		for (unsigned int j = 0; j < interpreter.total_length; j++) {
-			if (!mPamiec->ustaw_bajt(userprog->pierwszy_bajt_pamieci, j, interpreter.buffer[j])) {
-				SetConsoleTextAttribute( hOut, 0x0D);
-				cout << "Hue5: Pisanie do bajtu " << j << " nie powiodlo sie" << endl;
-				SetConsoleTextAttribute( hOut, 0x07);
-			}
-			else {
-				//cout << "Pisanie do bajtu " << j << " powiodlo sie" << endl;
-			}
-		}
-		SetConsoleTextAttribute( hOut, 0x0D);
-		cout << "Hue5: Uruchomienie procesu " << job_cards[i] << endl;
-		SetConsoleTextAttribute( hOut, 0x07);
-		mPoz3->uruchomProces(job_cards[i]);
-
+		loadJob(job_cards[i]);
 	}
 
+}
+
+bool Supervisor::loadJob(string job_name) {
+	HANDLE hOut;
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, 0x0D);
+	cout << "Hue5: Czytanie $JOB " << job_name << endl;
+	SetConsoleTextAttribute(hOut, 0x07);
+
+	if (!job->JOB_nazwapliku(job_name)) {
+		SetConsoleTextAttribute(hOut, 0x0D);
+		cout << "Hue5: Proces " << job_name << " nie zostal utworzony (brak karty job)" << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
+		return false;
+	}
+	Interpreter interpreter;
+	interpreter.interpret_code(job->getData());
+	if (!mPoz3->dodajProces(job_name, interpreter.op_count, interpreter.total_length)) {
+		SetConsoleTextAttribute(hOut, 0x0D);
+		cout << "Hue5: Proces " << job_name << " nie zostal utworzony (proces juz istnieje/brak pamieci)" << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
+		return false;
+	}
+	Proces* userprog = mPoz3->znajdzProces(job_name);
+	if (!userprog) {
+		SetConsoleTextAttribute(hOut, 0x0D);
+		cout << "Hue5: Proces " << job_name << " nie zostal utworzony" << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
+		return false;
+	}
+
+	for (unsigned int j = 0; j < interpreter.total_length; j++) {
+		if (!mPamiec->ustaw_bajt(userprog->pierwszy_bajt_pamieci, j, interpreter.buffer[j])) {
+			SetConsoleTextAttribute(hOut, 0x0D);
+			cout << "Hue5: Pisanie do bajtu " << j << " nie powiodlo sie" << endl;
+			SetConsoleTextAttribute(hOut, 0x07);
+			return false;
+		}
+		else {
+			//cout << "Pisanie do bajtu " << j << " powiodlo sie" << endl;
+		}
+	}
+	SetConsoleTextAttribute(hOut, 0x0D);
+	cout << "Hue5: Uruchomienie procesu " << job_name << endl;
+	SetConsoleTextAttribute(hOut, 0x07);
+	mPoz3->uruchomProces(job_name);
+	return true;
 }
 
 void Supervisor::execute(Proces* proces) {

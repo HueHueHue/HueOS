@@ -16,7 +16,7 @@ Lev3::Lev3(Proces* procesList, Rejestr* mRejestr, pamiec* mPamiec){
 	SetConsoleTextAttribute( hOut, 0x07);
 }
 
-void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short rozmiar){
+bool Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short rozmiar){
 	IDCounter ++;
 	HANDLE hOut;
 	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
@@ -42,6 +42,7 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 		SetConsoleTextAttribute( hOut, 0x0B);
 		cout << "Hue3: Nazwa procesu jest uzyta!" << endl;
 		SetConsoleTextAttribute( hOut, 0x07);
+		return false;
 	} else {
 		HANDLE hOut;
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
@@ -59,6 +60,7 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 			SetConsoleTextAttribute( hOut, 0x07);
 			wyslijKomunikat("*IBSUP", "BRAKPAMIECI " + Nazwa);
 			delete nowyProces;
+			return false;
 		} else {
 			HANDLE hOut;
 			hOut = GetStdHandle( STD_OUTPUT_HANDLE );
@@ -68,6 +70,7 @@ void Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 			nowyProces->auto_storage_size = rozmiar;
 			nowyProces->pierwszy_bajt_pamieci = pierwszy_bajt;
 			dodajPCB(nowyProces,0);
+			return true;
 		}
 	}
 

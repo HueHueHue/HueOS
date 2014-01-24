@@ -57,7 +57,7 @@ JOB::JOB()
 
 	
 }
-string JOB::JOB_nazwapliku(string nazwapliku)
+bool JOB::JOB_nazwapliku(string nazwapliku)
 {
 	    rozmiar = 5;
 		
@@ -92,11 +92,12 @@ string JOB::JOB_nazwapliku(string nazwapliku)
 	else
 	{
 		wypisz("ERROR 01\nNie otwarto pliku.");	
+		return false;
 	}
 	SetConsoleTextAttribute( hOut, 0x07);   //Reset koloru do podstawowego
 
 	bazadanych.close();
-	return "2";
+	return true;
 }
 
 string	JOB::getWorkspaceSize() {

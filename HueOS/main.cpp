@@ -3,13 +3,14 @@
 #include "HueHueHue/lev3.h"
 #include "HueHue/pamiec.h"
 #include "HueHueHueHueHue/supervisor.h"
+#include "HueHueHueHueHue/split.h"
 void tRzeczywisty(float t, DWORD tStart);
 void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor* mSupervisor);
 
 
 int main() {
 	cout << "Hue0:				Start systemu" << endl;
-	system("pause");
+	cin.ignore(INT_MAX, '\n');
 	cout << "Hue0: Inicjowanie klas.." << endl;
 	cout << endl << "Hue0: Lev1" << endl;
 	//1
@@ -76,51 +77,53 @@ void tRzeczywisty(float t, DWORD tStart){
 void wyswietlKomendy();
 void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor* mSupervisor){
 	cout << "Hue0: Koniec jednostki czasu" << endl;
-	string x;
+	string line;
+	vector<string> x;
 	bool end = false;
 	cout << string(80, '-') << endl;
-	do{
+	do {
 		cout << endl;
-		cout << "> Wprowadz komende (<enter> - nastepna jednostka, help - komendy)" << endl << ">   ";
+		cout << "> Wprowadz komende (<ENTER> - nastepna jednostka, help - komendy)" << endl << "> ";
 		
-		getline(cin, x);
+		getline(cin, line);
+		x = split(line, ' ');
 		cout << endl;
-		if(x == "help"){
-			
-			wyswietlKomendy();
-		} else if(x == "start"){
-			//dodaj nowy proces z plytki job. Krzychu do boju! :D
-		} else if(x == "pamiec"){
-			opamiec->wyswietl_tablice_pamieci_dziesietnie();
-		} else if(x == "pamiec16"){
-			opamiec->wyswietl_tablice_pamieci_szesnastkowo();
-		} else if(x == "pcb"){
-			mPlanista->wyswietl();
-		}else if (x == "rejestr"){
-			mRejestr->wyswietl();
-		}else if (x == "drukarka"){
-			mSupervisor->wyswietlDrukarka1();
-		}else if (x == ""){
+		if (x.size() == 0) {
 			end = true;
+		} else if (x[0] == "help") {
+			wyswietlKomendy();
+		} else if(x[0] == "load") {
+			if (x.size() == 2) {
+				mSupervisor->loadJob(x[1]);
+			} else {
+				cout << "Nieprawidlowa liczba argumentow." << endl;
+			}
+		} else if(x[0] == "pamiec") {
+			opamiec->wyswietl_tablice_pamieci_dziesietnie();
+		} else if(x[0] == "pamiec16") {
+			opamiec->wyswietl_tablice_pamieci_szesnastkowo();
+		} else if(x[0] == "pcb") {
+			mPlanista->wyswietl();
+		} else if (x[0] == "rejestr") {
+			mRejestr->wyswietl();
+		} else if (x[0] == "drukarka") {
+			mSupervisor->wyswietlDrukarka1();
 		} else {
 			cout << "Zla komenda" << endl;
 			end = false;
 		}
-
-
-
 		cout << string(80, '-') << endl;
 	} while(end == false);
 }
 
 void wyswietlKomendy(){
 	cout << "> Dostepne komendy:" << endl;
-	cout << ">  <ENTER>		- zaczyna kolejna jendnostke czasu systemu" << endl;
+	cout << " >  <ENTER>		- zaczyna kolejna jendnostke czasu systemu" << endl;
 	cout << "1> pcb			- wyswietla procesy na liscie glownej" << endl;
 	cout << "1> rejestr		- wyswietla stan rejestru" << endl;
 	cout << "2> pamiec		- wyswietla zawartosc pamieci" << endl;
 	cout << "2> pamiec16		- wyswietla zawartosc pamieci w postaci szesnastkowej" << endl;
 	cout << "4> drukarka		- wyswietla ostatnie 10 wydrukowanych danych" << endl;
-	cout << "5> start		- zacznij wczytywac nowy proces" << endl;
+	cout << "5> load			- zacznij wczytywac nowy proces" << endl;
 
 }
