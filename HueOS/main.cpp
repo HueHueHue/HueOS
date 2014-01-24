@@ -117,13 +117,40 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 }
 
 void wyswietlKomendy(){
-	cout << "> Dostepne komendy:" << endl;
-	cout << " >  <ENTER>		- zaczyna kolejna jendnostke czasu systemu" << endl;
-	cout << "1> pcb			- wyswietla procesy na liscie glownej" << endl;
-	cout << "1> rejestr		- wyswietla stan rejestru" << endl;
-	cout << "2> pamiec		- wyswietla zawartosc pamieci" << endl;
-	cout << "2> pamiec16		- wyswietla zawartosc pamieci w postaci szesnastkowej" << endl;
-	cout << "4> drukarka		- wyswietla ostatnie 10 wydrukowanych danych" << endl;
-	cout << "5> load			- zacznij wczytywac nowy proces" << endl;
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, 0x12);
+	cout << "> Dostepne komendy:" << endl; SetConsoleTextAttribute(hOut, 0x07);
+
+	SetConsoleTextAttribute(hOut, 0x09);
+	cout << " > <ENTER>"; SetConsoleTextAttribute(hOut, 0x07);
+	cout<<"		-zaczyna kolejna jendnostke czasu systemu" << endl;
+
+	SetConsoleTextAttribute(hOut, 0x0C);
+	cout << "1> pcb"; SetConsoleTextAttribute(hOut, 0x07);
+	cout<<"			-wyswietla procesy na liscie glownej" << endl;
+
+	SetConsoleTextAttribute(hOut, 0x0C);
+	cout << "1> rejestr"; SetConsoleTextAttribute(hOut, 0x07);
+	cout<<"		-wyswietla stan rejestru" << endl;
+
+	
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+	cout << "2> pamiec"; SetConsoleTextAttribute(hOut, 0x07);
+	cout<<"		-wyswietla zawartosc pamieci" << endl;
+
+	
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY); 
+	cout << "2> pamiec16"; SetConsoleTextAttribute(hOut, 0x07);
+	cout<<"		-wyswietla zawartosc pamieci w postaci szesnastkowej" << endl;
+	
+	
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	cout << "4> drukarka"; SetConsoleTextAttribute(hOut, 0x07);
+	cout<<"		-wyswietla ostatnie 10 wydrukowanych danych" << endl;
+
+	
+	SetConsoleTextAttribute(hOut, 0x0D);
+	cout << "5> load"; SetConsoleTextAttribute(hOut, 0x07);
+	cout<<"			-zacznij wczytywac nowy proces" << endl;
 
 }
