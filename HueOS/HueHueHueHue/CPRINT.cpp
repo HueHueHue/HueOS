@@ -72,11 +72,11 @@ void CPRINT::wypisz(string a)
 
 void CPRINT::wyswietl(){
 
-	int rozmiar = 50;
+	int rozmiar = 10;
 	tabl = new string[rozmiar];
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-	cout << "Ostatnie 5 wydrukowanych danych" << endl;
+	cout << "Ostatnie " << rozmiar << " wydrukowanych danych" << endl;
 
 	fstream bazadanych("wyniki.txt", ios::in);
 
@@ -87,34 +87,27 @@ void CPRINT::wyswietl(){
 		string line; //zmienna przechowujaca tekst z lini karty $JOB
 
 		//wypisz("Rozpoczecie wczytywania pliku do bufora przed wyswietleniem druku.");
-		while (numer_lini <= 5)
+		while (numer_lini < rozmiar)
 		{
+			if(bazadanych.eof())
+				break;
 			getline(bazadanych, line);
 			tabl[numer_lini] = line;
 			numer_lini++;
 		}
-		//wypisz("Wczytywanie pliku do bufora wyswietlania druku zakonczone.");
-			for (int i = 0; i <= rozmiar; i++)
-			{
-				cout << i << tabl[i] << endl;
-			}
-	}
 
-	else
-	{
+		//wypisz("Wczytywanie pliku do bufora wyswietlania druku zakonczone.");
+			for (int i = 0; i < rozmiar; i++)
+			{
+				cout.width( 3 );
+				cout << i+1;
+				cout << " | " << tabl[i] << endl;
+			}
+	}else{
 		wypisz("ERROR 01\nNie otwarto pliku wynikowego.");
 	}
 
 	bazadanych.close();
-
-<<<<<<< HEAD
-	for (int i = 0; i <= 4; i++)
-	{
-		cout << i << tabl[i] << endl;
-	}
-=======
-
->>>>>>> 09171c4f053783522b233deb6c365c964afea390
 
 	SetConsoleTextAttribute(hOut, 0x07);
 }
