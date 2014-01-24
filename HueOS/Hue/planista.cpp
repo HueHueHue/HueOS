@@ -186,7 +186,7 @@ void Planista::wyswietl(){
 	
 		do {
 			cout << " " <<bufor->id << "	| " << bufor->running << "	| " << bufor->stopped << "	| " << bufor->blocked << "	| " << bufor ->t_przewidywany_next << "	| " << bufor ->nazwa << endl;
-			//printf("%i %24s %8d %8d \n", bufor->id, bufor ->nazwa, bufor->stopped, bufor->blocked);
+			
 			bufor = bufor->wszystkieNext;
 		} while(bufor != procesList);
 

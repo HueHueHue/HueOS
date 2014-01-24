@@ -95,7 +95,7 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 			
 			wyswietlKomendy();
 		} else if(x == "start"){
-			//dodaj nowy proces z p³ytki job
+			//dodaj nowy proces z plytki job. Krzychu do boju! :D
 		} else if(x == "pamiec"){
 			opamiec->wyswietl_tablice_pamieci_dziesietnie();
 		} else if(x == "pamiec16"){
@@ -123,10 +123,12 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 
 void wyswietlKomendy(){
 	cout << "> Dostepne komendy:" << endl;
-	cout << "> <ENTER>	- zaczyna kolejna jendnostke czasu systemu" << endl;
-	cout << "> pcb		- wyswietla procesy na liscie glownej" << endl;
-	cout << "> pamiec		- wyswietla zawartosc pamieci" << endl;
-	cout << "> pamiec16		- wyswietla zawartosc pamieci w postaci szesnastkowej" << endl;
-	cout << "> start		- zacznij wczytywac nowy proces" << endl;
+	cout << ">  <ENTER>		- zaczyna kolejna jendnostke czasu systemu" << endl;
+	cout << "1> pcb			- wyswietla procesy na liscie glownej" << endl;
+	cout << "1> rejestr		- wyswietla stan rejestru" << endl;
+	cout << "2> pamiec		- wyswietla zawartosc pamieci" << endl;
+	cout << "2> pamiec16		- wyswietla zawartosc pamieci w postaci szesnastkowej" << endl;
+	cout << "4> drukarka		- wyswietla ostatnie wydrukowane dane" << endl;
+	cout << "5> start		- zacznij wczytywac nowy proces" << endl;
 
 }
