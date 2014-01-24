@@ -32,7 +32,7 @@ bool Lev3::dodajProces(string Nazwa, int t_przewidywany_next, unsigned short roz
 				break;
 			}
 			bufor = bufor->wszystkieNext;
-		} while(bufor->wszystkieNext != procesList);
+		} while(bufor != procesList);
 	} else {
 		nazwauzyta = false;
 	}
