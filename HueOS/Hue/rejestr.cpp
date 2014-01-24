@@ -19,7 +19,7 @@ void Rejestr::wyswietl(){
 	HANDLE hOut;
 	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	SetConsoleTextAttribute( hOut, 0x0C);
-	cout << "Stan rejestrow" << endl;
+	cout << "Hue1: Stan rejestrow" << endl;
 	for(int i=0;i<4;i++){
 		cout << "	" << i+1 << "	=	" << rejestr[i] << endl;
 	}

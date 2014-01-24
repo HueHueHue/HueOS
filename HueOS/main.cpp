@@ -31,13 +31,15 @@ int main() {
 	Supervisor* supervisor = new Supervisor(mPlanista, mPoz3, opamiec, mRejestr);
 	supervisor->init();
 	//5
+
 	DWORD tStart; //Petla czasu rzeczywistego
 
 	cout << endl << endl << "Hue0:			<<<<< Start petli >>>>>" << endl << endl;
-		for(int i = 0; i<80; i++){
-			cout << "-";
-		}
-		cout << endl;
+	for(int i = 0; i<80; i++){
+		cout << "-";
+	}
+	cout << endl;
+
 	while(1){
 		tStart = GetTickCount(); //czas na rozpoczeciu petli
 		mPlanista->startCykl(); //Hue1

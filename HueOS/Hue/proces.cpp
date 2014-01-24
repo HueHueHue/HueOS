@@ -26,6 +26,13 @@ Proces::Proces(int id, string nazwa, int t_przewidywany_next){
 
 	in_smc = 0;
 
+	for(int i=0;i<4;i++){
+		old_registers[i] = 0;
+		if(i<3)
+			temp[i] = "";
+	}
+	old_psw = "";
+
 	if(nazwa == "Proces bezczynnosciowy"){
 		textLev1(1, "Proces wskaznikowy utworzony (PCB)");
 	} else {
@@ -35,11 +42,11 @@ Proces::Proces(int id, string nazwa, int t_przewidywany_next){
 
 void Proces::zapiszStan(Rejestr* mRejestr){
 	for(int i=0;i<4;i++){
-		old_registers[i] = mRejestr->getRejestr(i);
+		old_registers[i] = mRejestr->getRejestr(i+1);
 	}
 }
 void Proces::wczytajStan(Rejestr* mRejestr){
 	for(int i=0;i<4;i++){
-		 mRejestr->setRejestr(i, old_registers[i]);
+		 mRejestr->setRejestr(i+1, old_registers[i]);
 	}
 }
