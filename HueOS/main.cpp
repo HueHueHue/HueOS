@@ -35,9 +35,7 @@ int main() {
 	DWORD tStart; //Petla czasu rzeczywistego
 
 	cout << endl << endl << "Hue0:			<<<<< Start petli >>>>>" << endl << endl;
-	for(int i = 0; i<80; i++){
-		cout << "-";
-	}
+	cout << string(80, '-') << endl;
 	cout << endl;
 
 	while(1){
@@ -69,9 +67,7 @@ void tRzeczywisty(float t, DWORD tStart){
 		} while(tTeraz - tStart < t*1000);
 	cout << "Hue0: Koniec jednostki czasu" << endl;
 
-	for(int i = 0; i<80; i++){
-		cout << "-";
-	}
+	cout << string(80, '-') << endl;
 	cout << endl;
 }
 //
@@ -82,9 +78,7 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 	cout << "Hue0: Koniec jednostki czasu" << endl;
 	string x;
 	bool end = false;
-	for(int i = 0; i<80; i++){
-		cout << "-";
-	}
+	cout << string(80, '-') << endl;
 	do{
 		cout << endl;
 		cout << "> Wprowadz komende (<enter> - nastepna jednostka, help - komendy)" << endl << ">   ";
@@ -115,9 +109,7 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 
 
 
-		for(int i = 0; i<80; i++){
-			cout << "-";
-		}
+		cout << string(80, '-') << endl;
 	} while(end == false);
 }
 
