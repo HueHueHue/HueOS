@@ -150,11 +150,11 @@ void wyswietlKomendy(){
 	
 	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 	cout << "4> drukarka"; SetConsoleTextAttribute(hOut, 0x07);
-	cout<<"		-wyswietla ostatnie 10 wydrukowanych danych" << endl;
+	cout<<"		-wyswietla 10 wydrukowanych danych" << endl;
 
 	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 	cout << "4> wyczyscDrukarka"; SetConsoleTextAttribute(hOut, 0x07);
-	cout << "		-czysci plik druku" << endl;
+	cout << "	-czysci plik druku" << endl;
 	
 	SetConsoleTextAttribute(hOut, 0x0D);
 	cout << "5> load"; SetConsoleTextAttribute(hOut, 0x07);
