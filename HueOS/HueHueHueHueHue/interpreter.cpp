@@ -79,6 +79,7 @@ void Interpreter::interpret_code(string blob) {
 				op_count += 1;
 				line_length += 4;
 				total_length += 4;
+				line_lengths.push_back(4);
 				param_lengths.push_back(1);
 			}
 			else if (parts[0] == "OUT") {
@@ -97,7 +98,7 @@ void Interpreter::interpret_code(string blob) {
 				//length = sizeof(unsigned int);
 			}
 			param_lengths.push_back(length);
-			line_length += length + 1;
+			line_length += length;
 		}
 		total_length += line_length;
 		line_lengths.push_back(line_length);
@@ -150,8 +151,9 @@ void Interpreter::interpret_code(string blob) {
 			buffer[c++] = param_lengths[p++];
 			if ((op == "JUMP" || op == "JMPZ" || op == "JPNZ") && param_lengths[p-1] == sizeof(unsigned int)) {
 				j = 0;
-				for (int i = 0; i <= atoi(parts[1].c_str()); i++) {
-					j += line_lengths[i];
+				int target = atoi(parts[1].c_str());
+				for (int k = 0; k < target; k++) {
+					j += line_lengths[k];
 				}
 				memcpy(buffer + c, &j, sizeof(unsigned int));
 				c += sizeof(unsigned int);

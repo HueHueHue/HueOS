@@ -179,11 +179,38 @@ void Supervisor::execute(Proces* proces) {
 		mRejestr->setRejestr(reg1, mRejestr->getRejestr(reg1) / int_param);
 		break;
 	case Interpreter::OpCode::JUMP:
-	case Interpreter::OpCode::JMPZ:
-	case Interpreter::OpCode::JPNZ:
 		SetConsoleTextAttribute(hOut, 0x0D);
-		cout << "Hue5: Cos uzytecznego! Olewam!" << endl;
+		cout << "Hue5: JUMP " << int_param << endl;
 		SetConsoleTextAttribute(hOut, 0x07);
+		proces->mem_pointer = int_param;
+		mPlanista->koniecProcesu(mRejestr);
+		break;
+	case Interpreter::OpCode::JMPZ:
+		if (mRejestr->getRejestr(1) == 0) {
+			SetConsoleTextAttribute(hOut, 0x0D);
+			cout << "Hue5: JMPZ " << int_param << endl;
+			SetConsoleTextAttribute(hOut, 0x07);
+			proces->mem_pointer = int_param;
+			mPlanista->koniecProcesu(mRejestr);
+		} else {
+			SetConsoleTextAttribute(hOut, 0x0D);
+			cout << "Hue5: JMPZ " << int_param << " (ignoring)" << endl;
+			SetConsoleTextAttribute(hOut, 0x07);
+		}
+		break;
+	case Interpreter::OpCode::JPNZ:
+		if (mRejestr->getRejestr(1) != 0) {
+			SetConsoleTextAttribute(hOut, 0x0D);
+			cout << "Hue5: JPNZ " << int_param << endl;
+			SetConsoleTextAttribute(hOut, 0x07);
+			proces->mem_pointer = int_param;
+			mPlanista->koniecProcesu(mRejestr);
+		}
+		else {
+			SetConsoleTextAttribute(hOut, 0x0D);
+			cout << "Hue5: JPNZ " << int_param << " (ignoring)" << endl;
+			SetConsoleTextAttribute(hOut, 0x07);
+		}
 		break;
 	case Interpreter::OpCode::IN1:
 	case Interpreter::OpCode::IN2:
@@ -208,20 +235,27 @@ void Supervisor::execute(Proces* proces) {
 		break;
 	case Interpreter::OpCode::BYE:
 		SetConsoleTextAttribute(hOut, 0x0D);
-		cout << "Hue5: Cos uzytecznego! Olewam!" << endl;
+		cout << "Hue5: BYE" << endl;
 		SetConsoleTextAttribute(hOut, 0x07);
+		mPoz3->zatrzymajProces(proces->nazwa);
+		mPlanista->koniecProcesu(mRejestr);
+		mPoz3->usunProces(proces->nazwa);
 		break;
 	default:
 		SetConsoleTextAttribute(hOut, 0x0D);
 		cout << "Hue5: Nieprawidlowy rozkaz. Proces zostanie usuniety" << endl;
 		SetConsoleTextAttribute(hOut, 0x07);
-		// fixme usun proces
+		mPoz3->zatrzymajProces(proces->nazwa);
+		mPlanista->koniecProcesu(mRejestr);
+		mPoz3->usunProces(proces->nazwa);
 	}
 
 	if (raw_param) {
 		delete[] raw_param;
 	}
-	proces->t_obslugi++;
+	if (proces) {
+		proces->t_obslugi++;
+	}
 }
 
 void Supervisor::checkMessages() {
