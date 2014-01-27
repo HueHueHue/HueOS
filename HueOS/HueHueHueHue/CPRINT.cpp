@@ -35,6 +35,10 @@ void CPRINT::PRINT( char zapisywane[] ){
 	{
 		zaj_print=1;
 		fstream wyniki;
+		if (wyniki.is_open())
+		{
+			wyniki.close();
+		}
 
 		wyniki.open("wyniki.txt",std::ios::app | std::ios::ate); // otwarcie pliku
 		if(wyniki.is_open())	
