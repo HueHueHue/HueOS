@@ -138,6 +138,7 @@ void Planista::koniecProcesu(Rejestr* mRejestr){
 		Running->t_przewidywany = Running->t_przewidywany_next;
 		Running->t_przewidywany_next = NULL;
 		Running->t_wykonania = Running->t_obslugi;
+		Running->t_obslugi = 0;
 		Running->running = 0;
 
 		Running->zapiszStan(mRejestr);

@@ -39,9 +39,10 @@ void CPRINT::PRINT( char zapisywane[] ){
 		wyniki.open("wyniki.txt",std::ios::app | std::ios::ate); // otwarcie pliku
 		if(wyniki.is_open())	
 		{
-			wypisz(" Otwieram plik zapisu wyniki.txt .");
+			wypisz(" Otwieram plik zapisu wyniki.txt i przystepuje do druku .");
 			wyniki<<zapisywane<<endl;
 
+			wypisz(" Drukowanie zakonczone.");
 		   /*
 		   PRINT( "AFdsafsdf");
 		   Przyklad wywolania funkcji zapisu
