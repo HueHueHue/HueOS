@@ -98,9 +98,7 @@ void Lev3::usunProces(string nazwa){
 		usunPCB(doKasacji);
 		mPamiec->zwolnij_pamiec(doKasacji->pierwszy_bajt_pamieci);
 
-		//Kasowanie komunikatow
-
-		delete doKasacji;
+		//delete doKasacji;
 	}
 }
 void Lev3::stop(string nazwa){
