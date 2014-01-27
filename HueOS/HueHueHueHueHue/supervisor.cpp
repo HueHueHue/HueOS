@@ -25,19 +25,10 @@ Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec, Rejest
 }
 
 void Supervisor::init() {
-	string job_cards[] = { "1.job" };
 	// uruchom procesy systemowe
 	for (int i = 0; i < 3; i++) {
 		mPoz3->dodajPCB(new SysProces(i + 1, Supervisor::names[i]), true);
 	}
-
-	JOB job; // hey, let's ignore job.job :v
-
-	// parsuj $JOB
-	for (int i = 0; i < 1; i++) {
-		loadJob(job_cards[i]);
-	}
-
 }
 
 bool Supervisor::loadJob(string job_name) {
@@ -122,6 +113,7 @@ void Supervisor::execute(Proces* proces) {
 
 	// parameter preprocessing
 	int reg1, len;
+	string in_buffer;
 	char out_buffer[10];
 
 	switch (op) {
@@ -152,6 +144,11 @@ void Supervisor::execute(Proces* proces) {
 			raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 		}
 		memcpy(&int_param, raw_param, sizeof(unsigned int));
+		break;
+	case Interpreter::OpCode::IN1:
+	case Interpreter::OpCode::IN2:
+		mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+		reg1 = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++) - 64;
 		break;
 	case Interpreter::OpCode::OUT1:
 		len = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
@@ -213,10 +210,14 @@ void Supervisor::execute(Proces* proces) {
 		}
 		break;
 	case Interpreter::OpCode::IN1:
+		mPoz3->wyslijKomunikat("*IN", proces->nazwa);
+		cout << "Hue5: IN1" << endl;
+		break;
 	case Interpreter::OpCode::IN2:
-		SetConsoleTextAttribute(hOut, 0x0D);
-		cout << "Hue5: Cos uzytecznego! Olewam!" << endl;
-		SetConsoleTextAttribute(hOut, 0x07);
+		in_buffer = mPoz3->czytajKomunikat(proces->nazwa);
+		int_param = atoi(in_buffer.c_str());
+		mRejestr->setRejestr(reg1, int_param);
+		cout << "Hue5: IN2 " << int_param << " do R" << reg1 << endl;
 		break;
 	case Interpreter::OpCode::OUT1:
 		if (len == 1) {
@@ -278,8 +279,10 @@ void Supervisor::checkMessages() {
 				SetConsoleTextAttribute(hOut, 0x07);
 				break;
 			case 1: // in
-				// pobrac tekst (z pliku podanego w komunikacie?),
-				// wyslac komunikat do nadawcy (czyli kogo :v)
+				mPoz3->wyslijKomunikat(komunikat, czytnik1->READ_String_File("wejscie.txt"));
+				SetConsoleTextAttribute(hOut, 0x0D);
+				cout << "Hue5: Wczytano wejscie dla procesu " << komunikat << endl;
+				SetConsoleTextAttribute(hOut, 0x07);
 				break;
 			case 2:
 				drukarka1->PRINT((char *)komunikat.c_str());
