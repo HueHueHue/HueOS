@@ -108,6 +108,8 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 			mRejestr->wyswietl();
 		} else if (x[0] == "drukarka") {
 			mSupervisor->wyswietlDrukarka1();
+		} else if (x[0] == "wyczyscDrukarka") {
+			mSupervisor->wyczyscDrukarka1();
 		} else {
 			cout << "Zla komenda" << endl;
 			end = false;
@@ -150,6 +152,9 @@ void wyswietlKomendy(){
 	cout << "4> drukarka"; SetConsoleTextAttribute(hOut, 0x07);
 	cout<<"		-wyswietla ostatnie 10 wydrukowanych danych" << endl;
 
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	cout << "4> wyczyscDrukarka"; SetConsoleTextAttribute(hOut, 0x07);
+	cout << "		-czysci plik druku" << endl;
 	
 	SetConsoleTextAttribute(hOut, 0x0D);
 	cout << "5> load"; SetConsoleTextAttribute(hOut, 0x07);

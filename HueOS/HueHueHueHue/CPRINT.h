@@ -37,6 +37,7 @@ public:
 	void PRINT( char zapisywane[] );
 	void wypisz(string a);
 	void wyswietl();
+	void wyczyscDrukarka();
 
 };
 

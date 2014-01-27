@@ -21,4 +21,5 @@ public:
 	void checkMessages();
 
 	void wyswietlDrukarka1();
+	void wyczyscDrukarka1();
 };

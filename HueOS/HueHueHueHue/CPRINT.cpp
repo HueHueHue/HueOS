@@ -39,7 +39,7 @@ void CPRINT::PRINT( char zapisywane[] ){
 		wyniki.open("wyniki.txt",std::ios::app | std::ios::ate); // otwarcie pliku
 		if(wyniki.is_open())	
 		{
-			cout<<"Hue4: Otwieram plik zapisu wyniki.txt ."<<endl;
+			wypisz(" Otwieram plik zapisu wyniki.txt .");
 			wyniki<<zapisywane<<endl;
 
 		   /*
@@ -48,11 +48,11 @@ void CPRINT::PRINT( char zapisywane[] ){
 		   */
 
 			wyniki.close();
-			cout<<"Hue4: Zamykam plik zapisu wyniki.txt ."<<endl;
+			wypisz(" Zamykam plik zapisu wyniki.txt .");
 		}
 		else
 	{
-		cout<<"Hue4: ERROR 01\nNie otwarto pliku PRINT."<<endl;	
+		wypisz(" ERROR 01\nNie otwarto pliku PRINT.");	
 	}
 // Tu nalezy podmienic na wlasciwa funkcje semafora od Hue1
 	  	//	user_semaphore( V ) ;       // Operacja ktora nalezy wykonac po operacji ktora przywruci semafor do stanu sprzed operacji
@@ -106,6 +106,29 @@ void CPRINT::wyswietl(){
 	}else{
 		wypisz("ERROR 01\nNie otwarto pliku wynikowego.");
 	}
+
+	bazadanych.close();
+
+	SetConsoleTextAttribute(hOut, 0x07);
+}
+
+void CPRINT::wyczyscDrukarka(){
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	
+
+	fstream bazadanych;
+
+	if (bazadanych.is_open())
+	{
+		bazadanych.close();
+	}
+	bazadanych.open("wyniki.txt", ios::out | ios::trunc);
+
+	
+		wypisz("Czyszczenie pliku drukarki.");
+	
 
 	bazadanych.close();
 
