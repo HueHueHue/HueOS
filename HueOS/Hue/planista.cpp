@@ -128,7 +128,12 @@ void Planista::startCykl(){
 
 void Planista::koniecProcesu(Rejestr* mRejestr){
 	if(Running != NULL){
-		textLev1(true, "Proces zakonczyl dzialanie");
+		string text = "Proces zakonczyl dzialanie: ID [";
+		char str[10];
+		itoa(Running->id,str,10);
+		text += str;
+		text += "]";
+		textLev1(true, text);
 		Running->przewidziany = false;
 		Running->t_przewidywany = Running->t_przewidywany_next;
 		Running->t_przewidywany_next = NULL;
@@ -146,24 +151,40 @@ void Planista::koniecProcesu(Rejestr* mRejestr){
 }
 
 void Planista::nowyProces(Proces* nowyProces){
-	textLev1(true, "Pojawil sie nowy aktywny proces! Testuje jego przewidywany czas wykonywania...");
-	if(nowyProces->stopped == 0 && nowyProces->blocked == 0){
-		if(nowyProces->przewidziany == false){
-			nowyProces->t_przewidywany_next = 0.5 * nowyProces->t_przewidywany + 0.5 * nowyProces-> t_wykonania;
-			nowyProces->przewidziany = 1;
-		}
-		if(nowyProces->t_przewidywany_next < Running->t_przewidywany_next - Running->t_obslugi){
-			textLev1(true, "Nowy proces ma mniejszy przewidywany czas. Wywlaszczam stary i uruchamian nowy");
-			//ZATRZYMAJ najlepszyCzasProces
-			Running->running = 0;
-			koniecProcesu(mRejestr);
-			//ZAPISZ STAN najlepszyCzasProces
+	if(Running == 0){
+		textLev1(true, "Nie wywlaszczam - nie mam czego!");
+	} else {
+		textLev1(true, "Pojawil sie nowy aktywny proces " + nowyProces->nazwa);
+		textLev1(true, "Testuje przewidywany czas wykonywania...");
 
-			Running = nowyProces;
-			//WYKONAJ najlepszyCzasProces
-			Running->running = 1;
-		} else {
-			textLev1(true, "Nowy proces ma wiekszy przewydywany czas. Kontynuuje wykonywanie starego");
+		if(nowyProces->stopped == 0 && nowyProces->blocked == 0){
+			if(nowyProces->przewidziany == false){
+				nowyProces->t_przewidywany_next = 0.5 * nowyProces->t_przewidywany + 0.5 * nowyProces-> t_wykonania;
+				nowyProces->przewidziany = 1;
+			}
+			if(nowyProces->t_przewidywany_next < Running->t_przewidywany_next - Running->t_obslugi){
+				string text = "Nowy proces ma mniejszy czas [";
+				char str[10];
+				itoa(nowyProces->t_przewidywany_next,str,10);
+				text += str;
+				text += "], wywlaszczam stary i uruchamian nowy";
+				textLev1(true, text);
+				//ZATRZYMAJ najlepszyCzasProces
+				Running->running = 0;
+				koniecProcesu(mRejestr);
+				//ZAPISZ STAN najlepszyCzasProces
+
+				Running = nowyProces;
+				//WYKONAJ najlepszyCzasProces
+				Running->running = 1;
+			} else {
+				string text = "Nowy proces ma wiekszy czas [";
+				char str[10];
+				itoa(nowyProces->t_przewidywany_next,str,10);
+				text += str;
+				text += "], kontynuuje wykonywanie starego";
+				textLev1(true, text);
+			}
 		}
 	}
 }
