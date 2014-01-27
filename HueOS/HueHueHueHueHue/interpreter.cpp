@@ -146,7 +146,7 @@ void Interpreter::interpret_code(string blob) {
 		buffer[c++] = (char)opcode;
 		buffer[c++] = parts.size() - 1;
 		unsigned int j;
-		for (int i = 1; i < parts.size(); i++) {
+		for (unsigned int i = 1; i < parts.size(); i++) {
 			buffer[c++] = param_lengths[p++];
 			if ((op == "JUMP" || op == "JMPZ" || op == "JPNZ") && param_lengths[p-1] == sizeof(unsigned int)) {
 				j = 0;

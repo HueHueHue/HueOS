@@ -12,7 +12,7 @@
 
 #include "supervisor.h"
 
-const char* const Supervisor::names[] = {"*IBSUP", "*IN", "*OUT"};
+const char* const Supervisor::names[] = { "*IBSUP", "*IN", "*OUT" };
 
 Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec, Rejestr* mRejestr) /*: mPlanista(mPlanista), mPoz3(mPoz3)*/ {
 	this->mPoz3 = mPoz3;
@@ -25,7 +25,7 @@ Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec, Rejest
 }
 
 void Supervisor::init() {
-	string job_cards[] = {"1.job"};
+	string job_cards[] = { "1.job" };
 	// uruchom procesy systemowe
 	for (int i = 0; i < 3; i++) {
 		mPoz3->dodajPCB(new SysProces(i + 1, Supervisor::names[i]), true);
@@ -84,6 +84,7 @@ bool Supervisor::loadJob(string job_name) {
 	cout << "Hue5: Uruchomienie procesu " << job_name << endl;
 	SetConsoleTextAttribute(hOut, 0x07);
 	mPoz3->uruchomProces(job_name);
+	mPlanista->nowyProces(userprog);
 	return true;
 }
 
@@ -92,10 +93,10 @@ void Supervisor::execute(Proces* proces) {
 		return; // brak procesu do wykonania
 	}
 	HANDLE hOut;
-	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
-	SetConsoleTextAttribute( hOut, 0x0D);
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hOut, 0x0D);
 	cout << "Hue5: Wykonuje rozkaz procesu " << proces->nazwa << endl;
-	SetConsoleTextAttribute( hOut, 0x07);
+	SetConsoleTextAttribute(hOut, 0x07);
 
 	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 	unsigned short param_count = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
@@ -103,24 +104,25 @@ void Supervisor::execute(Proces* proces) {
 		cout << "Hue5: Blad odczytu. Przerywam wykonanie." << endl;
 		//zatrzymajproces
 		return;
-	} 
+	}
 	//unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 	char* raw_param = NULL;
 	unsigned int int_param;
 	SetConsoleTextAttribute(hOut, 0x0D);
 	cout << "Hue5: Proces " << proces->nazwa << " wykonuje rozkaz : ID = " << (char)op;
 	/*if (param_length != 0) {
-		raw_param = new char[param_length]();
-		for (int i = 0; i < param_length; i++) {
-			raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
-		}
-		cout << " PARAMS=" << raw_param;
+	raw_param = new char[param_length]();
+	for (int i = 0; i < param_length; i++) {
+	raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+	}
+	cout << " PARAMS=" << raw_param;
 	}*/
 	cout << endl;
 	SetConsoleTextAttribute(hOut, 0x07);
 
 	// parameter preprocessing
-	int reg1, reg2;
+	int reg1, len;
+	char out_buffer[10];
 
 	switch (op) {
 	case Interpreter::OpCode::SET:
@@ -131,7 +133,7 @@ void Supervisor::execute(Proces* proces) {
 		mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 		reg1 = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++) - 64;
 		switch (mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++)) {
-		case sizeof(char):
+		case sizeof(char) :
 			int_param = mRejestr->getRejestr(mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++) - 64);
 		case sizeof(unsigned int) :
 			raw_param = new char[sizeof(unsigned int)]();
@@ -144,8 +146,20 @@ void Supervisor::execute(Proces* proces) {
 	case Interpreter::OpCode::JUMP:
 	case Interpreter::OpCode::JMPZ:
 	case Interpreter::OpCode::JPNZ:
+		len = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+		raw_param = new char[len]();
+		for (int i = 0; i < len; i++) {
+			raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+		}
 		memcpy(&int_param, raw_param, sizeof(unsigned int));
-		cout << int_param << endl;
+		break;
+	case Interpreter::OpCode::OUT1:
+		len = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+		raw_param = new char[len + 1]();
+		for (int i = 0; i < len; i++) {
+			raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+		}
+		break;
 	}
 
 	switch (op) {
@@ -167,18 +181,40 @@ void Supervisor::execute(Proces* proces) {
 	case Interpreter::OpCode::JUMP:
 	case Interpreter::OpCode::JMPZ:
 	case Interpreter::OpCode::JPNZ:
+		SetConsoleTextAttribute(hOut, 0x0D);
+		cout << "Hue5: Cos uzytecznego! Olewam!" << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
+		break;
 	case Interpreter::OpCode::IN1:
 	case Interpreter::OpCode::IN2:
-	case Interpreter::OpCode::OUT1:
-	case Interpreter::OpCode::BYE:
-		SetConsoleTextAttribute( hOut, 0x0D);
+		SetConsoleTextAttribute(hOut, 0x0D);
 		cout << "Hue5: Cos uzytecznego! Olewam!" << endl;
-		SetConsoleTextAttribute( hOut, 0x07);
+		SetConsoleTextAttribute(hOut, 0x07);
+		break;
+	case Interpreter::OpCode::OUT1:
+		if (len == 1) {
+			sprintf(out_buffer, "%d", mRejestr->getRejestr(reg1));
+			//drukarka1->PRINT(out_buffer);
+			mPoz3->wyslijKomunikat("*OUT", string(out_buffer));
+			//print from register
+		}
+		else {
+			//drukarka1->PRINT(raw_param + 1); // omits first character
+			mPoz3->wyslijKomunikat("*OUT", string(raw_param + 1));
+		}
+		SetConsoleTextAttribute(hOut, 0x0D);
+		cout << "Hue5: OUT: " << raw_param << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
+		break;
+	case Interpreter::OpCode::BYE:
+		SetConsoleTextAttribute(hOut, 0x0D);
+		cout << "Hue5: Cos uzytecznego! Olewam!" << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
 		break;
 	default:
-		SetConsoleTextAttribute( hOut, 0x0D);
+		SetConsoleTextAttribute(hOut, 0x0D);
 		cout << "Hue5: Nieprawidlowy rozkaz. Proces zostanie usuniety" << endl;
-		SetConsoleTextAttribute( hOut, 0x07);
+		SetConsoleTextAttribute(hOut, 0x07);
 		// fixme usun proces
 	}
 
@@ -190,22 +226,22 @@ void Supervisor::execute(Proces* proces) {
 
 void Supervisor::checkMessages() {
 	HANDLE hOut;
-	hOut = GetStdHandle( STD_OUTPUT_HANDLE );
-	
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
 	string komunikat;
 	vector<string> x;
 	for (int i = 0; i < 3; i++) {
 		komunikat = mPoz3->czytajKomunikat(Supervisor::names[i]);
 		if (!komunikat.empty()) {
-			SetConsoleTextAttribute( hOut, 0x0D);
+			SetConsoleTextAttribute(hOut, 0x0D);
 			cout << "Hue5: " << Supervisor::names[i] << " otrzymal komunikat: " << komunikat << endl;
-			SetConsoleTextAttribute( hOut, 0x07);
+			SetConsoleTextAttribute(hOut, 0x07);
 			switch (i) {
 			case 0: // ibsup
 				x = split(komunikat, ' ');
-				SetConsoleTextAttribute( hOut, 0x0D);
+				SetConsoleTextAttribute(hOut, 0x0D);
 				cout << "Hue5: Zakonczono proces uzytkownika: " << x[1] << endl;
-				SetConsoleTextAttribute( hOut, 0x07);
+				SetConsoleTextAttribute(hOut, 0x07);
 				break;
 			case 1: // in
 				// pobrac tekst (z pliku podanego w komunikacie?),
@@ -213,9 +249,9 @@ void Supervisor::checkMessages() {
 				break;
 			case 2:
 				drukarka1->PRINT((char *)komunikat.c_str());
-				SetConsoleTextAttribute( hOut, 0x0D);
+				SetConsoleTextAttribute(hOut, 0x0D);
 				cout << "Hue5: Przekazano komunikat do druku: " << komunikat << endl;
-				SetConsoleTextAttribute( hOut, 0x07);
+				SetConsoleTextAttribute(hOut, 0x07);
 				break;
 			}
 		}
@@ -225,6 +261,7 @@ void Supervisor::checkMessages() {
 void Supervisor::wyswietlDrukarka1(){
 	drukarka1->wyswietl();
 }
+
 void Supervisor::wyczyscDrukarka1()
 {
 	drukarka1->wyczyscDrukarka();
