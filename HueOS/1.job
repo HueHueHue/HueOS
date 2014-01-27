@@ -1,4 +1,4 @@
 osiem
 jeden
-SET:10|OUT:Witaj, tu sie liczy w kolko!|ADD:1|ADD:2|ADD:3|SUB:1|SUB:2|SUB:3|OUT:Bylo milo zrobic to kolko!|JUMP:1
+SET:A:10|OUT:AWitaj, tu sie liczy w kolko!|ADD:A:1|ADD:A:2|ADD:A:3|SUB:A:1|SUB:A:2|SUB:A:3|OUT:ABylo milo zrobic to kolko!|JUMP:1
 kierownik

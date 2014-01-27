@@ -25,7 +25,7 @@ Supervisor::Supervisor(Planista* mPlanista, Lev3* mPoz3, pamiec* mPamiec, Rejest
 }
 
 void Supervisor::init() {
-	string job_cards[] = {"1.job", "2.job"};
+	string job_cards[] = {"1.job"};
 	// uruchom procesy systemowe
 	for (int i = 0; i < 3; i++) {
 		mPoz3->dodajPCB(new SysProces(i + 1, Supervisor::names[i]), true);
@@ -34,7 +34,7 @@ void Supervisor::init() {
 	JOB job; // hey, let's ignore job.job :v
 
 	// parsuj $JOB
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < 1; i++) {
 		loadJob(job_cards[i]);
 	}
 
@@ -97,35 +97,50 @@ void Supervisor::execute(Proces* proces) {
 	cout << "Hue5: Wykonuje rozkaz procesu " << proces->nazwa << endl;
 	SetConsoleTextAttribute( hOut, 0x07);
 
-	// fixme dodaj obsluge bledow pobierz_bajt
 	Interpreter::OpCode op = (Interpreter::OpCode)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
-	unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
-	if (param_length == 0xFFFF) {
+	unsigned short param_count = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+	if (param_count == 0xFFFF) {
 		cout << "Hue5: Blad odczytu. Przerywam wykonanie." << endl;
 		//zatrzymajproces
 		return;
-	}
-	char* raw_param;
+	} 
+	//unsigned short param_length = (unsigned short)mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+	char* raw_param = NULL;
 	unsigned int int_param;
 	SetConsoleTextAttribute(hOut, 0x0D);
 	cout << "Hue5: Proces " << proces->nazwa << " wykonuje rozkaz : ID = " << (char)op;
-	if (param_length != 0) {
+	/*if (param_length != 0) {
 		raw_param = new char[param_length]();
 		for (int i = 0; i < param_length; i++) {
 			raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
 		}
-		cout << " PARAM=" << raw_param;
-	}
+		cout << " PARAMS=" << raw_param;
+	}*/
 	cout << endl;
 	SetConsoleTextAttribute(hOut, 0x07);
 
 	// parameter preprocessing
+	int reg1, reg2;
+
 	switch (op) {
 	case Interpreter::OpCode::SET:
 	case Interpreter::OpCode::ADD:
 	case Interpreter::OpCode::SUB:
 	case Interpreter::OpCode::MUL:
 	case Interpreter::OpCode::DIV:
+		mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+		reg1 = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++) - 64;
+		switch (mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++)) {
+		case sizeof(char):
+			int_param = mRejestr->getRejestr(mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++) - 64);
+		case sizeof(unsigned int) :
+			raw_param = new char[sizeof(unsigned int)]();
+			for (int i = 0; i < sizeof(unsigned int); i++) {
+				raw_param[i] = mPamiec->pobierz_bajt(proces->pierwszy_bajt_pamieci, proces->mem_pointer++);
+			}
+			memcpy(&int_param, raw_param, sizeof(unsigned int));
+		}
+		break;
 	case Interpreter::OpCode::JUMP:
 	case Interpreter::OpCode::JMPZ:
 	case Interpreter::OpCode::JPNZ:
@@ -135,10 +150,20 @@ void Supervisor::execute(Proces* proces) {
 
 	switch (op) {
 	case Interpreter::OpCode::SET:
+		mRejestr->setRejestr(reg1, int_param);
+		break;
 	case Interpreter::OpCode::ADD:
+		mRejestr->setRejestr(reg1, mRejestr->getRejestr(reg1) + int_param);
+		break;
 	case Interpreter::OpCode::SUB:
+		mRejestr->setRejestr(reg1, mRejestr->getRejestr(reg1) - int_param);
+		break;
 	case Interpreter::OpCode::MUL:
+		mRejestr->setRejestr(reg1, mRejestr->getRejestr(reg1) * int_param);
+		break;
 	case Interpreter::OpCode::DIV:
+		mRejestr->setRejestr(reg1, mRejestr->getRejestr(reg1) / int_param);
+		break;
 	case Interpreter::OpCode::JUMP:
 	case Interpreter::OpCode::JMPZ:
 	case Interpreter::OpCode::JPNZ:
@@ -157,7 +182,7 @@ void Supervisor::execute(Proces* proces) {
 		// fixme usun proces
 	}
 
-	if (param_length != 0) {
+	if (raw_param) {
 		delete[] raw_param;
 	}
 	proces->t_obslugi++;

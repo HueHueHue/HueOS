@@ -22,5 +22,6 @@ public:
 	unsigned int op_count;
 	unsigned int total_length;
 	char* buffer;
+	static bool is_valid_registry(string name);
 	void interpret_code(string blob);
 };
