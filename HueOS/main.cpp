@@ -118,11 +118,13 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 
 void wyswietlKomendy(){
 	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleTextAttribute(hOut, 0x12);
-	cout << "> Dostepne komendy:" << endl; SetConsoleTextAttribute(hOut, 0x07);
+	SetConsoleTextAttribute(hOut, 0x0F);
+	cout << "> Dostepne komendy:" << endl; 
 
-	SetConsoleTextAttribute(hOut, 0x09);
-	cout << " > <ENTER>"; SetConsoleTextAttribute(hOut, 0x07);
+	
+	cout << " >	";
+	SetConsoleTextAttribute(hOut, 0x12);
+	cout << "<ENTER>"; SetConsoleTextAttribute(hOut, 0x07);
 	cout<<"		-zaczyna kolejna jendnostke czasu systemu" << endl;
 
 	SetConsoleTextAttribute(hOut, 0x0C);
