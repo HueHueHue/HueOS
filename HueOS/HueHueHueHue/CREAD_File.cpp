@@ -35,7 +35,7 @@ string CREAD_File::READ_String_File(string nazwapliku)  // Funkcja READ1
        
 
         zaj_read=1;
-		wypisz(" Otwieram i przeszukuje plik "); cout << nazwapliku << endl;
+		wypisz("Otwieram i przeszukuje plik {" + nazwapliku + "}");
         fstream plik(nazwapliku,ios::in);            // co do bazy rozkazow to jest ona do stworzenia ale potrzebne sa dane od Pani Agnieszki.(Cytat J.B.)
 				
 				if(plik.is_open())
@@ -48,8 +48,8 @@ string CREAD_File::READ_String_File(string nazwapliku)  // Funkcja READ1
 				}
 				plik.close();
 
-        
-				cout << "Hue4: " << dane << endl; wypisz( " powyzsza wartosc dane ktore zwroce \n");
+        wypisz(dane + " powyzsza wartosc dane ktore zwroce");
+			//	cout << "Hue4: " << dane << endl; wypisz( " powyzsza wartosc dane ktore zwroce \n");
         SetConsoleTextAttribute( hOut, 0x07);
         
         // Tu nalezy podmienic na wlasciwa funkcje semafora od Michala
