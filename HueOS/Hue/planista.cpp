@@ -24,10 +24,10 @@ void Planista::stopowanie(){
 }
 void Planista::startCykl(){
 	stopowanie();
-
+	string text = "";
 
 	Proces* bufor = procesList;
-	if(Running == 0){
+	if(Running == NULL){
 		if(bufor != NULL && bufor->wszystkieNext != 0){
 			//wyliczanie czasu
 			do {
@@ -35,8 +35,9 @@ void Planista::startCykl(){
 					if(bufor->przewidziany == 0){
 						bufor->t_przewidywany_next = 0.5 * bufor->t_przewidywany + 0.5 * bufor-> t_wykonania;
 						bufor->przewidziany = 1;
-
-							string text = "Obliczylem wartosc [";
+						textLev1(true, "XXXXXXXXXXXXXXXXXXXXX");
+							text = "Obliczylem wartosc [";
+							textLev1(true, "XXXXXXXXXXXXXXXXXXXXX");
 							char str[10];
 							itoa(bufor->t_przewidywany_next,str,10);
 							text += str;
@@ -56,7 +57,7 @@ void Planista::startCykl(){
 						if(najlepszyCzas == 0){
 							najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
 							najlepszyCzasProces = bufor;
-							string text = "Pierwsza wartosc [";
+							text = "Pierwsza wartosc [";
 							char str[10];
 							itoa(bufor->t_przewidywany_next,str,10);
 							text += str;
@@ -67,7 +68,7 @@ void Planista::startCykl(){
 							if(najlepszyCzas > bufor->t_przewidywany_next - bufor->t_obslugi){
 								najlepszyCzas = bufor->t_przewidywany_next - bufor->t_obslugi;
 								najlepszyCzasProces = bufor;
-								string text = "Lepsza wartosc [";
+								text = "Lepsza wartosc [";
 								char str[10];
 								itoa(bufor->t_przewidywany_next,str,10);
 								text += str;
@@ -75,7 +76,7 @@ void Planista::startCykl(){
 								text += bufor->nazwa;
 								textLev1(true, text);
 							} else {
-								string text = "Gorsza wartosc [";
+								text = "Gorsza wartosc [";
 								char str[10];
 								itoa(bufor->t_przewidywany_next,str,10);
 								text += str;
@@ -91,7 +92,7 @@ void Planista::startCykl(){
 
 
 			if(najlepszyCzasProces != NULL){
-				string text = "Wybrano proces o najkrotszym czasie wykonywania [";
+				text = "Wybrano proces o najkrotszym czasie wykonywania [";
 			
 				char str[10];
 				itoa(najlepszyCzasProces->id,str,10);
@@ -113,7 +114,7 @@ void Planista::startCykl(){
 				textLev1(true, "Proces wybrany, w trakcie wykonywania");
 		}
 	} else {
-		string text = "Proces jest wykonywany: ID [";
+		text = "Proces jest wykonywany: ID [";
 		char str[10];
 		itoa(Running->id,str,10);
 		text += str;
