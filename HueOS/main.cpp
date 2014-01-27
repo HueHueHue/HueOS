@@ -14,6 +14,7 @@ int main() {
 	cout << "Hue0: Inicjowanie klas.." << endl;
 	cout << endl << "Hue0: Lev1" << endl;
 	//1
+	int licznikJednostek = 0;
 	Proces* procesList = new Proces(0, "Proces bezczynnosciowy", 0); //proces od ktorego zaczynam iterowac po wszystkich.
 	procesList->blocked = 1;
 	Rejestr* mRejestr = new Rejestr();
@@ -40,6 +41,8 @@ int main() {
 	cout << endl;
 
 	while(1){
+		licznikJednostek++;
+		cout << "Hue0:		Start jednostki czasowej [ " << licznikJednostek << " ]." << endl;
 		tStart = GetTickCount(); //czas na rozpoczeciu petli
 		mPlanista->startCykl(); //Hue1
 
