@@ -211,13 +211,17 @@ void Supervisor::execute(Proces* proces) {
 		break;
 	case Interpreter::OpCode::IN1:
 		mPoz3->wyslijKomunikat("*IN", proces->nazwa);
+		SetConsoleTextAttribute(hOut, 0x0D);
 		cout << "Hue5: IN1" << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
 		break;
 	case Interpreter::OpCode::IN2:
 		in_buffer = mPoz3->czytajKomunikat(proces->nazwa);
 		int_param = atoi(in_buffer.c_str());
 		mRejestr->setRejestr(reg1, int_param);
+		SetConsoleTextAttribute(hOut, 0x0D);
 		cout << "Hue5: IN2 " << int_param << " do R" << reg1 << endl;
+		SetConsoleTextAttribute(hOut, 0x07);
 		break;
 	case Interpreter::OpCode::OUT1:
 		if (len == 1) {
