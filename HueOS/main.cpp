@@ -10,6 +10,12 @@ void decyzja(Planista* mPlanista, Rejestr* mRejestr, pamiec* opamiec, Supervisor
 
 int main() {
 	cout << "Hue0:				Start systemu" << endl;
+	cout << "		###   ###   ##   ##   #######          ####" << endl;
+	cout << "		###   ###   ##   ##   ##         ###  # " << endl;
+	cout << "		#########   ##   ##   #######   #   #  ####" << endl;
+	cout << "		###   ###   ### ###   ##        #   #      #" << endl;
+	cout << "		###   ###    #####    #######    ###   ####" << endl;
+
 	cin.ignore(INT_MAX, '\n');
 	cout << "Hue0: Inicjowanie klas.." << endl;
 	cout << endl << "Hue0: Lev1" << endl;
