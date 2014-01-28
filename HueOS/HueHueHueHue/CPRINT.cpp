@@ -13,7 +13,7 @@ CPRINT::CPRINT()
 		hOut = GetStdHandle( STD_OUTPUT_HANDLE );
 	    SetConsoleTextAttribute( hOut, FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 		
-	cout << "Hue4: ==> konstruktor PRINT wywolany!!! \n";
+	wypisz(" ==> konstruktor PRINT wywolany!!! ");
 	SetConsoleTextAttribute( hOut, 0x07);  //Reset koloru do podstawowego
 }
 
@@ -29,7 +29,7 @@ void CPRINT::PRINT( char zapisywane[] ){
 
 
 	if( zaj_print == 1 ){
-		cout << "Hue4: Urzadzenie PRINT jest w tej chwili zajete! \n";
+		wypisz(" Urzadzenie PRINT jest w tej chwili zajete! ");
 	}
 	else 
 	{
